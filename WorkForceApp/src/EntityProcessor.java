@@ -12,7 +12,6 @@ import java.util.List;
 public class EntityProcessor {
 	//Only one DBhandler for one EntityProcessor (class diagram)
 	DBHandler dbhand=new DBHandler();
-	private List<Entity> entityList=new ArrayList<Entity>();
 	
 	//Add one entity, not associated to file
 	public boolean addEntity(String name, String country, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){
@@ -38,6 +37,7 @@ public class EntityProcessor {
 			FileReader fr=new FileReader(outfile);
 			BufferedReader br=new BufferedReader(fr);
 			String line;
+			List<Entity> entityList=new ArrayList<Entity>();
 			while((line=br.readLine())!=null){
 				//Each row in CSV(name,country,metric,timeperiod,null file paths,related_entities("2","5"),isBelief,person,strengh,note)
 				String[] arry=line.split(",");
@@ -68,6 +68,7 @@ public class EntityProcessor {
 			if(!directory.exists()) return false;
 			
 			File files[]=directory.listFiles();
+			List<Entity> entityList=new ArrayList<Entity>();
 			for(int i=0;i<files.length;i++){
 				String name=(String)Array.get(files[i].getName().split("."), 0);
 				String[] file_paths=new String[1];
@@ -79,11 +80,20 @@ public class EntityProcessor {
 		return true;
 	}
 	
-	public Entity searchEntity(int entityid){
-		return null;
+	public List<Entity> searchEntity(String country,String metric,String timeperiod){		
+		return dbhand.searchEntity(country,metric,timeperiod);
 	}
 	
-	public List<Entity> searchEntity(String searchquery){
-		return null;
+	public Entity searchEntity(int entityid){	
+		return dbhand.searchEntity(entityid);
 	}
+	
+	public boolean deleteEntity(int entityid){
+		return dbhand.deleteEntity(entityid);
+	}
+
+	public boolean updateEntity(int entityid,String name, String country, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){
+		Entity entity=new Entity(entityid,name,country,metric,timeperiod,file_paths,related_entities,isBelief,person,strength,note);
+		return dbhand.updateEntity(entity);
+	}	
 }

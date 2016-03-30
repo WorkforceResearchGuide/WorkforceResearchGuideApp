@@ -13,4 +13,20 @@ public class DBHandler {
 	public  boolean addEntityFolderScan(List<Entity> entityList){
 		return true;
 	}
+	
+	public List<Entity> searchEntity(String country,String metric,String timeperiod){
+		return null;
+	}
+	
+	public Entity searchEntity(int entityid){
+		return null;
+	}
+	
+	public boolean deleteEntity(int entityid){
+		return true;		
+	}
+	
+	public boolean updateEntity(Entity entity){
+		return true;		
+	}
 }

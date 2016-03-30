@@ -24,6 +24,21 @@ public class Entity {
 		setStrength(strength);
 		this.note=note;
 	}
+
+	//For updateEntity function in EntityProcessor Class
+	public Entity(int entityid,String name, String country, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){
+		this.id=entityid;
+		this.name=name;
+		Template.setCountry(country);
+		Template.setMetric(metric);	
+		Template.setTimePeriod(timeperiod);
+		setFilePaths(file_paths);
+		setRelatedEntities(related_entities);
+		this.isBelief=isBelief;
+		this.person=person;
+		setStrength(strength);
+		this.note=note;
+	}
 	
 	//For addEntityFolderScan function in EntityProcessor Class
 	public Entity(String name, String[] file_paths){
