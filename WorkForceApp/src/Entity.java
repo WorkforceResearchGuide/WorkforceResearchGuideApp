@@ -9,43 +9,55 @@ public class Entity {
 	private String person;
 	private Strength strength;
 	private String note;
-	
-	//For addEntity and addBatchEntity functions in EntityProcessor Class
-	public Entity(String name, String country, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){
-		//id will be given when storing the Entity to database.
-		this.name=name;
-		Template.setCountry(country);
-		Template.setMetric(metric);	
-		Template.setTimePeriod(timeperiod);
-		setFilePaths(file_paths);
-		setRelatedEntities(related_entities);
-		this.isBelief=isBelief;
-		this.person=person;
-		setStrength(strength);
-		this.note=note;
-	}
 
-	//For updateEntity function in EntityProcessor Class
 	public Entity(int entityid,String name, String country, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){
+		if((Integer)entityid==null){
+			System.err.println("id can't be null!");
+			return;
+		}
+		if(name==null || name.isEmpty()){
+			System.err.println("name can't be null or empty!");
+			return;
+		}
+		if(String.valueOf(isBelief).isEmpty()){
+			System.err.println("isBelief can't be null or empty!");
+			return;
+		}
+		if(strength==null || strength.isEmpty()){
+			System.err.println("strength can't be null or empty!");
+			return;
+		} 
+		
 		this.id=entityid;
 		this.name=name;
 		Template.setCountry(country);
 		Template.setMetric(metric);	
 		Template.setTimePeriod(timeperiod);
-		setFilePaths(file_paths);
-		setRelatedEntities(related_entities);
+		if(file_paths==null){
+			this.file_paths=file_paths;
+		}else{
+			this.file_paths=new String[file_paths.length];
+			setFilePaths(file_paths);
+		}
+		if(related_entities==null){
+			this.related_entities=related_entities;
+		}else{
+			this.related_entities=new int[related_entities.length];
+			setRelatedEntities(related_entities);
+		}
 		this.isBelief=isBelief;
 		this.person=person;
-		setStrength(strength);
+		setStrength(strength);	
 		this.note=note;
 	}
 	
-	//For addEntityFolderScan function in EntityProcessor Class
-	public Entity(String name, String[] file_paths){
-		this.name=name;
-		setFilePaths(file_paths);
-	}
+//	//For addEntityFolderScan function in EntityProcessor Class
+//	public Entity(String name, String[] file_paths){
+//		this.name=name;
+//		setFilePaths(file_paths);
+//	}
 	
+
 	public void setId(int id){
 		this.id=id;
 	}
@@ -89,7 +101,7 @@ public class Entity {
 		//add one entity
 		if(file_paths==null) return;
 		
-		//add one entity and the entity relates to files
+		//entities relates to files in the folder path
 		int count=0;
 		for(String fp:file_paths){
 			this.file_paths[count]=fp;
@@ -102,10 +114,9 @@ public class Entity {
 	}
 
 	public void setRelatedEntities(int[] related_entities){
-		int count=0;
-		for(int re:related_entities){
-			this.related_entities[count]=re;
-			count++;
+		if(related_entities==null) return;
+		for(int i=0;i<related_entities.length;i++){
+			this.related_entities[i]=related_entities[i];
 		}		
 	}
 
@@ -130,19 +141,14 @@ public class Entity {
 	}
 	
 	public void setStrength(String strength){
-		switch(strength){
-			case "undecided":
+		if(strength.equalsIgnoreCase("undecided")){
 				this.strength=Strength.UNDECIDED;
-				break;
-			case "belief":
-				this.strength=Strength.BELIEF;
-				break;
-			case "unbelief":
-				this.strength=Strength.UNBELIEF;
-				break;
-			default:
-				System.err.println("Error strength input.");
-				System.err.println("Please enter 'undecided', 'belief', or 'unbelief'");
+		}else if(strength.equalsIgnoreCase("belief")){
+			this.strength=Strength.BELIEF;
+		}else if(strength.equalsIgnoreCase("unbelief")){
+			this.strength=Strength.UNBELIEF;
+		}else{
+			return;
 		}
 	}
 	

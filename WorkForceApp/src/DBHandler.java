@@ -29,4 +29,8 @@ public class DBHandler {
 	public boolean updateEntity(Entity entity){
 		return true;		
 	}
+	
+	public int getLastEntityIdInDB(){
+		return 0;
+	}
 }
