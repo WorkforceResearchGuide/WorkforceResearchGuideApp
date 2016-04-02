@@ -4,7 +4,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 
 @RunWith(Suite.class)
-@SuiteClasses({ TestAddEntityGoodCase.class, TestAddEntityBadCase.class,TestAddEntityBatch.class })
+@SuiteClasses({ TestAddEntityGoodCase.class, TestAddEntityBadCase.class,TestAddEntityBatch.class,TestAddEntityFolderScan.class })
 public class AllTests {
 	
 }
