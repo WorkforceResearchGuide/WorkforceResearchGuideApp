@@ -1,0 +1,26 @@
+Geography,Metric,Time Period,Statement,Type,Person,Strength,Description
+USA,-,2002,Total Employment Decreased -0.33%,Fact,,,Based on BLS data
+USA,-,2008,Total Employment Decreased -0.46%,Fact,,,Based on BLS data
+USA,-,2009,Total Employment Decreased -3.77%,Fact,,,Based on BLS data
+USA,-,2010,Total Employment Decreased -0.58%,Fact,,,Based on BLS data
+USA,-,2006,"Total Employment Increased 1.91%, the fastest during 2000-2015",Fact,,,Based on BLS data
+USA,-,2015,"Total Employment Increased 1.73%, vs. 0.57% avg during 2000-2015",Fact,,,Based on BLS data
+Canada,-,2009,Total Employment Decreased -1.76%,Fact,,,Based on StatCan data
+Canada,-,2002,"Total Employment Increased 2.68%, the fastest during 2000-2015",Fact,,,Based on StatCan data
+Canada,-,2015,"Total Employment Increased 1.12%, vs. 1.32% avg during 2000-2015",Fact,,,Based on StatCan data
+USA,-,2015,USA's Total Employment fell in 4 years during 2000-2015,Fact,,,Based on BLS data
+Canada,-,2015,Canada's Total Employment fell in 1 year during 2000-2015,Fact,,,Based on StatCan data
+USA,-,2015,USA's Total Employment grew the most in 2006 during 2000-2015,Fact,,,Based on BLS data
+Canada,-,2015,Canada's Total Employment grew the most in 2002 during 2000-2015,Fact,,,Based on StatCan data
+USA,-,2015,USA's Total Employment grew more slowly than Canada's during 2000-2015,Fact,,,"Based on BLS,StatCan data"
+Canada,-,2015,Canada's Total Employment grew more quickly than USA's during 2000-2015,Fact,,,"Based on BLS,StatCan data"
+USA,-,2015,USA's Total Employment has strong momentum,Belief,Jeff Buchmiller,High,Based on BLS data
+Canada,-,2015,Canada's Total Employment has poor momentum,Belief,Jeff Buchmiller,High,Based on StatCan data
+USA,-,2009,USA's Total Employment has negative momentum,Belief,Jeff Buchmiller,High,Based on BLS data
+Canada,-,2015,Canada's Total Employment is likely to accelerate during 2016-2017,Belief,Jeff Buchmiller,Medium,Based on StatCan data
+USA,-,2017,"USA's Total Employment is likely to slow down, with unemployment beyond its natural rate",Belief,Jeff Buchmiller,Medium,Based on BLS data
+USA,-,2015,USA is a better environment than Canada for workers currently,Belief,Jeff Buchmiller,Medium,"Based on BLS,StatCan data"
+Canada,-,2015,Canada is a better environment than USA for workers currently,Belief,Jeff Buchmiller,Medium,"Based on BLS,StatCan data"
+USA,-,2017,USA will be a worse environment than Canada for workers,Belief,Rodney Davenport,Medium,"Based on BLS,StatCan data"
+Canada,-,2017,Canada will be a better environment than USA for workers,Belief,Rodney Davenport,Medium,"Based on BLS,StatCan data"
+USA,-,2015,"Alliance Data should support workers in Canada currently, but workers in USA in 2017",Belief,Ed Heffernan,Medium,"Based on BLS,StatCan data"

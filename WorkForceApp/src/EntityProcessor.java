@@ -21,7 +21,7 @@ public class EntityProcessor {
 	DBHandler dbhand=new DBHandler();
 	
 	//Add one entity, not associated to file
-	public boolean addEntity(String name, String country, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){		
+	public boolean addEntity(String name, String geography, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){		
 			int currentId=dbhand.getLastEntityIdInDB()+1;
 			if((Integer)currentId==null){
 				System.err.println("Id can't be null. Please check DBHandler or database.");
@@ -41,7 +41,7 @@ public class EntityProcessor {
 				System.err.println("Wrong strength name. Please enter 'undecided', 'belief', or 'unbelief'.");
 				return false;
 			}
-			Entity entity=new Entity(currentId,name,country,metric,timeperiod,null,related_entities,isBelief,person,strength,note);
+			Entity entity=new Entity(currentId,name,geography,metric,timeperiod,null,related_entities,isBelief,person,strength,note);
 			dbhand.addEntity(entity);
 			return true;		
 	}
@@ -77,7 +77,7 @@ public class EntityProcessor {
 			List<Entity> entityList=new ArrayList<Entity>();
 			int cutrentId=dbhand.getLastEntityIdInDB()+1;
 			while((line=br.readLine())!=null){
-				//Each row in CSV(name,country,metric,timeperiod,null file paths,related_entities("2","5"),isBelief,person,strengh,note)
+				//Each row in CSV(name,geography,metric,timeperiod,null file paths,related_entities("2","5"),isBelief,person,strengh,note)
 				String[] arry=line.split(",");
 				String[] arry_str=arry[5].replace("\"", "").split(" ");
 				int[] arry_int=new int[arry_str.length];
@@ -120,24 +120,38 @@ public class EntityProcessor {
 	//Add entities, each of which associates to one file in the folder path
 	public boolean addEntityFolderScan(String folderpath){
 			File directory=new File(folderpath);
-			if(!directory.exists()) return false;
+			if(!directory.exists()){
+				System.err.println("Folder doesn't exist.");
+				return false;
+			} 
 			
 			File files[]=directory.listFiles();
+			if(files.length==0){
+				System.err.println("Folder is empty.");
+				return false;
+			}
+			
 			List<Entity> entityList=new ArrayList<Entity>();
 			int cutrentId=dbhand.getLastEntityIdInDB()+1;
 			for(int i=0;i<files.length;i++){
-				String name=(String)Array.get(files[i].getName().split("."), 0);
+				//System.out.println(files[i].getName().split("\\.")[1]);
+				String name=(String)Array.get(files[i].getName().split("\\."), 0);
 				String[] file_paths=new String[1];
 				Array.set(file_paths,0,files[i].toString());
-				Entity entity=new Entity(cutrentId,name, null, null, null,file_paths, null, false, null, null, null);
+				//Set default strength, Undecided
+				Entity entity=new Entity(cutrentId,name, null, null, null,file_paths, null, false, null, "Undecided", null);
 				entityList.add(entity);
-			}			
+			}
+			//print entities' information
+			for(Entity entityCheck:entityList){
+				entityCheck.printEntityInfo();
+			}
 			dbhand.addEntityBatch(entityList);
 		return true;
 	}
 	
-	public List<Entity> searchEntity(String country,String metric,String timeperiod){		
-		return dbhand.searchEntity(country,metric,timeperiod);
+	public List<Entity> searchEntity(String geography,String metric,String timeperiod){		
+		return dbhand.searchEntity(geography,metric,timeperiod);
 	}
 	
 	public Entity searchEntity(int entityid){	
@@ -150,8 +164,8 @@ public class EntityProcessor {
 		return dbhand.deleteEntity(entityid);
 	}
 
-	public boolean updateEntity(int entityid,String name, String country, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){
-		Entity entity=new Entity(entityid,name,country,metric,timeperiod,file_paths,related_entities,isBelief,person,strength,note);
+	public boolean updateEntity(int entityid,String name, String geography, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){
+		Entity entity=new Entity(entityid,name,geography,metric,timeperiod,file_paths,related_entities,isBelief,person,strength,note);
 		return dbhand.updateEntity(entity);
 	}	
 }

@@ -37,7 +37,7 @@ public class TestAddEntityBadCase {
 			                    ,String strength,String note){
 		
 		this.name=name;
-		Template.setCountry(geography);
+		Template.setgeography(geography);
 		Template.setMetric(metric);	
 		Template.setTimePeriod(timeperiod);
 		this.file_paths=file_paths;

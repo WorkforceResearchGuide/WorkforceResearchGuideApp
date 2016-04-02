@@ -54,7 +54,7 @@ public class TestAddEntityGoodCase {
 	public void testAddEntity() {
 		EntityProcessor ep=new EntityProcessor();
 		assertEquals("",false,ep.addEntity(actual_entity_good.getName()
-				                          ,actual_entity_good.getCountry(),actual_entity_good.getMetric()
+				                          ,actual_entity_good.getgeography(),actual_entity_good.getMetric()
 				                          ,actual_entity_good.getTimePeriod(),actual_entity_good.getFilePaths()
 				                          ,actual_entity_good.getRelatedEntities(),actual_entity_good.getIsBelief()
 				                          ,actual_entity_good.getPerson(),actual_entity_good.getStrength().toString()

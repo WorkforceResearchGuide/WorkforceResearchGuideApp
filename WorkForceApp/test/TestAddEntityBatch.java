@@ -23,7 +23,7 @@ public class TestAddEntityBatch {
 									  //null name, null isBelief, null Strength
 									  ,{"C:\\Users\\Shin-Yi\\git\\WorkforceResearchGuideApp\\WorkForceApp\\CSV\\entitiesBad.csv"}
 									  //filepath doesn't exist
-									  ,{"\\XLSX\\notexist.csv"}
+									  ,{"C:\\Users\\Shin-Yi\\git\\WorkforceResearchGuideApp\\WorkForceApp\\CSV\\notexist.csv"}
 									  ,{"..\\NOTEX"}};		      
 		return Arrays.asList(data);
 	}

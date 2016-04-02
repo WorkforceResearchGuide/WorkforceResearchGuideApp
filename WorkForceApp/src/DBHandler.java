@@ -14,7 +14,7 @@ public class DBHandler {
 		return true;
 	}
 	
-	public List<Entity> searchEntity(String country,String metric,String timeperiod){
+	public List<Entity> searchEntity(String geography,String metric,String timeperiod){
 		return null;
 	}
 	

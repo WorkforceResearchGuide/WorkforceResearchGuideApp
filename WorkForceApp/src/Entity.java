@@ -10,7 +10,7 @@ public class Entity {
 	private Strength strength;
 	private String note;
 
-	public Entity(int entityid,String name, String country, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){
+	public Entity(int entityid,String name, String geography, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){
 		if((Integer)entityid==null){
 			System.err.println("id can't be null!");
 			return;
@@ -30,7 +30,7 @@ public class Entity {
 		
 		this.id=entityid;
 		this.name=name;
-		Template.setCountry(country);
+		Template.setgeography(geography);
 		Template.setMetric(metric);	
 		Template.setTimePeriod(timeperiod);
 		if(file_paths==null){
@@ -74,12 +74,12 @@ public class Entity {
 		return this.name;
 	}
 	
-	public void setCountry(String country){
-		Template.setCountry(country);
+	public void setgeography(String geography){
+		Template.setgeography(geography);
 	}
 	
-	public String getCountry(){
-		return Template.getCountry();
+	public String getgeography(){
+		return Template.getgeography();
 	}
 	public void setMetric(String metric){
 		Template.setMetric(metric);
@@ -162,5 +162,14 @@ public class Entity {
 	
 	public String getNote(){
 		return this.note;
+	}
+	
+	public void printEntityInfo(){
+		System.out.println("Id: "+this.getId()+"\n Name: "+this.getName()
+							+"\n Geography: "+this.getgeography()+"\n Metric: "+this.getMetric()+"\n TimePeriod: "+this.getTimePeriod()
+							+"\n Unstructured file path: "+this.getFilePaths()[0]+"\n isBelief: "+this.getIsBelief()
+							+"\n Person: "+this.getPerson()+"\n Strength: "+this.getStrength()
+							+"\n Description: "+this.getNote());
+		System.out.println("-----------------------------------------------");
 	}
 }
