@@ -1,23 +1,23 @@
 
 public final class Template {
 	
-	private static String country;
+	private static String geography;
 	private static String metric;
 	private static String timeperiod;
 	
 	private Template(){
 		//default values
-		country="USA";
+		geography="USA";
 		metric="0";
 		timeperiod="1";
 	}
 	
-	public static void setCountry(String countryy){
-		country=countryy;
+	public static void setgeography(String geographyy){
+		geography=geographyy;
 	}
 	
-	public static String getCountry(){
-		return country;
+	public static String getgeography(){
+		return geography;
 	}
 	
 	public static void setMetric(String metricc){
