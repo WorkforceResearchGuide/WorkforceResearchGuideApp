@@ -1,27 +1,27 @@
 
-public class Strength {
-	int strengthId;
+public class Metric {
+	int metricId;
 	String value;
 	boolean isDisabled;
-	
-	public Strength() {
+
+	public Metric() {
 	
 	}
 	
-	public Strength(int id, String value, boolean isDisabled) {
-		this.strengthId = id;
+	public Metric(int id, String value, boolean isDisabled) {
+		this.metricId = id;
 		this.value = value;
 		this.isDisabled = isDisabled;
 	}
 	
-	public int getStrengthId() {
-		return strengthId;
+	public int getMetricId() {
+		return metricId;
 	}
-
-	public void setStrengthId(int strengthId) {
-		this.strengthId = strengthId;
+	
+	public void setMetricId(int metricId) {
+		this.metricId = metricId;
 	}
-
+	
 	public String getValue() {
 		return value;
 	}
@@ -37,5 +37,5 @@ public class Strength {
 	public void setDisabled(boolean isDisabled) {
 		this.isDisabled = isDisabled;
 	}
-		
+	
 }

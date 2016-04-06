@@ -1,27 +1,27 @@
 
-public class Strength {
-	int strengthId;
+public class Region {
+	int regionId;
 	String value;
 	boolean isDisabled;
 	
-	public Strength() {
+	public Region() {
 	
 	}
 	
-	public Strength(int id, String value, boolean isDisabled) {
-		this.strengthId = id;
+	public Region(int id, String value, boolean isDisabled) {
+		this.regionId = id;
 		this.value = value;
 		this.isDisabled = isDisabled;
 	}
 	
-	public int getStrengthId() {
-		return strengthId;
+	public int getRegionId() {
+		return regionId;
 	}
-
-	public void setStrengthId(int strengthId) {
-		this.strengthId = strengthId;
+	
+	public void setRegionId(int regionId) {
+		this.regionId = regionId;
 	}
-
+	
 	public String getValue() {
 		return value;
 	}
@@ -37,5 +37,5 @@ public class Strength {
 	public void setDisabled(boolean isDisabled) {
 		this.isDisabled = isDisabled;
 	}
-		
+	
 }
