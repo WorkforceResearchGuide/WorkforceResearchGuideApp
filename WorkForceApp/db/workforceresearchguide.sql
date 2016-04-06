@@ -1,6 +1,12 @@
--- Install sqlite3 and perform .read thisFile.sql
--- It will create the schema on your machine.
--- Create the database under /db folder for now, we will figure out where to kep it later.
+-- --------------------------------------------------------
+
+-- Steps(Windows laptop):
+
+-- 1. Install sqlite3 and perform .read thisFile.sql
+-- 2. open cmd, cd to project's db directory
+-- 3. run "sqlite3 workforceresearchguide.db". This will start this database. If it exisits it will open that, otherwise it will create a new database with this name.
+-- 4. run ".read workforceresearchguide.sql". This will run the sql statements from the file. it will create the required schema.
+-- 5. To quite, run ".quit".
 
 -- --------------------------------------------------------
 
@@ -53,8 +59,8 @@ CREATE TABLE IF NOT EXISTS `file_relations` (
 -- Table structure for table `metric`
 --
 
-DROP TABLE IF EXISTS `metric`;
-CREATE TABLE IF NOT EXISTS `metric` (
+DROP TABLE IF EXISTS `metrics`;
+CREATE TABLE IF NOT EXISTS `metrics` (
 `metric_id` integer PRIMARY KEY AUTOINCREMENT,
   `value` varchar(100),
   `is_disabled` boolean
@@ -82,6 +88,19 @@ CREATE TABLE IF NOT EXISTS `regions` (
 DROP TABLE IF EXISTS `time_periods`;
 CREATE TABLE IF NOT EXISTS `time_periods` (
 `time_period_id` integer PRIMARY KEY AUTOINCREMENT,
+  `value` varchar(100),
+  `is_disabled` boolean
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `strengths`
+--
+
+DROP TABLE IF EXISTS `strengths`;
+CREATE TABLE IF NOT EXISTS `strengths` (
+`strength_id` integer PRIMARY KEY AUTOINCREMENT,
   `value` varchar(100),
   `is_disabled` boolean
 );
