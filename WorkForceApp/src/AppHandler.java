@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.List;
 
 public class AppHandler {
@@ -5,7 +6,7 @@ public class AppHandler {
 	private EntityProcessor eprocessor = new EntityProcessor();
 	private TemplateProcessor tprocessor = new TemplateProcessor();
 	
-	public boolean addEntity(String name, String country, String metric, String timeperiod,List<String> filePaths, List<Integer> relatedEntities, boolean isBelief, String person, String strength, String note) {
+	public boolean addEntity(String name, String country, String metric, String timeperiod,List<String> filePaths, HashMap<Integer, String> relatedEntities, boolean isBelief, String person, String strength, String note) {
 		
 		return eprocessor.addEntity(name, country, metric, timeperiod, filePaths, relatedEntities, isBelief, person, strength, note);
 	}
@@ -35,7 +36,7 @@ public class AppHandler {
 		return eprocessor.deleteEntity(entityId);
 	}
 
-	public Entity updateEntity(int entityId, String name, String country, String metric, String timeperiod,List<String> filePaths, List<Integer> relatedEntities, boolean isBelief, String person, String strength, String note) {
+	public Entity updateEntity(int entityId, String name, String country, String metric, String timeperiod,List<String> filePaths, HashMap<Integer, String> relatedEntities, boolean isBelief, String person, String strength, String note) {
 		
 		return eprocessor.updateEntity(entityId, name, country, metric, timeperiod, filePaths, relatedEntities, isBelief, person, strength, note);
 	}
