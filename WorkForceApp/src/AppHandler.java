@@ -83,7 +83,7 @@ public class AppHandler {
 	
 	public List<Region> retrieveAllRegions(){
 		
-		return tprocessor.retrieveAllRegions()
+		return tprocessor.retrieveAllRegions();
 	}
 	
 	public List<Metric> retrieveAllMetrics(){
