@@ -23,7 +23,8 @@ public class AppHandler {
 	
 	public List<Entity> searchEntity(String searchQuery ) {
 		
-		return eprocessor.searchEntity(searchQuery);
+		//To be completed
+		return eprocessor.searchEntity(searchQuery, null, null);
 	}
 
 	public Entity searchEntity(int entityId) {
