@@ -40,18 +40,63 @@ public class AppHandler {
 		return eprocessor.updateEntity(name, country, metric, timeperiod, file_paths, related_entities, isBelief, person, strength, note);
 	}
 	
-	public boolean addTemplate(String fieldName, String value){
+	public boolean addRegion(String region){
 		
-		return tprocessor.addTemplate(fieldName,value);
+		return tprocessor.addRegion(region);
 	}
 	
-	public boolean disableTemplate(String fieldName, String value){
+	public boolean disableRegion(int regionId){
 		
-		return tprocessor.disableTemplate(fieldName,value);
+		return tprocessor.disableRegion(regionId);
 	}
 	
-	public ArrayList<Template> retrieveAllTemplates(){
+	public boolean addMetric(String metric){
 		
-		return tprocessor.retrieveAllTemplates();
+		return tprocessor.addMetric(metric);
+	}
+	
+	public boolean disableMetric(int metricId){
+		
+		return tprocessor.disableMetric(metricId);
+	}
+	
+	public boolean addTimeperiod(String timeperiod){
+		
+		return tprocessor.addTimeperiod(timeperiod);
+	}
+	
+	public boolean disableTimeperiod(int timeperiodId){
+		
+		return tprocessor.disableTimeperiod(timeperiodId);
+	}
+	
+	public boolean addStrength(String strength){
+		
+		return tprocessor.addStrength(strength);
+	}
+	
+	public boolean disableStrength(int strengthId){
+		
+		return tprocessor.disableStrength(strengthId);
+	}
+	
+	public List<Region> retrieveAllRegions(){
+		
+		return tprocessor.retrieveAllRegions()
+	}
+	
+	public List<Metric> retrieveAllMetrics(){
+		
+		return tprocessor.retrieveAllMetrics();
+	}
+	
+	public List<Timeperiod> retrieveAllTimeperiods(){
+		
+		return tprocessor.retrieveAllTimeperiods();
+	}
+	
+	public List<Strength> retrieveAllStrengths(){
+		
+		return tprocessor.retrieveAllStrengths();
 	}
 }

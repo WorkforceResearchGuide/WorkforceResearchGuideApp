@@ -2,58 +2,58 @@ import java.util.List;
 
 public class TemplateProcessor {
 
-	DBHandler db = new DBHandler();
-	Region r;
-	Metric m;
-	Timeperiod tp;
-	Strength s;
+	private DBHandler db = new DBHandler();
+	private Region r = new Region();
+	private Metric m = new Metric();
+	private Timeperiod tp = new Timeperiod();
+	private Strength s = new Strength();
 	
 	public boolean addRegion(String region){
 		
-		r = new Region(region, false);
+		r.setValue(region);
+		r.setDisabled(false);
 		return db.addRegion(region);
 	}
 	
 	public boolean addMetric(String metric){
 		
-		m = new Metric(metric, false);
+		m.setValue(metric);
+		m.setDisabled(false);
 		return db.addMetric(metric);
 	}
 	
 	public boolean addTimeperiod(String timeperiod){
 		
-		tp = new Timeperiod(timeperiod, false);
+		tp.setValue(timeperiod);
+		tp.setDisabled(false);
 		return db.addTimeperiod(timeperiod);
 	}
 	
 	public boolean addStrength(String strength){
 		
-		s = new Strength(strength, false);
+		s.setValue(strength);
+		s.setDisabled(false);
 		return db.addStrength(strength);
 	}
 	
-	public boolean disableRegion(String region){
+	public boolean disableRegion(int regionId){
 		
-		r = new Region(region, true);
-		return db.disableRegion(region);
+		return db.disableRegion(regionId);
 	}
 	
-	public boolean disableMetric(String metric){
+	public boolean disableMetric(int metricId){
 		
-		m = new Metric(metric, true);
-		return db.disableMetric(metric);
+		return db.disableMetric(metricId);
 	}
 	
-	public boolean disableTimeperiod(String timeperiod){
+	public boolean disableTimeperiod(int timeperiodId){
 		
-		tp = new Timeperiod(timeperiod, true);
-		return db.disableTimeperiod(timeperiod);
+		return db.disableTimeperiod(timeperiodId);
 	}
 	
-	public boolean disableStrength(String strength){
+	public boolean disableStrength(int strengthId){
 		
-		s = new Strength(strength, true);
-		return db.disableStrength(strength);
+		return db.disableStrength(strengthId);
 	}
 	
 	public List<Region> retrieveAllRegions(){
@@ -75,6 +75,4 @@ public class TemplateProcessor {
 		
 		return db.retrieveAllStrengths();
 	}
-	
-	
 }
