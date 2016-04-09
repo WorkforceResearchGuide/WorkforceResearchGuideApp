@@ -35,9 +35,9 @@ public class AppHandler {
 		return eprocessor.deleteEntity(entityId);
 	}
 
-	public Entity updateEntity(String name, String country, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note) {
+	public Entity updateEntity(int entityId, String name, String country, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note) {
 		
-		return eprocessor.updateEntity(name, country, metric, timeperiod, file_paths, related_entities, isBelief, person, strength, note);
+		return eprocessor.updateEntity(entityId, name, country, metric, timeperiod, file_paths, related_entities, isBelief, person, strength, note);
 	}
 	
 	public boolean addRegion(String region){
