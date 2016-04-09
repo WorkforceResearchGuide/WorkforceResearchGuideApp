@@ -190,12 +190,20 @@ public class EntityProcessor {
 		else isBelief=true;
 		
 		TemplateProcessor tp=new TemplateProcessor();
-		Region reg=this.addregion(region,tp);
-		Metric metr=this.addmetric(metric, tp);	
-		Timeperiod timepe=this.addtimeperiod(timeperiod, tp);
-		Strength stren=this.addstrength(strength, tp);
+		Region reg = new Region();
+		reg.setValue(region);
+		reg.setDisabled(false);
+		Metric metr = new Metric();
+		metr.setValue(metric);
+		metr.setDisabled(false);
+		Timeperiod tPeriod = new Timeperiod();
+		tPeriod.setValue(timeperiod);
+		tPeriod.setDisabled(false);
+		Strength s = new Strength();
+		s.setValue(strength);
+		s.setDisabled(false);
 		
-		Entity entity=new Entity(entityid,name,reg,metr,timepe,file_paths,related_entities,isBelief,person,stren,note);
+		Entity entity=new Entity(entityid,name,reg,metr,tPeriod,file_paths,related_entities,isBelief,person,s,note);
 		return dbhand.updateEntity(entity);
 	}
 	
