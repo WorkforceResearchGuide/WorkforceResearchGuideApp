@@ -99,4 +99,24 @@ public class AppHandler {
 		
 		return tprocessor.retrieveAllStrengths();
 	}
+	
+	public List<Region> retrieveEnabledRegions(){
+		
+		return tprocessor.retrieveEnabledRegions();
+	}
+	
+	public List<Metric> retrieveEnabledMetrics(){
+		
+		return tprocessor.retrieveEnabledMetrics();
+	}
+	
+	public List<Timeperiod> retrieveEnabledTimeperiods(){
+		
+		return tprocessor.retrieveEnabledTimeperiods();
+	}
+	
+	public List<Strength> retrieveEnabledStrengths(){
+		
+		return tprocessor.retrieveEnabledStrengths();
+	}
 }
