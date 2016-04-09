@@ -77,7 +77,6 @@ public class DBHandler {
 		}
 	}
 
-	// This is not needed, use addEntityBatch as both have same signature.
 	public boolean addEntityFolderScan(List<Entity> entityList) {
 		return addEntityBatch(entityList);
 	}
@@ -128,6 +127,9 @@ public class DBHandler {
 		return result;
 	}
 
+	// TODO: Decide on Search feature -> how exactly it will work... inputs and
+	// search field preferences
+	// Then complete method.
 	public List<Entity> searchEntity(String region, String metric,
 			String timeperiod) {
 
@@ -239,7 +241,7 @@ public class DBHandler {
 		}
 	}
 
-	// This method will return the same entity, or we can change it to return
+	// TODO: This method will return the same entity, or we can change it to return
 	// boolean..
 	public Entity updateEntity(Entity entityUpdated) {
 		Entity entityCurrent = searchEntity(entityUpdated.getId());
@@ -372,11 +374,6 @@ public class DBHandler {
 			e.printStackTrace();
 			return entityCurrent;
 		}
-	}
-
-	// Why does anyone need this method?
-	public int getLastEntityIdInDB() {
-		return 0;
 	}
 
 	// Add Template
