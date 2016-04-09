@@ -1,9 +1,7 @@
 import java.util.List;
 
-public class Entity {
-	private int id;
-
-
+public class Entity{
+	
 	private String statement;
 	private List<String> filePaths;
 	private List<Integer> relatedEntities;

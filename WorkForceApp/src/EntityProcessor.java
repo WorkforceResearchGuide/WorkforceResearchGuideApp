@@ -21,12 +21,7 @@ public class EntityProcessor {
 	DBHandler dbhand=new DBHandler();
 	
 	//Add one entity, not associated to file
-	public boolean addEntity(String name, String geography, String metric, String timeperiod,String[] file_paths, int[] related_entities, String factBelief, String person, String strength, String note){		
-			int currentId=dbhand.getLastEntityIdInDB()+1;
-			if((Integer)currentId==null){
-				System.err.println("Id can't be null. Please check DBHandler or database.");
-				return false;
-			}
+	public boolean addEntity(String name, String region, String metric, String timeperiod,String[] file_paths, int[] related_entities, String factBelief, String person, String strength, String note){		
 			if(name==null || name.length()==0){
 				System.err.println("Name can't be empty. Please enter text in name.");
 				return false;
@@ -41,20 +36,18 @@ public class EntityProcessor {
 				System.err.println("Wrong strength name. Please enter 'undecided', 'belief', or 'unbelief'.");
 				return false;
 			}
+			
 			boolean isBelief;
 			if(factBelief.equalsIgnoreCase("fact")) isBelief=false;
 			else isBelief=true;
 			
-			
-			String region,,metric,timeperiod,strength
 			TemplateProcessor tp=new TemplateProcessor();
-			this.addregion(region,tp);
-			this.addmetric(metric, tp);	
-
-				
+			Region reg=this.addregion(region,tp);
+			Metric metr=this.addmetric(metric, tp);	
+			Timeperiod timepe=this.addtimeperiod(timeperiod, tp);
+			Strength stren=this.addstrength(strength, tp);
 			
-				
-			Entity entity=new Entity(currentId,name,geography,metric,timeperiod,null,related_entities,isBelief,person,strength,note);
+			Entity entity=new Entity(name,reg,metr,timepe,null,related_entities,isBelief,person,stren,note);
 			dbhand.addEntity(entity);
 			return true;		
 	}
@@ -88,7 +81,8 @@ public class EntityProcessor {
 			BufferedReader br=new BufferedReader(fr);
 			String line;
 			List<Entity> entityList=new ArrayList<Entity>();
-			int cutrentId=dbhand.getLastEntityIdInDB()+1;
+			//Skip header
+			br.readLine();
 			while((line=br.readLine())!=null){
 				//Each row in CSV(name,geography,metric,timeperiod,null file paths,related_entities("2","5"),isBelief,person,strengh,note)
 				String[] arry=line.split(",");
@@ -96,10 +90,6 @@ public class EntityProcessor {
 				int[] arry_int=new int[arry_str.length];
 				for(int i=0 ;i<arry_str.length;i++){
 					arry_int[i]=Integer.parseInt(arry_str[i]);
-				}
-				if((Integer)cutrentId==null){
-					System.err.println("id can't be null!");
-					return false;
 				}
 				if(arry[0]==null || arry[0].isEmpty()){
 					System.err.println("name can't be null or empty!");
@@ -113,9 +103,19 @@ public class EntityProcessor {
 					System.err.println("strength can't be null or empty!");
 					return false;
 				}
-				Entity entity=new Entity(cutrentId,arry[0],arry[1],arry[2],arry[3],null,arry_int,Boolean.parseBoolean(arry[6]),arry[7],arry[8],arry[9]);
+				
+				boolean isBelief;
+				if(arry[6].equalsIgnoreCase("fact")) isBelief=false;
+				else isBelief=true;
+				
+				TemplateProcessor tp=new TemplateProcessor();
+				Region reg=this.addregion(arry[1],tp);
+				Metric metr=this.addmetric(arry[2], tp);	
+				Timeperiod timepe=this.addtimeperiod(arry[3], tp);
+				Strength stren=this.addstrength(arry[8], tp);
+				
+				Entity entity=new Entity(arry[0],reg,metr,timepe,null,arry_int,isBelief,arry[7],stren,arry[9]);
 				entityList.add(entity);
-				cutrentId++;
 			}
 			dbhand.addEntityBatch(entityList);		
 			br.close();
@@ -145,14 +145,21 @@ public class EntityProcessor {
 			}
 			
 			List<Entity> entityList=new ArrayList<Entity>();
-			int cutrentId=dbhand.getLastEntityIdInDB()+1;
 			for(int i=0;i<files.length;i++){
 				//System.out.println(files[i].getName().split("\\.")[1]);
 				String name=(String)Array.get(files[i].getName().split("\\."), 0);
 				String[] file_paths=new String[1];
-				Array.set(file_paths,0,files[i].toString());
-				//Set default strength, Undecided
-				Entity entity=new Entity(cutrentId,name, null, null, null,file_paths, null, false, null, "Undecided", null);
+				Array.set(file_paths,0,files[i].toString());				
+				
+				//Entity(String name, Region region, Metric metric, Timeperiod timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, Strength strength, String note)
+
+				
+				TemplateProcessor tp=new TemplateProcessor();
+	
+				//Set default strength =Undecided
+				Strength stren=this.addstrength("Undecided", tp);
+				//Set default isBelief =false
+				Entity entity=new Entity(name, null, null, null,file_paths, null, false, null, stren, null);
 				entityList.add(entity);
 			}
 			//print entities' information
@@ -177,39 +184,63 @@ public class EntityProcessor {
 		return dbhand.deleteEntity(entityid);
 	}
 
-	public Entity updateEntity(int entityid,String name, String geography, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){
-		Entity entity=new Entity(entityid,name,geography,metric,timeperiod,file_paths,related_entities,isBelief,person,strength,note);
+	public Entity updateEntity(int entityid,String name, String region, String metric, String timeperiod,String[] file_paths, int[] related_entities, String factBelief, String person, String strength, String note){
+		boolean isBelief;
+		if(factBelief.equalsIgnoreCase("fact")) isBelief=false;
+		else isBelief=true;
+		
+		TemplateProcessor tp=new TemplateProcessor();
+		Region reg=this.addregion(region,tp);
+		Metric metr=this.addmetric(metric, tp);	
+		Timeperiod timepe=this.addtimeperiod(timeperiod, tp);
+		Strength stren=this.addstrength(strength, tp);
+		
+		Entity entity=new Entity(entityid,name,reg,metr,timepe,file_paths,related_entities,isBelief,person,stren,note);
 		return dbhand.updateEntity(entity);
 	}
 	
 	public Region addregion(String region, TemplateProcessor tp){
 		tp.addRegion(region); //true: add success, false: System.err.println("Region has already exist!");
 		List<Region> regionlist=tp.retrieveAllRegions();
+		Region returnReg=null;
 		for(Region rg:regionlist){
 			if(rg.getValue().equalsIgnoreCase(region)){
-				return new Region(rg.getRegionId(),region,rg.isDisabled());
+				returnReg=new Region(rg.getRegionId(),region,rg.isDisabled());
 			}
-		}	
+		}
+		return returnReg;
 	}
 	public Metric addmetric(String metric, TemplateProcessor tp){
-		if(tp.addMetric(metric)){
-			List<Metric> metriclist=tp.retrieveAllMetrics();
-			for(Metric mt:metriclist){
-				if(mt.getValue().equalsIgnoreCase(metric)){
-					return new Metric(mt.getMetricId(),metric,mt.isDisabled());
-				} 
-			}
+		tp.addMetric(metric);
+		List<Metric> metriclist=tp.retrieveAllMetrics();
+		Metric returnMet=null;
+		for(Metric mt:metriclist){
+			if(mt.getValue().equalsIgnoreCase(metric)){
+				returnMet= new Metric(mt.getMetricId(),metric,mt.isDisabled());
+			} 
 		}
+		return returnMet;
 	}
 	public Timeperiod addtimeperiod(String timeperiod, TemplateProcessor tp){
-		if(tp.addTimeperiod(timeperiod)){
-			List<Timeperiod> tplist=tp.retrieveAllTimeperiods();
-			for(Timeperiod timep:tplist){
-				if(timep.getValue().equalsIgnoreCase(timeperiod)){
-					new Timeperiod(timep.getTimeperiodId(),timeperiod,timep.isDisabled());
-				} 
-			}
+		tp.addTimeperiod(timeperiod);
+		List<Timeperiod> tplist=tp.retrieveAllTimeperiods();
+		Timeperiod returnTp=null;
+		for(Timeperiod timep:tplist){
+			if(timep.getValue().equalsIgnoreCase(timeperiod)){
+				returnTp=new Timeperiod(timep.getTimeperiodId(),timeperiod,timep.isDisabled());
+			} 
 		}
+		return returnTp;
 	}
-	public strength
+	public Strength addstrength(String strength, TemplateProcessor tp){
+		tp.addStrength(strength);
+		List<Strength> strengthlist=tp.retrieveAllStrengths();
+		Strength returnStren=null;
+		for(Strength streng:strengthlist){
+			if(streng.getValue().equalsIgnoreCase(strength)){
+				returnStren=new Strength(streng.getStrengthId(),strength,streng.isDisabled());
+			} 
+		}
+		return returnStren;
+	}
 }
