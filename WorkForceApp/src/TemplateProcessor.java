@@ -3,56 +3,56 @@ import java.util.List;
 public class TemplateProcessor {
 
 	DBHandler db = new DBHandler();
-	Region r;
-	Metric m;
-	Timeperiod tp;
-	Strength s;
+	Region r = new Region();
+	Metric m = new Metric();
+	Timeperiod tp = new Timeperiod();
+	Strength s = new Strength();
 	
 	public boolean addRegion(String region){
 		
-		r = new Region(region, false);
+		r.setValue(region);
+		r.setDisabled(false);
 		return db.addRegion(region);
 	}
 	
 	public boolean addMetric(String metric){
 		
-		m = new Metric(metric, false);
+		m.setValue(metric);
+		m.setDisabled(false);
 		return db.addMetric(metric);
 	}
 	
 	public boolean addTimeperiod(String timeperiod){
 		
-		tp = new Timeperiod(timeperiod, false);
+		tp.setValue(timeperiod);
+		tp.setDisabled(false);
 		return db.addTimeperiod(timeperiod);
 	}
 	
 	public boolean addStrength(String strength){
 		
-		s = new Strength(strength, false);
+		s.setValue(strength);
+		s.setDisabled(false);
 		return db.addStrength(strength);
 	}
 	
 	public boolean disableRegion(String region){
 		
-		r = new Region(region, true);
 		return db.disableRegion(region);
 	}
 	
 	public boolean disableMetric(String metric){
 		
-		m = new Metric(metric, true);
 		return db.disableMetric(metric);
 	}
 	
 	public boolean disableTimeperiod(String timeperiod){
 		
-		tp = new Timeperiod(timeperiod, true);
 		return db.disableTimeperiod(timeperiod);
 	}
 	
 	public boolean disableStrength(String strength){
 		
-		s = new Strength(strength, true);
 		return db.disableStrength(strength);
 	}
 	
