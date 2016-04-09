@@ -13,7 +13,7 @@ public class EntityProcessor {
 	DBHandler dbhand=new DBHandler();
 	
 	//Add one entity, not associated to file
-	public boolean addEntity(String name, String region, String metric, String timeperiod,List<String> file_paths, HashMap<Integer, String> related_entities, String factBelief, String person, String strength, String note){		
+	public boolean addEntity(String name, String region, String metric, String timeperiod,List<String> file_paths, HashMap<Integer, String> related_entities, boolean isBelief, String person, String strength, String note){		
 			if(name==null || name.length()==0){
 				return false;
 			}
@@ -21,10 +21,6 @@ public class EntityProcessor {
 			if(strength==null){
 				return false;
 			}
-			
-			boolean isBelief;
-			if(factBelief.equalsIgnoreCase("fact")) isBelief=false;
-			else isBelief=true;
 			
 			Region reg = new Region();
 			reg.setValue(region);
@@ -156,11 +152,8 @@ public class EntityProcessor {
 		return dbhand.deleteEntity(entityid);
 	}
 
-	public Entity updateEntity(int entityid,String name, String region, String metric, String timeperiod,List<String> file_paths, HashMap<Integer, String> related_entities, String factBelief, String person, String strength, String note){
-		boolean isBelief;
-		if(factBelief.equalsIgnoreCase("fact")) isBelief=false;
-		else isBelief=true;
-		
+	public Entity updateEntity(int entityid,String name, String region, String metric, String timeperiod,List<String> file_paths, HashMap<Integer, String> related_entities, boolean isBelief, String person, String strength, String note){
+
 		Region reg = new Region();
 		reg.setValue(region);
 		reg.setDisabled(false);
