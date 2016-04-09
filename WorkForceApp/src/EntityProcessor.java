@@ -9,19 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class EntityProcessor {
-	//Only one DBhandler for one EntityProcessor (class diagram)
+
 	DBHandler dbhand=new DBHandler();
 	
-	//Add one entity, not associated to file
 	public boolean addEntity(String name, String region, String metric, String timeperiod,List<String> file_paths, HashMap<Integer, String> related_entities, boolean isBelief, String person, String strength, String note){		
-			if(name==null || name.length()==0){
-				return false;
-			}
-			
-			if(strength==null){
-				return false;
-			}
-			
+
 			Region reg = new Region();
 			reg.setValue(region);
 			reg.setDisabled(false);
@@ -40,10 +32,8 @@ public class EntityProcessor {
 			return true;		
 	}
 	
-	//Add entities through a xlsx file, not associated to file
 	public boolean addEntityBatch(String filepath){
 		try {
-			//find the xlsx input file in the filepath
 			File infile=new File(filepath);
 			if(!infile.exists()) {
 				return false;
@@ -54,7 +44,6 @@ public class EntityProcessor {
 			BufferedReader br=new BufferedReader(fr);
 			String line;
 			List<Entity> entityList=new ArrayList<Entity>();
-			//Skip header
 			br.readLine();
 			while((line=br.readLine())!=null){
 				//Each row in CSV(name,geography,metric,timeperiod,null file paths,related_entities("2","5"),isBelief,person,strengh,note)
