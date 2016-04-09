@@ -2,11 +2,11 @@ import java.util.List;
 
 public class TemplateProcessor {
 
-	DBHandler db = new DBHandler();
-	Region r = new Region();
-	Metric m = new Metric();
-	Timeperiod tp = new Timeperiod();
-	Strength s = new Strength();
+	private DBHandler db = new DBHandler();
+	private Region r = new Region();
+	private Metric m = new Metric();
+	private Timeperiod tp = new Timeperiod();
+	private Strength s = new Strength();
 	
 	public boolean addRegion(String region){
 		
@@ -36,24 +36,24 @@ public class TemplateProcessor {
 		return db.addStrength(strength);
 	}
 	
-	public boolean disableRegion(String region){
+	public boolean disableRegion(int regionId){
 		
-		return db.disableRegion(region);
+		return db.disableRegion(regionId);
 	}
 	
-	public boolean disableMetric(String metric){
+	public boolean disableMetric(int metricId){
 		
-		return db.disableMetric(metric);
+		return db.disableMetric(metricId);
 	}
 	
-	public boolean disableTimeperiod(String timeperiod){
+	public boolean disableTimeperiod(int timeperiodId){
 		
-		return db.disableTimeperiod(timeperiod);
+		return db.disableTimeperiod(timeperiodId);
 	}
 	
-	public boolean disableStrength(String strength){
+	public boolean disableStrength(int strengthId){
 		
-		return db.disableStrength(strength);
+		return db.disableStrength(strengthId);
 	}
 	
 	public List<Region> retrieveAllRegions(){
