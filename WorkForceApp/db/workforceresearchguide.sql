@@ -2,7 +2,7 @@
 
 -- Steps(Windows laptop):
 
--- 1. Install sqlite3 and perform .read thisFile.sql
+-- 1. Install sqlite3 from https://www.sqlite.org/
 -- 2. open cmd, cd to project's db directory
 -- 3. run "sqlite3 workforceresearchguide.db". This will start this database. If it exisits it will open that, otherwise it will create a new database with this name.
 -- 4. run ".read workforceresearchguide.sql". This will run the sql statements from the file. it will create the required schema.
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `file_relations` (
 DROP TABLE IF EXISTS `metrics`;
 CREATE TABLE IF NOT EXISTS `metrics` (
 `metric_id` integer PRIMARY KEY AUTOINCREMENT,
-  `value` varchar(100),
+  `value` varchar(100) UNIQUE,
   `is_disabled` boolean
 );
 
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `metrics` (
 DROP TABLE IF EXISTS `regions`;
 CREATE TABLE IF NOT EXISTS `regions` (
 `region_id` integer PRIMARY KEY AUTOINCREMENT,
-  `value` varchar(100),
+  `value` varchar(100) UNIQUE,
   `is_disabled` boolean
 );
 
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `regions` (
 DROP TABLE IF EXISTS `time_periods`;
 CREATE TABLE IF NOT EXISTS `time_periods` (
 `time_period_id` integer PRIMARY KEY AUTOINCREMENT,
-  `value` varchar(100),
+  `value` varchar(100) UNIQUE,
   `is_disabled` boolean
 );
 
@@ -101,6 +101,6 @@ CREATE TABLE IF NOT EXISTS `time_periods` (
 DROP TABLE IF EXISTS `strengths`;
 CREATE TABLE IF NOT EXISTS `strengths` (
 `strength_id` integer PRIMARY KEY AUTOINCREMENT,
-  `value` varchar(100),
+  `value` varchar(100) UNIQUE,
   `is_disabled` boolean
 );
