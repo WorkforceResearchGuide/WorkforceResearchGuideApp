@@ -19,6 +19,24 @@ public class Entity {
 
 	}
 
+	public Entity(String statement, Region region, Metric metric,
+			Timeperiod timeperiod, List<String> filePaths,
+			HashMap<Integer, String> relatedEntities, boolean isBelief,
+			String person, Strength strength, String note) {
+		
+		this.statement = statement;
+		this.region = region;
+		this.metric = metric;
+		this.timeperiod = timeperiod;
+		this.filePaths = filePaths;
+		this.relatedEntities = relatedEntities;
+		this.isBelief = isBelief;
+		this.person = person;
+		this.strength = strength;
+		this.note = note;
+		
+	}
+	
 	public Entity(int entityid, String statement, Region region, Metric metric,
 			Timeperiod timeperiod, List<String> filePaths,
 			HashMap<Integer, String> relatedEntities, boolean isBelief,
