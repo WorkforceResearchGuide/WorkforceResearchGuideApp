@@ -75,6 +75,4 @@ public class TemplateProcessor {
 		
 		return db.retrieveAllStrengths();
 	}
-	
-	
 }

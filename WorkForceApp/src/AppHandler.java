@@ -99,5 +99,4 @@ public class AppHandler {
 		
 		return tprocessor.retrieveAllStrengths();
 	}
-	
 }
