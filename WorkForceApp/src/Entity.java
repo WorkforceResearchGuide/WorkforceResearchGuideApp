@@ -1,3 +1,5 @@
+import java.util.List;
+
 
 public class Entity {
 	private int id;
@@ -7,10 +9,13 @@ public class Entity {
 	private int[] related_entities;
 	private boolean isBelief;
 	private String person;
-	private Strength strength;
+	private Strength strength;	
+	private Region region;
+	private Metric metric;
+	private Timeperiod timeperiod;
 	private String note;
 
-	public Entity(int entityid,String name, String geography, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){
+	public Entity(int entityid,String name, Region region, Metric metric, Timeperiod timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, Strength strength, String note){
 		if((Integer)entityid==null){
 			System.err.println("id can't be null!");
 			return;
@@ -23,16 +28,13 @@ public class Entity {
 			System.err.println("isBelief can't be null or empty!");
 			return;
 		}
-		if(strength==null || strength.isEmpty()){
+		if(strength==null){
 			System.err.println("strength can't be null or empty!");
 			return;
 		} 
 		
 		this.id=entityid;
 		this.name=name;
-		Template.setgeography(geography);
-		Template.setMetric(metric);	
-		Template.setTimePeriod(timeperiod);
 		if(file_paths==null){
 			this.file_paths=file_paths;
 		}else{
@@ -47,8 +49,11 @@ public class Entity {
 		}
 		this.isBelief=isBelief;
 		this.person=person;
-		setStrength(strength);	
 		this.note=note;
+		
+	    
+			
+		this.strength=strength;	
 	}
 	
 //	//For addEntityFolderScan function in EntityProcessor Class
@@ -74,27 +79,27 @@ public class Entity {
 		return this.name;
 	}
 	
-	public void setgeography(String geography){
-		Template.setgeography(geography);
+	public void setRegion(Region region){
+		this.region=region;
 	}
 	
-	public String getgeography(){
-		return Template.getgeography();
+	public Region getRegion(){
+		return this.region;
 	}
-	public void setMetric(String metric){
-		Template.setMetric(metric);
-	}
-	
-	public String getMetric(){
-		return Template.getMetric();
+	public void setMetric(Metric metric){
+		this.metric=metric;
 	}
 	
-	public void setTimePeriod(String timeperiod){
-		Template.setTimePeriod(timeperiod);
+	public Metric getMetric(){
+		return this.metric;
 	}
 	
-	public String getTimePeriod(){
-		return Template.getTimePeriod();
+	public void setTimePeriod(Timeperiod timeperiod){
+		this.timeperiod=timeperiod;
+	}
+	
+	public Timeperiod getTimePeriod(){
+		return this.timeperiod;
 	}
 	
 	public void setFilePaths(String[] file_paths){
@@ -140,16 +145,9 @@ public class Entity {
 		return this.person;
 	}
 	
-	public void setStrength(String strength){
-		if(strength.equalsIgnoreCase("undecided")){
-				this.strength=Strength.UNDECIDED;
-		}else if(strength.equalsIgnoreCase("belief")){
-			this.strength=Strength.BELIEF;
-		}else if(strength.equalsIgnoreCase("unbelief")){
-			this.strength=Strength.UNBELIEF;
-		}else{
-			return;
-		}
+	public void setStrength(Strength strength){
+			this.strength=strength;
+
 	}
 	
 	public Strength getStrength(){
@@ -166,7 +164,7 @@ public class Entity {
 	
 	public void printEntityInfo(){
 		System.out.println("Id: "+this.getId()+"\n Name: "+this.getName()
-							+"\n Geography: "+this.getgeography()+"\n Metric: "+this.getMetric()+"\n TimePeriod: "+this.getTimePeriod()
+							+"\n region: "+this.getRegion()+"\n Metric: "+this.getMetric()+"\n TimePeriod: "+this.getTimePeriod()
 							+"\n Unstructured file path: "+this.getFilePaths()[0]+"\n isBelief: "+this.getIsBelief()
 							+"\n Person: "+this.getPerson()+"\n Strength: "+this.getStrength()
 							+"\n Description: "+this.getNote());
