@@ -50,9 +50,45 @@ public class Entity {
 		this.isBelief=isBelief;
 		this.person=person;
 		this.note=note;
+		this.region=region;
+	    this.metric=metric;
+		this.timeperiod=timeperiod;	
+		this.strength=strength;	
+	}
+	
+	public Entity(String name, Region region, Metric metric, Timeperiod timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, Strength strength, String note){
+		if(name==null || name.isEmpty()){
+			System.err.println("name can't be null or empty!");
+			return;
+		}
+		if(String.valueOf(isBelief).isEmpty()){
+			System.err.println("isBelief can't be null or empty!");
+			return;
+		}
+		if(strength==null){
+			System.err.println("strength can't be null or empty!");
+			return;
+		} 
 		
-	    
-			
+		this.name=name;
+		if(file_paths==null){
+			this.file_paths=file_paths;
+		}else{
+			this.file_paths=new String[file_paths.length];
+			setFilePaths(file_paths);
+		}
+		if(related_entities==null){
+			this.related_entities=related_entities;
+		}else{
+			this.related_entities=new int[related_entities.length];
+			setRelatedEntities(related_entities);
+		}
+		this.isBelief=isBelief;
+		this.person=person;
+		this.note=note;
+		this.region=region;
+	    this.metric=metric;
+		this.timeperiod=timeperiod;	
 		this.strength=strength;	
 	}
 	
