@@ -20,9 +20,10 @@ public class Entity {
 	}
 
 	public Entity(int entityid, String statement, Region region, Metric metric,
-			Timeperiod timeperiod, List<String> filePaths, HashMap<Integer, String> relatedEntities,
-			boolean isBelief, String person, Strength strength, String note) {
-		
+			Timeperiod timeperiod, List<String> filePaths,
+			HashMap<Integer, String> relatedEntities, boolean isBelief,
+			String person, Strength strength, String note) {
+
 		this.id = entityid;
 		this.statement = statement;
 		this.region = region;
@@ -44,7 +45,8 @@ public class Entity {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -58,7 +60,8 @@ public class Entity {
 	}
 
 	/**
-	 * @param statement the statement to set
+	 * @param statement
+	 *            the statement to set
 	 */
 	public void setStatement(String statement) {
 		this.statement = statement;
@@ -72,7 +75,8 @@ public class Entity {
 	}
 
 	/**
-	 * @param filePaths the filePaths to set
+	 * @param filePaths
+	 *            the filePaths to set
 	 */
 	public void setFilePaths(List<String> filePaths) {
 		this.filePaths = filePaths;
@@ -86,7 +90,8 @@ public class Entity {
 	}
 
 	/**
-	 * @param relatedEntities the relatedEntities to set
+	 * @param relatedEntities
+	 *            the relatedEntities to set
 	 */
 	public void setRelatedEntities(HashMap<Integer, String> relatedEntities) {
 		this.relatedEntities = relatedEntities;
@@ -100,7 +105,8 @@ public class Entity {
 	}
 
 	/**
-	 * @param isBelief the isBelief to set
+	 * @param isBelief
+	 *            the isBelief to set
 	 */
 	public void setBelief(boolean isBelief) {
 		this.isBelief = isBelief;
@@ -114,7 +120,8 @@ public class Entity {
 	}
 
 	/**
-	 * @param person the person to set
+	 * @param person
+	 *            the person to set
 	 */
 	public void setPerson(String person) {
 		this.person = person;
@@ -128,7 +135,8 @@ public class Entity {
 	}
 
 	/**
-	 * @param strength the strength to set
+	 * @param strength
+	 *            the strength to set
 	 */
 	public void setStrength(Strength strength) {
 		this.strength = strength;
@@ -142,7 +150,8 @@ public class Entity {
 	}
 
 	/**
-	 * @param region the region to set
+	 * @param region
+	 *            the region to set
 	 */
 	public void setRegion(Region region) {
 		this.region = region;
@@ -156,7 +165,8 @@ public class Entity {
 	}
 
 	/**
-	 * @param metric the metric to set
+	 * @param metric
+	 *            the metric to set
 	 */
 	public void setMetric(Metric metric) {
 		this.metric = metric;
@@ -170,7 +180,8 @@ public class Entity {
 	}
 
 	/**
-	 * @param timeperiod the timeperiod to set
+	 * @param timeperiod
+	 *            the timeperiod to set
 	 */
 	public void setTimeperiod(Timeperiod timeperiod) {
 		this.timeperiod = timeperiod;
@@ -184,7 +195,8 @@ public class Entity {
 	}
 
 	/**
-	 * @param note the note to set
+	 * @param note
+	 *            the note to set
 	 */
 	public void setNote(String note) {
 		this.note = note;
