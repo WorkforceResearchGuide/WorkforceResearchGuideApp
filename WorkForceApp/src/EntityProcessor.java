@@ -21,7 +21,7 @@ public class EntityProcessor {
 	DBHandler dbhand=new DBHandler();
 	
 	//Add one entity, not associated to file
-	public boolean addEntity(String name, String geography, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){		
+	public boolean addEntity(String name, String geography, String metric, String timeperiod,String[] file_paths, int[] related_entities, String factBelief, String person, String strength, String note){		
 			int currentId=dbhand.getLastEntityIdInDB()+1;
 			if((Integer)currentId==null){
 				System.err.println("Id can't be null. Please check DBHandler or database.");
@@ -41,6 +41,19 @@ public class EntityProcessor {
 				System.err.println("Wrong strength name. Please enter 'undecided', 'belief', or 'unbelief'.");
 				return false;
 			}
+			boolean isBelief;
+			if(factBelief.equalsIgnoreCase("fact")) isBelief=false;
+			else isBelief=true;
+			
+			
+			String region,,metric,timeperiod,strength
+			TemplateProcessor tp=new TemplateProcessor();
+			this.addregion(region,tp);
+			this.addmetric(metric, tp);	
+
+				
+			
+				
 			Entity entity=new Entity(currentId,name,geography,metric,timeperiod,null,related_entities,isBelief,person,strength,note);
 			dbhand.addEntity(entity);
 			return true;		
@@ -164,8 +177,39 @@ public class EntityProcessor {
 		return dbhand.deleteEntity(entityid);
 	}
 
-	public boolean updateEntity(int entityid,String name, String geography, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){
+	public Entity updateEntity(int entityid,String name, String geography, String metric, String timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, String strength, String note){
 		Entity entity=new Entity(entityid,name,geography,metric,timeperiod,file_paths,related_entities,isBelief,person,strength,note);
 		return dbhand.updateEntity(entity);
-	}	
+	}
+	
+	public Region addregion(String region, TemplateProcessor tp){
+		tp.addRegion(region); //true: add success, false: System.err.println("Region has already exist!");
+		List<Region> regionlist=tp.retrieveAllRegions();
+		for(Region rg:regionlist){
+			if(rg.getValue().equalsIgnoreCase(region)){
+				return new Region(rg.getRegionId(),region,rg.isDisabled());
+			}
+		}	
+	}
+	public Metric addmetric(String metric, TemplateProcessor tp){
+		if(tp.addMetric(metric)){
+			List<Metric> metriclist=tp.retrieveAllMetrics();
+			for(Metric mt:metriclist){
+				if(mt.getValue().equalsIgnoreCase(metric)){
+					return new Metric(mt.getMetricId(),metric,mt.isDisabled());
+				} 
+			}
+		}
+	}
+	public Timeperiod addtimeperiod(String timeperiod, TemplateProcessor tp){
+		if(tp.addTimeperiod(timeperiod)){
+			List<Timeperiod> tplist=tp.retrieveAllTimeperiods();
+			for(Timeperiod timep:tplist){
+				if(timep.getValue().equalsIgnoreCase(timeperiod)){
+					new Timeperiod(timep.getTimeperiodId(),timeperiod,timep.isDisabled());
+				} 
+			}
+		}
+	}
+	public strength
 }
