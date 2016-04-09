@@ -1,173 +1,126 @@
 import java.util.List;
 
-
 public class Entity {
 	private int id;
-	private String name;
-	//file_paths is where entities associate to files.
-	private String[] file_paths;
-	private int[] related_entities;
+
+
+	private String statement;
+	private List<String> filePaths;
+	private List<Integer> relatedEntities;
 	private boolean isBelief;
 	private String person;
-	private Strength strength;	
+	private Strength strength;
 	private Region region;
 	private Metric metric;
 	private Timeperiod timeperiod;
 	private String note;
 
-	public Entity(int entityid,String name, Region region, Metric metric, Timeperiod timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, Strength strength, String note){
-		if((Integer)entityid==null){
-			System.err.println("id can't be null!");
-			return;
-		}
-		if(name==null || name.isEmpty()){
-			System.err.println("name can't be null or empty!");
-			return;
-		}
-		if(String.valueOf(isBelief).isEmpty()){
-			System.err.println("isBelief can't be null or empty!");
-			return;
-		}
-		if(strength==null){
-			System.err.println("strength can't be null or empty!");
-			return;
-		} 
-		
-		this.id=entityid;
-		this.name=name;
-		if(file_paths==null){
-			this.file_paths=file_paths;
-		}else{
-			this.file_paths=new String[file_paths.length];
-			setFilePaths(file_paths);
-		}
-		if(related_entities==null){
-			this.related_entities=related_entities;
-		}else{
-			this.related_entities=new int[related_entities.length];
-			setRelatedEntities(related_entities);
-		}
-		this.isBelief=isBelief;
-		this.person=person;
-		this.note=note;
-		
-	    
-			
-		this.strength=strength;	
-	}
-	
-//	//For addEntityFolderScan function in EntityProcessor Class
-//	public Entity(String name, String[] file_paths){
-//		this.name=name;
-//		setFilePaths(file_paths);
-//	}
-	
-
-	public void setId(int id){
-		this.id=id;
-	}
-	
-	public int getId(){
-		return this.id;
-	}
-
-	public void setName(String name){
-		this.name=name;
-	}
-	
-	public String getName(){
-		return this.name;
-	}
-	
-	public void setRegion(Region region){
-		this.region=region;
-	}
-	
-	public Region getRegion(){
-		return this.region;
-	}
-	public void setMetric(Metric metric){
-		this.metric=metric;
-	}
-	
-	public Metric getMetric(){
-		return this.metric;
-	}
-	
-	public void setTimePeriod(Timeperiod timeperiod){
-		this.timeperiod=timeperiod;
-	}
-	
-	public Timeperiod getTimePeriod(){
-		return this.timeperiod;
-	}
-	
-	public void setFilePaths(String[] file_paths){
-		//add one entity
-		if(file_paths==null) return;
-		
-		//entities relates to files in the folder path
-		int count=0;
-		for(String fp:file_paths){
-			this.file_paths[count]=fp;
-			count++;
-		}		
-	}
-
-	public String[] getFilePaths(){
-		return this.file_paths;
-	}
-
-	public void setRelatedEntities(int[] related_entities){
-		if(related_entities==null) return;
-		for(int i=0;i<related_entities.length;i++){
-			this.related_entities[i]=related_entities[i];
-		}		
-	}
-
-	public int[] getRelatedEntities(){
-		return this.related_entities;
-	}
-	
-	public void setIsBelief(boolean isBelief){
-		this.isBelief=isBelief;
-	}
-	
-	public boolean getIsBelief(){
-		return this.isBelief;
-	}
-	
-	public void setPerson(String person){
-		this.person=person;
-	}
-	
-	public String getPerson(){
-		return this.person;
-	}
-	
-	public void setStrength(Strength strength){
-			this.strength=strength;
+	public Entity() {
 
 	}
-	
-	public Strength getStrength(){
-		return this.strength;
+
+	public Entity(int entityid, String name, Region region, Metric metric, Timeperiod timeperiod, List<String> filePaths,
+			List<Integer> relatedEntities, boolean isBelief, String person, Strength strength, String note) {
+
+		this.id = entityid;
+		this.statement = name;
+		this.region = region;
+		this.metric = metric;
+		this.timeperiod = timeperiod;
+		this.filePaths = filePaths;
+		this.relatedEntities = relatedEntities;
+		this.isBelief = isBelief;
+		this.person = person;
+		this.note = note;
+		this.strength = strength;
 	}
-	
-	public void setNote(String note){
-		this.note=note;
+
+	public int getId() {
+		return id;
 	}
-	
-	public String getNote(){
-		return this.note;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	
-	public void printEntityInfo(){
-		System.out.println("Id: "+this.getId()+"\n Name: "+this.getName()
-							+"\n region: "+this.getRegion()+"\n Metric: "+this.getMetric()+"\n TimePeriod: "+this.getTimePeriod()
-							+"\n Unstructured file path: "+this.getFilePaths()[0]+"\n isBelief: "+this.getIsBelief()
-							+"\n Person: "+this.getPerson()+"\n Strength: "+this.getStrength()
-							+"\n Description: "+this.getNote());
-		System.out.println("-----------------------------------------------");
+
+	public String getStatement() {
+		return statement;
 	}
+
+	public void setStatement(String statement) {
+		this.statement = statement;
+	}
+
+	public List<String> getFilePaths() {
+		return filePaths;
+	}
+
+	public void setFile_paths(List<String> filePaths) {
+		this.filePaths = filePaths;
+	}
+
+	public List<Integer> getRelatedEntities() {
+		return relatedEntities;
+	}
+
+	public void setRelatedEntities(List<Integer> relatedEntities) {
+		this.relatedEntities = relatedEntities;
+	}
+
+	public boolean isBelief() {
+		return isBelief;
+	}
+
+	public void setBelief(boolean isBelief) {
+		this.isBelief = isBelief;
+	}
+
+	public String getPerson() {
+		return person;
+	}
+
+	public void setPerson(String person) {
+		this.person = person;
+	}
+
+	public Strength getStrength() {
+		return strength;
+	}
+
+	public void setStrength(Strength strength) {
+		this.strength = strength;
+	}
+
+	public Region getRegion() {
+		return region;
+	}
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+	public Metric getMetric() {
+		return metric;
+	}
+
+	public void setMetric(Metric metric) {
+		this.metric = metric;
+	}
+
+	public Timeperiod getTimeperiod() {
+		return timeperiod;
+	}
+
+	public void setTimeperiod(Timeperiod timeperiod) {
+		this.timeperiod = timeperiod;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
 }
