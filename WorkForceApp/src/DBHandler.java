@@ -1,9 +1,15 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-import java.sql.*;
+import java.util.Map;
 
 public class DBHandler {
 
@@ -89,41 +95,47 @@ public class DBHandler {
 		StringBuilder insertEntityQuery = new StringBuilder();
 		insertEntityQuery
 				.append("insert into entities(statement, note, region, metric, time_period, is_belief, person, strength)")
-				.append("values('" + entity.getName() + "', ")
+				.append("values('" + entity.getStatement() + "', ")
 				.append("'" + entity.getNote() + "', ")
-				.append("'" + entity.getgeography() + "', ")
+				.append("'" + entity.getRegion() + "', ")
 				.append("'" + entity.getMetric() + "', ")
-				.append("'" + entity.getTimePeriod() + "', ")
-				.append("'" + entity.getIsBelief() + "', ")
+				.append("'" + entity.getTimeperiod() + "', ")
+				.append("'" + entity.isBelief() + "', ")
 				.append("'" + entity.getPerson() + "', ")
 				.append("'" + entity.getStrength() + "')");
 		result = statement.executeUpdate(insertEntityQuery.toString());
 		int entityid = statement.getGeneratedKeys().getInt(1);
 
 		// insert entity-file relations
-		if (entity.getFilePaths().length > 0) {
-			StringBuilder insertFileRelations = new StringBuilder();
+		StringBuilder insertFileRelations = new StringBuilder();
+		insertFileRelations
+				.append("insert into file_relations(entity_id, file_path) values");
 
-			insertFileRelations
-					.append("insert into file_relations(entity_id, file_path) values");
-			for (String file_path : entity.getFilePaths()) {
-				insertFileRelations.append("('" + entityid + "', '" + file_path
-						+ "')");
-			}
+		Iterator<String> filepaths = entity.getFilePaths().iterator();
+		while (filepaths.hasNext()) {
+			insertFileRelations.append("('" + entityid + "', '"
+					+ filepaths.next() + "')");
+		}
+
+		if (entity.getFilePaths().size() > 0) {
 			statement.executeUpdate(insertFileRelations.toString());
 		}
 
 		// insert entity-entity relations
-		if (entity.getRelatedEntities().length > 0) {
-			StringBuilder insertEntityRelations = new StringBuilder();
-			insertEntityRelations
-					.append("insert into entity_relations(entity_id, related_entity_id) values");
-			for (int relatedEntityId : entity.getRelatedEntities()) {
-				insertEntityRelations.append("('" + entityid + "', '"
-						+ relatedEntityId + "')");
-			}
+		StringBuilder insertEntityRelations = new StringBuilder();
+		insertEntityRelations
+				.append("insert into entity_relations(entity_id, related_entity_id) values");
+
+		for (Map.Entry<Integer, String> entry : entity.getRelatedEntities()
+				.entrySet()) {
+			insertEntityRelations.append("('" + entityid + "', '"
+					+ (int) entry.getKey() + "')");
+		}
+
+		if (entity.getRelatedEntities().size() > 0) {
 			statement.executeUpdate(insertEntityRelations.toString());
 		}
+
 		return result;
 	}
 
@@ -138,9 +150,11 @@ public class DBHandler {
 
 	public Entity searchEntity(int entityId) {
 		Entity entity = null;
-		List<String> file_paths = new ArrayList<String>();
-		List<String> related_entities = new ArrayList<String>();
+		List<String> filePathsList = new ArrayList<String>();
+		HashMap<Integer, String> relatedEntitiesMap = new HashMap<Integer, String>();
 		try {
+			entity = new Entity();
+
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
@@ -153,26 +167,41 @@ public class DBHandler {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				entity = new Entity(rs.getInt("entity_id"),
-						rs.getString("statement"), rs.getString("region"),
-						rs.getString("metric"), rs.getString("time_period"),
-						null, null, rs.getBoolean("is_belief"),
-						rs.getString("person"), rs.getString("strength"),
-						rs.getString("note"));
+				entity.setId(rs.getInt("entity_id"));
+				entity.setStatement(rs.getString("statement"));
+
+				Region r = new Region();
+				r.setValue(rs.getString("region"));
+				entity.setRegion(r);
+
+				Metric m = new Metric();
+				m.setValue(rs.getString("metric"));
+				entity.setMetric(m);
+
+				Timeperiod tp = new Timeperiod();
+				tp.setValue(rs.getString("time_period"));
+				entity.setTimeperiod(tp);
+
+				Strength s = new Strength();
+				s.setValue(rs.getString("strength"));
+				entity.setStrength(s);
+
+				entity.setBelief(rs.getBoolean("is_belief"));
+				entity.setPerson(rs.getString("person"));
+				entity.setPerson(rs.getString("person"));
+				entity.setNote(rs.getString("note"));
 			}
 
 			// retrieve entity-entity relations
 			ps = connection
-					.prepareStatement("select e.entity_id, e.statement from entity_relations as er, entities as e where er.entity_id = ? and er.related_entity_id = e.entity_id");
+					.prepareStatement("select er.related_entity_id, e.statement from entity_relations as er, entities as e where er.entity_id = ? and er.related_entity_id = e.entity_id");
 			ps.setInt(1, entityId);
 
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				related_entities.add(rs.getString(2));
+				relatedEntitiesMap.put(rs.getInt(1), rs.getString(2));
 			}
-			// entity should have id and statement of related entities.. Convert
-			// to list from array
-			entity.setRelatedEntities(related_entities);
+			entity.setRelatedEntities(relatedEntitiesMap);
 
 			// retrieve entity-file relations
 			ps = connection
@@ -181,11 +210,9 @@ public class DBHandler {
 
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				file_paths.add(rs.getString("file_path"));
+				filePathsList.add(rs.getString("file_path"));
 			}
-			// entity shuld have list of string not array. This also should have
-			// id..
-			entity.setFilePaths(file_paths);
+			entity.setFilePaths(filePathsList);
 
 			ps.close();
 			connection.close();
@@ -195,7 +222,6 @@ public class DBHandler {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return entity;
 	}
 
@@ -241,30 +267,29 @@ public class DBHandler {
 		}
 	}
 
-	// TODO: This method will return the same entity, or we can change it to return
-	// boolean..
 	public Entity updateEntity(Entity entityUpdated) {
 		Entity entityCurrent = searchEntity(entityUpdated.getId());
 
 		try {
 			List<String> updates = new ArrayList<String>();
+
 			// different statement
-			if (!((entityCurrent.getName() != null
-					&& entityUpdated.getName() != null && entityCurrent
-					.getName().equals(entityUpdated.getName())) || (entityUpdated
-					.getName() == null && entityUpdated.getName() == null))) {
+			if (!((entityCurrent.getStatement() != null
+					&& entityUpdated.getStatement() != null && entityCurrent
+					.getStatement().equals(entityUpdated.getStatement())) || (entityUpdated
+					.getStatement() == null && entityUpdated.getStatement() == null))) {
 				updates.add("update entities set statement = '"
-						+ entityUpdated.getName() + "' where entity_id = "
+						+ entityUpdated.getStatement() + "' where entity_id = "
 						+ entityUpdated.getId());
 			}
 
 			// different region
-			if (!((entityCurrent.getgeography() != null
-					&& entityUpdated.getgeography() != null && entityCurrent
-					.getgeography().equals(entityUpdated.getgeography())) || (entityUpdated
-					.getgeography() == null && entityUpdated.getgeography() == null))) {
+			if (!((entityCurrent.getRegion() != null
+					&& entityUpdated.getRegion() != null && entityCurrent
+					.getRegion().equals(entityUpdated.getRegion())) || (entityUpdated
+					.getRegion() == null && entityUpdated.getRegion() == null))) {
 				updates.add("update entities set region = '"
-						+ entityUpdated.getgeography() + "' where entity_id = "
+						+ entityUpdated.getRegion() + "' where entity_id = "
 						+ entityUpdated.getId());
 			}
 
@@ -279,12 +304,12 @@ public class DBHandler {
 			}
 
 			// different timeperiod
-			if (!((entityCurrent.getTimePeriod() != null
-					&& entityUpdated.getTimePeriod() != null && entityCurrent
-					.getTimePeriod().equals(entityUpdated.getTimePeriod())) || (entityUpdated
-					.getTimePeriod() == null && entityUpdated.getTimePeriod() == null))) {
+			if (!((entityCurrent.getTimeperiod() != null
+					&& entityUpdated.getTimeperiod() != null && entityCurrent
+					.getTimeperiod().equals(entityUpdated.getTimeperiod())) || (entityUpdated
+					.getTimeperiod() == null && entityUpdated.getTimeperiod() == null))) {
 				updates.add("update entities set time_period = '"
-						+ entityUpdated.getTimePeriod()
+						+ entityUpdated.getTimeperiod()
 						+ "' where entity_id = " + entityUpdated.getId());
 			}
 
@@ -299,9 +324,9 @@ public class DBHandler {
 			}
 
 			// different isBelief
-			if (entityCurrent.getIsBelief() != entityUpdated.getIsBelief()) {
+			if (entityCurrent.isBelief() != entityUpdated.isBelief()) {
 				updates.add("update entities set is_belief = '"
-						+ (entityUpdated.getIsBelief() ? 1 : 0)
+						+ (entityUpdated.isBelief() ? 1 : 0)
 						+ "' where entity_id = " + entityUpdated.getId());
 			}
 
@@ -326,24 +351,65 @@ public class DBHandler {
 			}
 
 			// different entity-entity relations
-			int[] updatedEntityRelations = entityUpdated.getRelatedEntities();
-			Arrays.sort(updatedEntityRelations);
-			int[] currentEntityRelations = entityCurrent.getRelatedEntities();
-			Arrays.sort(currentEntityRelations);
-			if (updatedEntityRelations.equals(currentEntityRelations)) {
-				// TODO: do update once entity is rectified
+			HashMap<Integer, String> updatedEntityRelations = entityUpdated
+					.getRelatedEntities();
+
+			HashMap<Integer, String> currentEntityRelations = entityCurrent
+					.getRelatedEntities();
+
+			for (Integer entityId : updatedEntityRelations.keySet()) {
+				if (!(currentEntityRelations.containsKey(entityId))) {
+					// add this new relation
+					updates.add("insert into entity_relations(entity_id, related_entity_id) values("
+							+ entityUpdated.getId() + ", " + entityId + ")");
+				}
+			}
+
+			for (Integer entityId : currentEntityRelations.keySet()) {
+				if (!(updatedEntityRelations.containsKey(entityId))) {
+					// remove this existing relation
+					updates.add("delete from entity_relations where related_entity_id = "
+							+ entityId
+							+ " and entity_id = "
+							+ entityUpdated.getId());
+				}
 			}
 
 			// different entity-file relations
-			String[] updatedFileRelations = entityUpdated.getFilePaths();
-			Arrays.sort(updatedFileRelations);
-			String[] currentFileRelations = entityCurrent.getFilePaths();
-			Arrays.sort(currentFileRelations);
-			if (updatedFileRelations.equals(currentFileRelations)) {
-				// TODO: do update once entity is rectified
+			List<String> updatedFileRelations = entityUpdated.getFilePaths();
+			List<String> currentFileRelations = entityCurrent.getFilePaths();
+
+			String[] updatedFileRelationsArr = updatedFileRelations
+					.toArray(new String[0]);
+			String[] currentFileRelationsArr = currentFileRelations
+					.toArray(new String[0]);
+			Arrays.sort(updatedFileRelationsArr);
+			Arrays.sort(currentFileRelationsArr);
+
+			for (int i = 0, j = 0; i < updatedFileRelationsArr.length
+					&& j < currentFileRelationsArr.length;) {
+				if (updatedFileRelationsArr[i] != null
+						&& updatedFileRelationsArr[i]
+								.compareTo(currentFileRelationsArr[j]) == 0) {
+					i++;
+					j++;
+				} else if (updatedFileRelationsArr[i] != null
+						&& updatedFileRelationsArr[i]
+								.compareTo(currentFileRelationsArr[j]) < 0) {
+					updates.add("insert into file_relations(entity_id, file_path) values("
+							+ entityUpdated.getId()
+							+ ",'"
+							+ updatedFileRelationsArr[i] + "')");
+					i++;
+				} else if (updatedFileRelationsArr[i] != null
+						&& updatedFileRelationsArr[i]
+								.compareTo(currentFileRelationsArr[j]) > 0) {
+					updates.add("delete from file_relations where entity_id = "+ entityUpdated.getId()
+							+" and file_path = '"+ currentFileRelationsArr[j] +"'");
+					j++;
+				}
 			}
 
-			//
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
@@ -362,8 +428,8 @@ public class DBHandler {
 			if (ps != null)
 				ps.close();
 			connection.close();
-			return entityUpdated;
 
+			return entityUpdated;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return entityCurrent;
