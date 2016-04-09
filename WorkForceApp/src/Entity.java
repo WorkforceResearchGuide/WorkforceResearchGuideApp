@@ -1,173 +1,192 @@
+import java.util.HashMap;
 import java.util.List;
-
 
 public class Entity {
 	private int id;
-	private String name;
-	//file_paths is where entities associate to files.
-	private String[] file_paths;
-	private int[] related_entities;
+	private String statement;
+	// file_paths is where entities associate to files.
+	private List<String> filePaths;
+	private HashMap<Integer, String> relatedEntities;
 	private boolean isBelief;
 	private String person;
-	private Strength strength;	
+	private Strength strength;
 	private Region region;
 	private Metric metric;
 	private Timeperiod timeperiod;
 	private String note;
 
-	public Entity(int entityid,String name, Region region, Metric metric, Timeperiod timeperiod,String[] file_paths, int[] related_entities, boolean isBelief, String person, Strength strength, String note){
-		if((Integer)entityid==null){
-			System.err.println("id can't be null!");
-			return;
-		}
-		if(name==null || name.isEmpty()){
-			System.err.println("name can't be null or empty!");
-			return;
-		}
-		if(String.valueOf(isBelief).isEmpty()){
-			System.err.println("isBelief can't be null or empty!");
-			return;
-		}
-		if(strength==null){
-			System.err.println("strength can't be null or empty!");
-			return;
-		} 
+	public Entity() {
+
+	}
+
+	public Entity(int entityid, String statement, Region region, Metric metric,
+			Timeperiod timeperiod, List<String> filePaths, HashMap<Integer, String> relatedEntities,
+			boolean isBelief, String person, Strength strength, String note) {
 		
-		this.id=entityid;
-		this.name=name;
-		if(file_paths==null){
-			this.file_paths=file_paths;
-		}else{
-			this.file_paths=new String[file_paths.length];
-			setFilePaths(file_paths);
-		}
-		if(related_entities==null){
-			this.related_entities=related_entities;
-		}else{
-			this.related_entities=new int[related_entities.length];
-			setRelatedEntities(related_entities);
-		}
-		this.isBelief=isBelief;
-		this.person=person;
-		this.note=note;
-		
-	    
-			
-		this.strength=strength;	
-	}
-	
-//	//For addEntityFolderScan function in EntityProcessor Class
-//	public Entity(String name, String[] file_paths){
-//		this.name=name;
-//		setFilePaths(file_paths);
-//	}
-	
-
-	public void setId(int id){
-		this.id=id;
-	}
-	
-	public int getId(){
-		return this.id;
+		this.id = entityid;
+		this.statement = statement;
+		this.region = region;
+		this.metric = metric;
+		this.timeperiod = timeperiod;
+		this.filePaths = filePaths;
+		this.relatedEntities = relatedEntities;
+		this.isBelief = isBelief;
+		this.person = person;
+		this.strength = strength;
+		this.note = note;
 	}
 
-	public void setName(String name){
-		this.name=name;
-	}
-	
-	public String getName(){
-		return this.name;
-	}
-	
-	public void setRegion(Region region){
-		this.region=region;
-	}
-	
-	public Region getRegion(){
-		return this.region;
-	}
-	public void setMetric(Metric metric){
-		this.metric=metric;
-	}
-	
-	public Metric getMetric(){
-		return this.metric;
-	}
-	
-	public void setTimePeriod(Timeperiod timeperiod){
-		this.timeperiod=timeperiod;
-	}
-	
-	public Timeperiod getTimePeriod(){
-		return this.timeperiod;
-	}
-	
-	public void setFilePaths(String[] file_paths){
-		//add one entity
-		if(file_paths==null) return;
-		
-		//entities relates to files in the folder path
-		int count=0;
-		for(String fp:file_paths){
-			this.file_paths[count]=fp;
-			count++;
-		}		
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
 	}
 
-	public String[] getFilePaths(){
-		return this.file_paths;
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public void setRelatedEntities(int[] related_entities){
-		if(related_entities==null) return;
-		for(int i=0;i<related_entities.length;i++){
-			this.related_entities[i]=related_entities[i];
-		}		
+	/**
+	 * @return the statement
+	 */
+	public String getStatement() {
+		return statement;
 	}
 
-	public int[] getRelatedEntities(){
-		return this.related_entities;
+	/**
+	 * @param statement the statement to set
+	 */
+	public void setStatement(String statement) {
+		this.statement = statement;
 	}
-	
-	public void setIsBelief(boolean isBelief){
-		this.isBelief=isBelief;
-	}
-	
-	public boolean getIsBelief(){
-		return this.isBelief;
-	}
-	
-	public void setPerson(String person){
-		this.person=person;
-	}
-	
-	public String getPerson(){
-		return this.person;
-	}
-	
-	public void setStrength(Strength strength){
-			this.strength=strength;
 
+	/**
+	 * @return the filePaths
+	 */
+	public List<String> getFilePaths() {
+		return filePaths;
 	}
-	
-	public Strength getStrength(){
-		return this.strength;
+
+	/**
+	 * @param filePaths the filePaths to set
+	 */
+	public void setFilePaths(List<String> filePaths) {
+		this.filePaths = filePaths;
 	}
-	
-	public void setNote(String note){
-		this.note=note;
+
+	/**
+	 * @return the relatedEntities
+	 */
+	public HashMap<Integer, String> getRelatedEntities() {
+		return relatedEntities;
 	}
-	
-	public String getNote(){
-		return this.note;
+
+	/**
+	 * @param relatedEntities the relatedEntities to set
+	 */
+	public void setRelatedEntities(HashMap<Integer, String> relatedEntities) {
+		this.relatedEntities = relatedEntities;
 	}
-	
-	public void printEntityInfo(){
-		System.out.println("Id: "+this.getId()+"\n Name: "+this.getName()
-							+"\n region: "+this.getRegion()+"\n Metric: "+this.getMetric()+"\n TimePeriod: "+this.getTimePeriod()
-							+"\n Unstructured file path: "+this.getFilePaths()[0]+"\n isBelief: "+this.getIsBelief()
-							+"\n Person: "+this.getPerson()+"\n Strength: "+this.getStrength()
-							+"\n Description: "+this.getNote());
-		System.out.println("-----------------------------------------------");
+
+	/**
+	 * @return the isBelief
+	 */
+	public boolean isBelief() {
+		return isBelief;
+	}
+
+	/**
+	 * @param isBelief the isBelief to set
+	 */
+	public void setBelief(boolean isBelief) {
+		this.isBelief = isBelief;
+	}
+
+	/**
+	 * @return the person
+	 */
+	public String getPerson() {
+		return person;
+	}
+
+	/**
+	 * @param person the person to set
+	 */
+	public void setPerson(String person) {
+		this.person = person;
+	}
+
+	/**
+	 * @return the strength
+	 */
+	public Strength getStrength() {
+		return strength;
+	}
+
+	/**
+	 * @param strength the strength to set
+	 */
+	public void setStrength(Strength strength) {
+		this.strength = strength;
+	}
+
+	/**
+	 * @return the region
+	 */
+	public Region getRegion() {
+		return region;
+	}
+
+	/**
+	 * @param region the region to set
+	 */
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+	/**
+	 * @return the metric
+	 */
+	public Metric getMetric() {
+		return metric;
+	}
+
+	/**
+	 * @param metric the metric to set
+	 */
+	public void setMetric(Metric metric) {
+		this.metric = metric;
+	}
+
+	/**
+	 * @return the timeperiod
+	 */
+	public Timeperiod getTimeperiod() {
+		return timeperiod;
+	}
+
+	/**
+	 * @param timeperiod the timeperiod to set
+	 */
+	public void setTimeperiod(Timeperiod timeperiod) {
+		this.timeperiod = timeperiod;
+	}
+
+	/**
+	 * @return the note
+	 */
+	public String getNote() {
+		return note;
+	}
+
+	/**
+	 * @param note the note to set
+	 */
+	public void setNote(String note) {
+		this.note = note;
 	}
 }
