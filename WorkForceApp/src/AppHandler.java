@@ -21,10 +21,10 @@ public class AppHandler {
 		return eprocessor.addEntityFolderScan(folderPath);
 	}
 	
-	public List<Entity> searchEntity(String searchQuery ) {
+	public List<Entity> searchEntity(String searchQuery, String region, String metric, String timeperiod) {
 		
 		//To be completed
-		return eprocessor.searchEntity(searchQuery, null, null);
+		return eprocessor.searchEntity(searchQuery, region, metric, timeperiod);
 	}
 
 	public Entity searchEntity(int entityId) {
@@ -40,6 +40,11 @@ public class AppHandler {
 	public Entity updateEntity(int entityId, String name, String country, String metric, String timeperiod,List<String> filePaths, HashMap<Integer, String> relatedEntities, boolean isBelief, String person, String strength, String note) {
 		
 		return eprocessor.updateEntity(entityId, name, country, metric, timeperiod, filePaths, relatedEntities, isBelief, person, strength, note);
+	}
+	
+	public List<Entity> retrieveAllEntities(){
+		
+		return eprocessor.retrieveAllEntities();
 	}
 	
 	public boolean addRegion(String region){

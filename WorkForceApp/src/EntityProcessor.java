@@ -126,7 +126,7 @@ public class EntityProcessor {
 		return true;
 	}
 	
-	public List<Entity> searchEntity(String region,String metric,String timeperiod){
+	public List<Entity> searchEntity(String searchQuery, String region,String metric,String timeperiod){
 		
 		return dbhand.searchEntity(region,metric,timeperiod);
 	}
@@ -158,6 +158,11 @@ public class EntityProcessor {
 		
 		Entity entity=new Entity(entityid,name,reg,metr,tPeriod,file_paths,related_entities,isBelief,person,s,note);
 		return dbhand.updateEntity(entity);
+	}
+	
+	public List<Entity> retrieveAllEntities(){
+		
+		return dbhand.retrieveAllEntities();
 	}
 	
 }
