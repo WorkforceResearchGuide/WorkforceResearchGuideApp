@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="627.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="workforceresearch.MainScreenController">
+    <children>
+        <SplitPane dividerPositions="0.5033444816053512" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="627.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="553.0" prefWidth="298.0">
+         <children>
+            <TextField fx:id="searchField" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="199.0" />
+            <Button fx:id="searchButton" layoutX="224.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSearchButton" text="Search" />
+            <Button fx:id="addButton" layoutX="28.0" layoutY="413.0" mnemonicParsing="false" onAction="#handleAddButton" text="Add Fact/Belief" />
+            <Button fx:id="editButton" layoutX="166.0" layoutY="413.0" mnemonicParsing="false" onAction="#handleEditButton" text="Edit Fact/Belief" />
+            <Button fx:id="batchUploadButton" layoutX="33.0" layoutY="448.0" mnemonicParsing="false" onAction="#handleBatchUploadButton" text="Batch Upload" />
+            <Button fx:id="templateButton" layoutX="83.0" layoutY="486.0" mnemonicParsing="false" onAction="#handleTemplateButton" text="Manage Templates" />
+            <TextField fx:id="nameField" editable="false" layoutX="74.0" layoutY="71.0" prefHeight="25.0" prefWidth="218.0" />
+            <Label layoutX="10.0" layoutY="75.0" text="Statement" />
+            <Label layoutX="27.0" layoutY="107.0" text="Region" />
+            <Label layoutX="29.0" layoutY="136.0" text="Metric" />
+            <Label layoutX="5.0" layoutY="166.0" text="Time Period" />
+            <Label layoutX="5.0" layoutY="277.0" text="Associations" />
+            <Label layoutX="28.0" layoutY="198.0" text="Person" />
+            <Label layoutX="23.0" layoutY="230.0" text="Strength" />
+            <TextField fx:id="regionField" editable="false" layoutX="74.0" layoutY="103.0" />
+            <TextField fx:id="metricField" layoutX="74.0" layoutY="132.0" />
+            <TextField fx:id="timePeriodField" layoutX="74.0" layoutY="162.0" />
+            <TextField fx:id="personField" layoutX="73.0" layoutY="194.0" />
+            <TextField fx:id="strengthField" layoutX="74.0" layoutY="226.0" />
+            <ScrollPane layoutX="75.0" layoutY="275.0" prefHeight="114.0" prefWidth="199.0">
+               <content>
+                  <ListView fx:id="associationsView" prefHeight="123.0" prefWidth="182.0" />
+               </content>
+            </ScrollPane>
+                  <Button fx:id="folderScanButton" layoutX="175.0" layoutY="448.0" mnemonicParsing="false" onAction="#handleFolderScanButton" text="Folder Scan" />
+            
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="554.0" prefWidth="336.0">
+         <children>
+            <ScrollPane layoutY="50.0" prefHeight="504.0" prefWidth="307.0">
+               <content>
+                  <ListView fx:id="factbeliefView" prefHeight="584.0" prefWidth="290.0" />
+               </content>
+            </ScrollPane>
+                  <ChoiceBox fx:id="regionChoiceBox" layoutX="14.0" layoutY="22.0" prefHeight="25.0" prefWidth="88.0" />
+                  <Label layoutX="39.0" layoutY="5.0" text="Region" />
+                  <ChoiceBox fx:id="metricChoiceBox" layoutX="110.0" layoutY="22.0" prefHeight="25.0" prefWidth="88.0" />
+                  <ChoiceBox fx:id="TimeChoiceBox" layoutX="205.0" layoutY="22.0" prefHeight="25.0" prefWidth="88.0" />
+                  <Label layoutX="137.0" layoutY="5.0" text="Metric" />
+                  <Label layoutX="217.0" layoutY="5.0" text="Time Period" />
+         </children></AnchorPane>
+  </items>
+</SplitPane>
+    </children>
+</AnchorPane>
