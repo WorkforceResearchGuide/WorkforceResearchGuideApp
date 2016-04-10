@@ -128,7 +128,7 @@ public class EntityProcessor {
 	
 	public List<Entity> searchEntity(String searchQuery, String region,String metric,String timeperiod){
 		
-		return dbhand.searchEntity(region,metric,timeperiod);
+		return dbhand.searchEntity(searchQuery,region,metric,timeperiod);
 	}
 	
 	public Entity searchEntity(int entityid){	

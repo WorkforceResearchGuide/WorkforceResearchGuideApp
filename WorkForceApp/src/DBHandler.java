@@ -139,13 +139,152 @@ public class DBHandler {
 		return result;
 	}
 
-	// TODO: Decide on Search feature -> how exactly it will work... inputs and
-	// search field preferences
-	// Then complete method.
-	public List<Entity> searchEntity(String region, String metric,
-			String timeperiod) {
+	public List<Entity> searchEntity(String searchQuery, String region,
+			String metric, String timeperiod) {
+		List<Entity> qualifiedEntities = new ArrayList<Entity>();
+		String query = createSearchQuery(searchQuery, region, metric,
+				timeperiod);
 
-		return null;
+		if (query != null) {
+			try {
+				// create connection
+				Class.forName("org.sqlite.JDBC");
+				Connection connection = DriverManager
+						.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+
+				PreparedStatement ps = connection.prepareStatement(query);
+
+				ResultSet rs = ps.executeQuery();
+				Entity e;
+				while (rs.next()) {
+					// TODO: I think we don't need all attributes here, not
+					// sure.
+					// Let me know what you guys think..?
+					// In that case, I can select only 2 columns from db.
+					e = new Entity();
+					e.setId(rs.getInt("entity_id"));
+					e.setStatement(rs.getString("statement"));
+					qualifiedEntities.add(e);
+				}
+				rs.close();
+				ps.close();
+				connection.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return qualifiedEntities;
+	}
+
+	private String createSearchQuery(String searchQuery, String region,
+			String metric, String timeperiod) {
+		String query;
+		boolean searchQueryFlag = false;
+		boolean regionFlag = false;
+		boolean metricFlag = false;
+		boolean timeperiodFlag = false;
+
+		if (searchQuery != null && searchQuery.length() > 0)
+			searchQueryFlag = true;
+		if (region != null && region.length() > 0)
+			regionFlag = true;
+		if (metric != null && metric.length() > 0)
+			metricFlag = true;
+		if (timeperiod != null && timeperiod.length() > 0)
+			timeperiodFlag = true;
+
+		if (searchQueryFlag && !regionFlag && !metricFlag && !timeperiodFlag) {
+			// 1. statement/person
+			query = "select * from entities where statement like '%"
+					+ searchQuery + "%' or person like '%" + searchQuery + "%'";
+		} else if (!searchQueryFlag && regionFlag && !metricFlag
+				&& !timeperiodFlag) {
+			// 2. region
+			query = "select * from entities where region = '" + region + "'";
+		} else if (!searchQueryFlag && !regionFlag && metricFlag
+				&& !timeperiodFlag) {
+			// 3. metric
+			query = "select * from entities where metric = '" + metric + "'";
+		} else if (!searchQueryFlag && !regionFlag && !metricFlag
+				&& timeperiodFlag) {
+			// 4. timeperiod
+			query = "select * from entities where time_period = '" + timeperiod
+					+ "'";
+		} else if (!searchQueryFlag && regionFlag && metricFlag
+				&& !timeperiodFlag) {
+			// 5. region and metric
+			query = "select * from entities where region = '" + region
+					+ "' and metric = '" + metric + "'";
+		} else if (!searchQueryFlag && regionFlag && !metricFlag
+				&& timeperiodFlag) {
+			// 6. region and timeperiod
+			query = "select * from entities where region = '" + region
+					+ "' and time_period = '" + timeperiod + "'";
+		} else if (!searchQueryFlag && !regionFlag && metricFlag
+				&& timeperiodFlag) {
+			// 7. metric and timeperiod
+			query = "select * from entities where metric = '" + metric
+					+ "' and time_period = '" + timeperiod + "'";
+		} else if (!searchQueryFlag && regionFlag && metricFlag
+				&& timeperiodFlag) {
+			// 8. region and metric and timeperiod
+			query = "select * from entities where region = '" + region
+					+ "' and metric = '" + metric + "' and time_period = '"
+					+ timeperiod + "'";
+		} else if (searchQueryFlag && regionFlag && !metricFlag
+				&& !timeperiodFlag) {
+			// 9. statement/person and region
+			query = "select * from entities where region = '" + region
+					+ "' and (statement like '%" + searchQuery
+					+ "%' or person like '%" + searchQuery + "%')";
+		} else if (searchQueryFlag && !regionFlag && metricFlag
+				&& !timeperiodFlag) {
+			// 10. statement/person & metric
+			query = "select * from entities where metric = '" + metric
+					+ "' and (statement like '%" + searchQuery
+					+ "%' or person like '%" + searchQuery + "%')";
+		} else if (searchQueryFlag && !regionFlag && !metricFlag
+				&& timeperiodFlag) {
+			// 11. statement/person & timeperiod
+			query = "select * from entities where time_period = '" + timeperiod
+					+ "' and (statement like '%" + searchQuery
+					+ "%' or person like '%" + searchQuery + "%')";
+		} else if (searchQueryFlag && regionFlag && metricFlag
+				&& !timeperiodFlag) {
+			// 12. statement/person & region & metric
+			query = "select * from entities where region = '" + region
+					+ "' and metric = '" + metric + "' and (statement like '%"
+					+ searchQuery + "%' or person like '%" + searchQuery
+					+ "%')";
+		} else if (searchQueryFlag && regionFlag && !metricFlag
+				&& timeperiodFlag) {
+			// 13. statement/person & region & timeperiod
+			query = "select * from entities where region = '" + region
+					+ "' and time_period = '" + timeperiod
+					+ "' and (statement like '%" + searchQuery
+					+ "%' or person like '%" + searchQuery + "%')";
+		} else if (searchQueryFlag && !regionFlag && metricFlag
+				&& timeperiodFlag) {
+			// 14. statement/person & metric & timeperiod
+			query = "select * from entities where metric = '" + metric
+					+ "' and time_period = '" + timeperiod
+					+ "' and (statement like '%" + searchQuery
+					+ "%' or person like '%" + searchQuery + "%')";
+		} else if (searchQueryFlag && regionFlag && metricFlag
+				&& timeperiodFlag) {
+			// 15. statement/person & region & metric & timeperiod
+			query = "select * from entities where region = '" + region
+					+ "' and metric = '" + metric + "' and time_period = '"
+					+ timeperiod + "' and (statement like '%" + searchQuery
+					+ "%' or person like '%" + searchQuery + "%')";
+		} else {
+			// 16. if no criteria mentioned, return empty list
+			query = null;
+		}
+		return query;
 	}
 
 	public Entity searchEntity(int entityId) {
@@ -404,8 +543,9 @@ public class DBHandler {
 				} else if (updatedFileRelationsArr[i] != null
 						&& updatedFileRelationsArr[i]
 								.compareTo(currentFileRelationsArr[j]) > 0) {
-					updates.add("delete from file_relations where entity_id = "+ entityUpdated.getId()
-							+" and file_path = '"+ currentFileRelationsArr[j] +"'");
+					updates.add("delete from file_relations where entity_id = "
+							+ entityUpdated.getId() + " and file_path = '"
+							+ currentFileRelationsArr[j] + "'");
 					j++;
 				}
 			}
