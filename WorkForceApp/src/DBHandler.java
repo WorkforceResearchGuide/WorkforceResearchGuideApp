@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class DBHandler {
 
+	// Entity management
 	@SuppressWarnings("finally")
 	public boolean addEntity(Entity entity) {
 		int result = 0;
@@ -582,6 +583,92 @@ public class DBHandler {
 		}
 	}
 
+	// TODO: clean-up this
+	public List<Entity> retrieveAllEntities() {
+		List<Entity> entities = new ArrayList<Entity>();
+		Entity entity;
+		
+//		List<String> filePathsList = new ArrayList<String>();
+//		HashMap<Integer, String> relatedEntitiesMap = new HashMap<Integer, String>();
+		
+		try {
+			// entity = new Entity();
+
+			// create connection
+			Class.forName("org.sqlite.JDBC");
+			Connection connection = DriverManager
+					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+
+			PreparedStatement ps = connection
+					.prepareStatement("select * from entities");
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				entity = new Entity();
+				
+				entity.setId(rs.getInt("entity_id"));
+				entity.setStatement(rs.getString("statement"));
+
+				Region r = new Region();
+				r.setValue(rs.getString("region"));
+				entity.setRegion(r);
+
+				Metric m = new Metric();
+				m.setValue(rs.getString("metric"));
+				entity.setMetric(m);
+
+				Timeperiod tp = new Timeperiod();
+				tp.setValue(rs.getString("time_period"));
+				entity.setTimeperiod(tp);
+
+				Strength s = new Strength();
+				s.setValue(rs.getString("strength"));
+				entity.setStrength(s);
+
+				entity.setBelief(rs.getBoolean("is_belief"));
+				entity.setPerson(rs.getString("person"));
+				entity.setPerson(rs.getString("person"));
+				entity.setNote(rs.getString("note"));
+				
+				entities.add(entity);
+			}
+			// TODO: make sure we oly need statement and id in these entities, then remove following code.
+			// also clean up the previous section to only fetch needed columns.
+
+//			// retrieve entity-entity relations
+//			ps = connection
+//					.prepareStatement("select er.related_entity_id, e.statement from entity_relations as er, entities as e where er.entity_id = ? and er.related_entity_id = e.entity_id");
+//			ps.setInt(1, entityId);
+//
+//			rs = ps.executeQuery();
+//			while (rs.next()) {
+//				relatedEntitiesMap.put(rs.getInt(1), rs.getString(2));
+//			}
+//			entity.setRelatedEntities(relatedEntitiesMap);
+//
+//			// retrieve entity-file relations
+//			ps = connection
+//					.prepareStatement("select * from file_relations where entity_id = ?");
+//			ps.setInt(1, entityId);
+//
+//			rs = ps.executeQuery();
+//			while (rs.next()) {
+//				filePathsList.add(rs.getString("file_path"));
+//			}
+//			entity.setFilePaths(filePathsList);
+			rs.close();
+			ps.close();
+			connection.close();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return entities;
+	}
+	
 	// Add Template
 	public boolean addRegion(String region) {
 		int result = 0;
@@ -918,4 +1005,5 @@ public class DBHandler {
 			return null;
 		}
 	}
+
 }
