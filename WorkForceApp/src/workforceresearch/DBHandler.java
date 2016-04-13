@@ -160,10 +160,6 @@ public class DBHandler {
 				ResultSet rs = ps.executeQuery();
 				Entity e;
 				while (rs.next()) {
-					// TODO: I think we don't need all attributes here, not
-					// sure.
-					// Let me know what you guys think..?
-					// In that case, I can select only 2 columns from db.
 					e = new Entity();
 					e.setId(rs.getInt("entity_id"));
 					e.setStatement(rs.getString("statement"));
@@ -201,85 +197,85 @@ public class DBHandler {
 
 		if (searchQueryFlag && !regionFlag && !metricFlag && !timeperiodFlag) {
 			// 1. statement/person
-			query = "select * from entities where statement like '%"
+			query = "select entity_id, statement from entities where statement like '%"
 					+ searchQuery + "%' or person like '%" + searchQuery + "%'";
 		} else if (!searchQueryFlag && regionFlag && !metricFlag
 				&& !timeperiodFlag) {
 			// 2. region
-			query = "select * from entities where region = '" + region + "'";
+			query = "select entity_id, statement from entities where region = '" + region + "'";
 		} else if (!searchQueryFlag && !regionFlag && metricFlag
 				&& !timeperiodFlag) {
 			// 3. metric
-			query = "select * from entities where metric = '" + metric + "'";
+			query = "select entity_id, statement from entities where metric = '" + metric + "'";
 		} else if (!searchQueryFlag && !regionFlag && !metricFlag
 				&& timeperiodFlag) {
 			// 4. timeperiod
-			query = "select * from entities where time_period = '" + timeperiod
+			query = "select entity_id, statement from entities where time_period = '" + timeperiod
 					+ "'";
 		} else if (!searchQueryFlag && regionFlag && metricFlag
 				&& !timeperiodFlag) {
 			// 5. region and metric
-			query = "select * from entities where region = '" + region
+			query = "select entity_id, statement from entities where region = '" + region
 					+ "' and metric = '" + metric + "'";
 		} else if (!searchQueryFlag && regionFlag && !metricFlag
 				&& timeperiodFlag) {
 			// 6. region and timeperiod
-			query = "select * from entities where region = '" + region
+			query = "select entity_id, statement from entities where region = '" + region
 					+ "' and time_period = '" + timeperiod + "'";
 		} else if (!searchQueryFlag && !regionFlag && metricFlag
 				&& timeperiodFlag) {
 			// 7. metric and timeperiod
-			query = "select * from entities where metric = '" + metric
+			query = "select entity_id, statement from entities where metric = '" + metric
 					+ "' and time_period = '" + timeperiod + "'";
 		} else if (!searchQueryFlag && regionFlag && metricFlag
 				&& timeperiodFlag) {
 			// 8. region and metric and timeperiod
-			query = "select * from entities where region = '" + region
+			query = "select entity_id, statement from entities where region = '" + region
 					+ "' and metric = '" + metric + "' and time_period = '"
 					+ timeperiod + "'";
 		} else if (searchQueryFlag && regionFlag && !metricFlag
 				&& !timeperiodFlag) {
 			// 9. statement/person and region
-			query = "select * from entities where region = '" + region
+			query = "select entity_id, statement from entities where region = '" + region
 					+ "' and (statement like '%" + searchQuery
 					+ "%' or person like '%" + searchQuery + "%')";
 		} else if (searchQueryFlag && !regionFlag && metricFlag
 				&& !timeperiodFlag) {
 			// 10. statement/person & metric
-			query = "select * from entities where metric = '" + metric
+			query = "select entity_id, statement from entities where metric = '" + metric
 					+ "' and (statement like '%" + searchQuery
 					+ "%' or person like '%" + searchQuery + "%')";
 		} else if (searchQueryFlag && !regionFlag && !metricFlag
 				&& timeperiodFlag) {
 			// 11. statement/person & timeperiod
-			query = "select * from entities where time_period = '" + timeperiod
+			query = "select entity_id, statement from entities where time_period = '" + timeperiod
 					+ "' and (statement like '%" + searchQuery
 					+ "%' or person like '%" + searchQuery + "%')";
 		} else if (searchQueryFlag && regionFlag && metricFlag
 				&& !timeperiodFlag) {
 			// 12. statement/person & region & metric
-			query = "select * from entities where region = '" + region
+			query = "select entity_id, statement from entities where region = '" + region
 					+ "' and metric = '" + metric + "' and (statement like '%"
 					+ searchQuery + "%' or person like '%" + searchQuery
 					+ "%')";
 		} else if (searchQueryFlag && regionFlag && !metricFlag
 				&& timeperiodFlag) {
 			// 13. statement/person & region & timeperiod
-			query = "select * from entities where region = '" + region
+			query = "select entity_id, statement from entities where region = '" + region
 					+ "' and time_period = '" + timeperiod
 					+ "' and (statement like '%" + searchQuery
 					+ "%' or person like '%" + searchQuery + "%')";
 		} else if (searchQueryFlag && !regionFlag && metricFlag
 				&& timeperiodFlag) {
 			// 14. statement/person & metric & timeperiod
-			query = "select * from entities where metric = '" + metric
+			query = "select entity_id, statement from entities where metric = '" + metric
 					+ "' and time_period = '" + timeperiod
 					+ "' and (statement like '%" + searchQuery
 					+ "%' or person like '%" + searchQuery + "%')";
 		} else if (searchQueryFlag && regionFlag && metricFlag
 				&& timeperiodFlag) {
 			// 15. statement/person & region & metric & timeperiod
-			query = "select * from entities where region = '" + region
+			query = "select entity_id, statement from entities where region = '" + region
 					+ "' and metric = '" + metric + "' and time_period = '"
 					+ timeperiod + "' and (statement like '%" + searchQuery
 					+ "%' or person like '%" + searchQuery + "%')";
@@ -585,80 +581,27 @@ public class DBHandler {
 		}
 	}
 
-	// TODO: clean-up this
 	public List<Entity> retrieveAllEntities() {
 		List<Entity> entities = new ArrayList<Entity>();
 		Entity entity;
 		
-//		List<String> filePathsList = new ArrayList<String>();
-//		HashMap<Integer, String> relatedEntitiesMap = new HashMap<Integer, String>();
-		
 		try {
-			// entity = new Entity();
-
-			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
 					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
 
 			PreparedStatement ps = connection
-					.prepareStatement("select * from entities");
+					.prepareStatement("select entity_id, statement from entities");
 
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				entity = new Entity();
-				
+				entity = new Entity();				
 				entity.setId(rs.getInt("entity_id"));
 				entity.setStatement(rs.getString("statement"));
-
-				Region r = new Region();
-				r.setValue(rs.getString("region"));
-				entity.setRegion(r);
-
-				Metric m = new Metric();
-				m.setValue(rs.getString("metric"));
-				entity.setMetric(m);
-
-				Timeperiod tp = new Timeperiod();
-				tp.setValue(rs.getString("time_period"));
-				entity.setTimeperiod(tp);
-
-				Strength s = new Strength();
-				s.setValue(rs.getString("strength"));
-				entity.setStrength(s);
-
-				entity.setBelief(rs.getBoolean("is_belief"));
-				entity.setPerson(rs.getString("person"));
-				entity.setPerson(rs.getString("person"));
-				entity.setNote(rs.getString("note"));
 				
 				entities.add(entity);
 			}
-			// TODO: make sure we oly need statement and id in these entities, then remove following code.
-			// also clean up the previous section to only fetch needed columns.
-
-//			// retrieve entity-entity relations
-//			ps = connection
-//					.prepareStatement("select er.related_entity_id, e.statement from entity_relations as er, entities as e where er.entity_id = ? and er.related_entity_id = e.entity_id");
-//			ps.setInt(1, entityId);
-//
-//			rs = ps.executeQuery();
-//			while (rs.next()) {
-//				relatedEntitiesMap.put(rs.getInt(1), rs.getString(2));
-//			}
-//			entity.setRelatedEntities(relatedEntitiesMap);
-//
-//			// retrieve entity-file relations
-//			ps = connection
-//					.prepareStatement("select * from file_relations where entity_id = ?");
-//			ps.setInt(1, entityId);
-//
-//			rs = ps.executeQuery();
-//			while (rs.next()) {
-//				filePathsList.add(rs.getString("file_path"));
-//			}
-//			entity.setFilePaths(filePathsList);
 			rs.close();
 			ps.close();
 			connection.close();
