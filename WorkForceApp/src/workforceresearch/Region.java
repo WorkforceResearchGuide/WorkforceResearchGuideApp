@@ -1,25 +1,27 @@
+package workforceresearch;
 
-public class Metric {
-	int metricId;
+
+public class Region {
+	int regionId;
 	String value;
 	boolean isDisabled;
-
-	public Metric() {
+	
+	public Region() {
 	
 	}
 	
-	public Metric(int id, String value, boolean isDisabled) {
-		this.metricId = id;
+	public Region(int id, String value, boolean isDisabled) {
+		this.regionId = id;
 		this.value = value;
 		this.isDisabled = isDisabled;
 	}
 	
-	public int getMetricId() {
-		return metricId;
+	public int getRegionId() {
+		return regionId;
 	}
 	
-	public void setMetricId(int metricId) {
-		this.metricId = metricId;
+	public void setRegionId(int regionId) {
+		this.regionId = regionId;
 	}
 	
 	public String getValue() {
@@ -46,7 +48,7 @@ public class Metric {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (isDisabled ? 1231 : 1237);
-		result = prime * result + metricId;
+		result = prime * result + regionId;
 		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
@@ -62,10 +64,10 @@ public class Metric {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Metric other = (Metric) obj;
+		Region other = (Region) obj;
 		if (isDisabled != other.isDisabled)
 			return false;
-		if (metricId != other.metricId)
+		if (regionId != other.regionId)
 			return false;
 		if (value == null) {
 			if (other.value != null)
