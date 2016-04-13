@@ -652,7 +652,7 @@ public class DBHandler {
 			Statement statement = connection.createStatement();
 
 			result = statement
-					.executeUpdate("insert into metric(value, is_disabled) values('"
+					.executeUpdate("insert into metrics(value, is_disabled) values('"
 							+ metric + "', 0)");
 
 			statement.close();
