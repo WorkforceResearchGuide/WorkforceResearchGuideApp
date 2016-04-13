@@ -1,25 +1,27 @@
+package workforceresearch;
 
-public class Strength {
-	int strengthId;
+
+public class Timeperiod {
+	int timeperiodId;
 	String value;
 	boolean isDisabled;
 	
-	public Strength() {
+	public Timeperiod() {
 	
 	}
 	
-	public Strength(int id, String value, boolean isDisabled) {
-		this.strengthId = id;
+	public Timeperiod(int id, String value, boolean isDisabled) {
+		this.timeperiodId = id;
 		this.value = value;
 		this.isDisabled = isDisabled;
 	}
 	
-	public int getStrengthId() {
-		return strengthId;
+	public int getTimeperiodId() {
+		return timeperiodId;
 	}
 
-	public void setStrengthId(int strengthId) {
-		this.strengthId = strengthId;
+	public void setTimeperiodId(int timeperiodId) {
+		this.timeperiodId = timeperiodId;
 	}
 
 	public String getValue() {
@@ -46,7 +48,7 @@ public class Strength {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (isDisabled ? 1231 : 1237);
-		result = prime * result + strengthId;
+		result = prime * result + timeperiodId;
 		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
@@ -62,10 +64,10 @@ public class Strength {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Strength other = (Strength) obj;
+		Timeperiod other = (Timeperiod) obj;
 		if (isDisabled != other.isDisabled)
 			return false;
-		if (strengthId != other.strengthId)
+		if (timeperiodId != other.timeperiodId)
 			return false;
 		if (value == null) {
 			if (other.value != null)
@@ -73,6 +75,6 @@ public class Strength {
 		} else if (!value.equals(other.value))
 			return false;
 		return true;
-	}
-		
+	}	
+
 }

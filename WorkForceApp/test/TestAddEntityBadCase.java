@@ -6,6 +6,7 @@ import java.util.Collection;
 
 
 
+
 //import org.junit.Rule;
 import org.junit.Test;
 //import org.junit.rules.ExpectedException;
@@ -13,6 +14,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 //import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+
+import workforceresearch.EntityProcessor;
 @RunWith(Parameterized.class)
 public class TestAddEntityBadCase {
 	

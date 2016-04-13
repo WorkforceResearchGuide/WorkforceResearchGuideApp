@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="589.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="workforceresearch.AddEntityController">
+   <children>
+      <TextField fx:id="nameField" layoutX="91.0" layoutY="14.0" prefHeight="25.0" prefWidth="240.0" />
+      <Label layoutX="26.0" layoutY="18.0" text="Statement" />
+      <Label layoutX="41.0" layoutY="51.0" text="Region" />
+      <RadioButton fx:id="beliefRadioButton" layoutX="422.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleBeliefRadioButton" text="This is a Belief" />
+      <ChoiceBox fx:id="regionChoiceBox" layoutX="91.0" layoutY="47.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="metricChoiceBox" layoutX="91.0" layoutY="83.0" prefWidth="150.0" />
+      <Label layoutX="48.0" layoutY="87.0" text="Metric" />
+      <TextField fx:id="personField" layoutX="394.0" layoutY="56.0" prefHeight="25.0" prefWidth="150.0" />
+      <Label layoutX="350.0" layoutY="60.0" text="Person" />
+      <Label layoutX="340.0" layoutY="96.0" text="Strength" />
+      <ChoiceBox fx:id="strengthChoiceBox" layoutX="394.0" layoutY="92.0" prefWidth="150.0" />
+      <Label layoutX="19.0" layoutY="117.0" text="Time Period" />
+      <Label layoutX="14.0" layoutY="148.0" prefHeight="17.0" prefWidth="73.0" text="Associations" />
+      <ScrollPane layoutX="91.0" layoutY="143.0" prefHeight="138.0" prefWidth="156.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="143.0" prefWidth="140.0">
+               <children>
+                  <ListView fx:id="associationsListView" layoutX="-8.0" layoutY="3.0" prefHeight="138.0" prefWidth="150.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Button fx:id="addFileRelationButton" layoutX="75.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleAddFileRelationButton" text="Add File Link" />
+      <Button fx:id="removeRelationButton" layoutX="116.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleRemoveRelationButton" text="Remove Selected" />
+      <Label layoutX="329.0" layoutY="135.0" prefHeight="17.0" prefWidth="63.0" text="Description" />
+      <ChoiceBox fx:id="timeChoiceBox" layoutX="91.0" layoutY="113.0" prefWidth="150.0" />
+      <TextArea fx:id="descriptionTextArea" layoutX="394.0" layoutY="135.0" prefHeight="138.0" prefWidth="156.0" />
+      <Button fx:id="addRelationButton" layoutX="166.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleAddRelationButton" text="Add Fact/Belief Link" />
+      <Button fx:id="saveNewFBButton" layoutX="240.0" layoutY="383.0" mnemonicParsing="false" onAction="#handleSaveNewFBButton" text="Save " />
+      <Button fx:id="cancelAddNewButton" layoutX="297.0" layoutY="383.0" mnemonicParsing="false" onAction="#handleCancelNewButton" text="Cancel" />
+   </children>
+</Pane>
