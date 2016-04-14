@@ -49,8 +49,11 @@ public class AddTemplateMetricController implements Initializable {
 
     @FXML
     private void handleAddItemButton(ActionEvent event) {
-        Stage stage = (Stage) addItemButton.getScene().getWindow();
-        stage.close();
+		if (!(newItemField.getText().equals(""))) {
+			appHandler.addMetric(newItemField.getText());
+			Stage stage = (Stage) addItemButton.getScene().getWindow();
+			stage.close();
+		}
     }
 
     @FXML
