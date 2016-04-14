@@ -49,8 +49,11 @@ public class AddTemplateTimeController implements Initializable {
 
     @FXML
     private void handleAddItemButton(ActionEvent event) {
-        Stage stage = (Stage) addItemButton.getScene().getWindow();
-        stage.close();
+    	if (!(newItemField.getText().equals(""))) {
+			appHandler.addTimeperiod(newItemField.getText());
+			Stage stage = (Stage) addItemButton.getScene().getWindow();
+			stage.close();
+		}
     }
 
     @FXML

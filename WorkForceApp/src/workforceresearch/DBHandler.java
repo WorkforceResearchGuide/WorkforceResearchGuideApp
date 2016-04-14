@@ -931,7 +931,7 @@ public class DBHandler {
 					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery("select * from time_periods");
+			ResultSet rs = statement.executeQuery("select * from strengths");
 
 			while (rs.next()) {
 				s = new Strength(rs.getInt(1), rs.getString(2),
