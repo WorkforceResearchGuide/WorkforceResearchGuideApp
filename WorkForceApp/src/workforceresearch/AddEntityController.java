@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -27,7 +28,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -59,6 +59,7 @@ public class AddEntityController implements Initializable {
 	private ObservableList<String> relationList;
 	private List<String> filePathsList;
 	private boolean isBelief;
+	private HashMap<Integer, String> relationsMap;
 
 	@FXML
 	private void handleBeliefRadioButton(ActionEvent event) {
@@ -74,7 +75,6 @@ public class AddEntityController implements Initializable {
 		relationList.add(fullPath);
 		filePathsList.add(fullPath);
 		associationsListView.setItems(relationList);
-		System.out.println(fullPath);
 	}
 
 	@FXML
@@ -91,6 +91,12 @@ public class AddEntityController implements Initializable {
 				relationList.remove(i);
 			}
 		}
+	    for(Iterator<Map.Entry<Integer, String>> it = relationsMap.entrySet().iterator(); it.hasNext(); ) {
+	        Map.Entry<Integer, String> entry = it.next();
+	        if(entry.getValue().equals(item)) {
+	          it.remove();
+	        }
+	    }
 		associationsListView.getItems().remove(item);
 	}
 
@@ -118,23 +124,24 @@ public class AddEntityController implements Initializable {
 			stage.initOwner(addRelationButton.getScene().getWindow());
 			associateControl.setAppHandler(appHandler);
 			stage.showAndWait();
+			List<Entity> tempRelationList = new ArrayList<Entity>();
+			tempRelationList = associateControl.getEntityList();
+			for(Entity e : tempRelationList){
+				relationList.add(e.getStatement());
+				relationsMap.put(e.getId(), e.getStatement());
+			}
+			associationsListView.setItems(relationList);
 		}
 	}
 
 	@FXML
 	private void handleSaveNewFBButton(ActionEvent event) {
-		// CHange HashMap
-		HashMap<Integer, String> t = new HashMap<Integer, String>();
-		t.put(1, "a");
 		String region = checkNull(regionChoiceBox);
 		String metric = checkNull(metricChoiceBox);
 		String time = checkNull(timeChoiceBox);
 		String strength = checkNull(strengthChoiceBox);
-		appHandler.addEntity(nameField.getText(), region, metric, time, filePathsList, t, isBelief,
+		appHandler.addEntity(nameField.getText(), region, metric, time, filePathsList, relationsMap, isBelief,
 				personField.getText(), strength, descriptionTextArea.getText());
-		for( Entity e : appHandler.retrieveAllEntities()){
-			System.out.println(e.getStatement());
-		}
 		Stage stage = (Stage) saveNewFBButton.getScene().getWindow();
 		stage.close();
 	}
@@ -149,6 +156,7 @@ public class AddEntityController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		isBelief = false;
 		filePathsList = new ArrayList<String>();
+		relationsMap = new HashMap<Integer, String>();
 		relationList = FXCollections.observableArrayList();
 		appHandler = new AppHandler();
 		ObservableList<String> regionList = FXCollections.observableArrayList();
