@@ -39,24 +39,24 @@ public class TemplateProcessor {
 		return db.addStrength(strength);
 	}
 	
-	public boolean disableRegion(int regionId){
+	public boolean disableRegion(String regionValue){
 		
-		return db.disableRegion(regionId);
+		return db.disableRegion(regionValue);
 	}
 	
-	public boolean disableMetric(int metricId){
+	public boolean disableMetric(String metricValue){
 		
-		return db.disableMetric(metricId);
+		return db.disableMetric(metricValue);
 	}
 	
-	public boolean disableTimeperiod(int timeperiodId){
+	public boolean disableTimeperiod(String timeperiodValue){
 		
-		return db.disableTimeperiod(timeperiodId);
+		return db.disableTimeperiod(timeperiodValue);
 	}
 	
-	public boolean disableStrength(int strengthId){
+	public boolean disableStrength(String strengthValue){
 		
-		return db.disableStrength(strengthId);
+		return db.disableStrength(strengthValue);
 	}
 	
 	public List<Region> retrieveAllRegions(){

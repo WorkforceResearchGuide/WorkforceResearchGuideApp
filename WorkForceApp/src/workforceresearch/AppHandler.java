@@ -25,7 +25,6 @@ public class AppHandler {
 	
 	public List<Entity> searchEntity(String searchQuery, String region, String metric, String timeperiod) {
 		
-		//To be completed
 		return eprocessor.searchEntity(searchQuery, region, metric, timeperiod);
 	}
 
@@ -54,9 +53,9 @@ public class AppHandler {
 		return tprocessor.addRegion(region);
 	}
 	
-	public boolean disableRegion(int regionId){
+	public boolean disableRegion(String regionValue){
 		
-		return tprocessor.disableRegion(regionId);
+		return tprocessor.disableRegion(regionValue);
 	}
 	
 	public boolean addMetric(String metric){
@@ -64,9 +63,9 @@ public class AppHandler {
 		return tprocessor.addMetric(metric);
 	}
 	
-	public boolean disableMetric(int metricId){
+	public boolean disableMetric(String metricValue){
 		
-		return tprocessor.disableMetric(metricId);
+		return tprocessor.disableMetric(metricValue);
 	}
 	
 	public boolean addTimeperiod(String timeperiod){
@@ -74,9 +73,9 @@ public class AppHandler {
 		return tprocessor.addTimeperiod(timeperiod);
 	}
 	
-	public boolean disableTimeperiod(int timeperiodId){
+	public boolean disableTimeperiod(String timeperiodValue){
 		
-		return tprocessor.disableTimeperiod(timeperiodId);
+		return tprocessor.disableTimeperiod(timeperiodValue);
 	}
 	
 	public boolean addStrength(String strength){
@@ -84,9 +83,9 @@ public class AppHandler {
 		return tprocessor.addStrength(strength);
 	}
 	
-	public boolean disableStrength(int strengthId){
+	public boolean disableStrength(String strengthValue){
 		
-		return tprocessor.disableStrength(strengthId);
+		return tprocessor.disableStrength(strengthValue);
 	}
 	
 	public List<Region> retrieveAllRegions(){

@@ -202,82 +202,106 @@ public class DBHandler {
 		} else if (!searchQueryFlag && regionFlag && !metricFlag
 				&& !timeperiodFlag) {
 			// 2. region
-			query = "select entity_id, statement from entities where region = '" + region + "'";
+			query = "select entity_id, statement from entities where region = '"
+					+ region + "'";
 		} else if (!searchQueryFlag && !regionFlag && metricFlag
 				&& !timeperiodFlag) {
 			// 3. metric
-			query = "select entity_id, statement from entities where metric = '" + metric + "'";
+			query = "select entity_id, statement from entities where metric = '"
+					+ metric + "'";
 		} else if (!searchQueryFlag && !regionFlag && !metricFlag
 				&& timeperiodFlag) {
 			// 4. timeperiod
-			query = "select entity_id, statement from entities where time_period = '" + timeperiod
-					+ "'";
+			query = "select entity_id, statement from entities where time_period = '"
+					+ timeperiod + "'";
 		} else if (!searchQueryFlag && regionFlag && metricFlag
 				&& !timeperiodFlag) {
 			// 5. region and metric
-			query = "select entity_id, statement from entities where region = '" + region
-					+ "' and metric = '" + metric + "'";
+			query = "select entity_id, statement from entities where region = '"
+					+ region + "' and metric = '" + metric + "'";
 		} else if (!searchQueryFlag && regionFlag && !metricFlag
 				&& timeperiodFlag) {
 			// 6. region and timeperiod
-			query = "select entity_id, statement from entities where region = '" + region
-					+ "' and time_period = '" + timeperiod + "'";
+			query = "select entity_id, statement from entities where region = '"
+					+ region + "' and time_period = '" + timeperiod + "'";
 		} else if (!searchQueryFlag && !regionFlag && metricFlag
 				&& timeperiodFlag) {
 			// 7. metric and timeperiod
-			query = "select entity_id, statement from entities where metric = '" + metric
-					+ "' and time_period = '" + timeperiod + "'";
+			query = "select entity_id, statement from entities where metric = '"
+					+ metric + "' and time_period = '" + timeperiod + "'";
 		} else if (!searchQueryFlag && regionFlag && metricFlag
 				&& timeperiodFlag) {
 			// 8. region and metric and timeperiod
-			query = "select entity_id, statement from entities where region = '" + region
-					+ "' and metric = '" + metric + "' and time_period = '"
-					+ timeperiod + "'";
+			query = "select entity_id, statement from entities where region = '"
+					+ region
+					+ "' and metric = '"
+					+ metric
+					+ "' and time_period = '" + timeperiod + "'";
 		} else if (searchQueryFlag && regionFlag && !metricFlag
 				&& !timeperiodFlag) {
 			// 9. statement/person and region
-			query = "select entity_id, statement from entities where region = '" + region
-					+ "' and (statement like '%" + searchQuery
+			query = "select entity_id, statement from entities where region = '"
+					+ region
+					+ "' and (statement like '%"
+					+ searchQuery
 					+ "%' or person like '%" + searchQuery + "%')";
 		} else if (searchQueryFlag && !regionFlag && metricFlag
 				&& !timeperiodFlag) {
 			// 10. statement/person & metric
-			query = "select entity_id, statement from entities where metric = '" + metric
-					+ "' and (statement like '%" + searchQuery
+			query = "select entity_id, statement from entities where metric = '"
+					+ metric
+					+ "' and (statement like '%"
+					+ searchQuery
 					+ "%' or person like '%" + searchQuery + "%')";
 		} else if (searchQueryFlag && !regionFlag && !metricFlag
 				&& timeperiodFlag) {
 			// 11. statement/person & timeperiod
-			query = "select entity_id, statement from entities where time_period = '" + timeperiod
-					+ "' and (statement like '%" + searchQuery
+			query = "select entity_id, statement from entities where time_period = '"
+					+ timeperiod
+					+ "' and (statement like '%"
+					+ searchQuery
 					+ "%' or person like '%" + searchQuery + "%')";
 		} else if (searchQueryFlag && regionFlag && metricFlag
 				&& !timeperiodFlag) {
 			// 12. statement/person & region & metric
-			query = "select entity_id, statement from entities where region = '" + region
-					+ "' and metric = '" + metric + "' and (statement like '%"
-					+ searchQuery + "%' or person like '%" + searchQuery
-					+ "%')";
+			query = "select entity_id, statement from entities where region = '"
+					+ region
+					+ "' and metric = '"
+					+ metric
+					+ "' and (statement like '%"
+					+ searchQuery
+					+ "%' or person like '%" + searchQuery + "%')";
 		} else if (searchQueryFlag && regionFlag && !metricFlag
 				&& timeperiodFlag) {
 			// 13. statement/person & region & timeperiod
-			query = "select entity_id, statement from entities where region = '" + region
-					+ "' and time_period = '" + timeperiod
-					+ "' and (statement like '%" + searchQuery
+			query = "select entity_id, statement from entities where region = '"
+					+ region
+					+ "' and time_period = '"
+					+ timeperiod
+					+ "' and (statement like '%"
+					+ searchQuery
 					+ "%' or person like '%" + searchQuery + "%')";
 		} else if (searchQueryFlag && !regionFlag && metricFlag
 				&& timeperiodFlag) {
 			// 14. statement/person & metric & timeperiod
-			query = "select entity_id, statement from entities where metric = '" + metric
-					+ "' and time_period = '" + timeperiod
-					+ "' and (statement like '%" + searchQuery
+			query = "select entity_id, statement from entities where metric = '"
+					+ metric
+					+ "' and time_period = '"
+					+ timeperiod
+					+ "' and (statement like '%"
+					+ searchQuery
 					+ "%' or person like '%" + searchQuery + "%')";
 		} else if (searchQueryFlag && regionFlag && metricFlag
 				&& timeperiodFlag) {
 			// 15. statement/person & region & metric & timeperiod
-			query = "select entity_id, statement from entities where region = '" + region
-					+ "' and metric = '" + metric + "' and time_period = '"
-					+ timeperiod + "' and (statement like '%" + searchQuery
+			query = "select entity_id, statement from entities where region = '"
+					+ region
+					+ "' and metric = '"
+					+ metric
+					+ "' and time_period = '"
+					+ timeperiod
+					+ "' and (statement like '%"
+					+ searchQuery
 					+ "%' or person like '%" + searchQuery + "%')";
 		} else {
 			// 16. if no criteria mentioned, return empty list
@@ -422,32 +446,38 @@ public class DBHandler {
 			}
 
 			// different region
-			if (!((entityCurrent.getRegion() != null
-					&& entityUpdated.getRegion() != null && entityCurrent
-					.getRegion().equals(entityUpdated.getRegion())) || (entityUpdated
-					.getRegion() == null && entityUpdated.getRegion() == null))) {
+			if (!((entityCurrent.getRegion().getValue() != null
+					&& entityUpdated.getRegion().getValue() != null && entityCurrent
+					.getRegion().getValue()
+					.equals(entityUpdated.getRegion().getValue())) || (entityUpdated
+					.getRegion().getValue() == null && entityUpdated
+					.getRegion().getValue() == null))) {
 				updates.add("update entities set region = '"
-						+ entityUpdated.getRegion() + "' where entity_id = "
-						+ entityUpdated.getId());
+						+ entityUpdated.getRegion().getValue()
+						+ "' where entity_id = " + entityUpdated.getId());
 			}
 
 			// different metric
-			if (!((entityCurrent.getMetric() != null
-					&& entityUpdated.getMetric() != null && entityCurrent
-					.getMetric().equals(entityUpdated.getMetric())) || (entityUpdated
-					.getMetric() == null && entityUpdated.getMetric() == null))) {
+			if (!((entityCurrent.getMetric().getValue() != null
+					&& entityUpdated.getMetric().getValue() != null && entityCurrent
+					.getMetric().getValue()
+					.equals(entityUpdated.getMetric().getValue())) || (entityUpdated
+					.getMetric().getValue() == null && entityUpdated
+					.getMetric().getValue() == null))) {
 				updates.add("update entities set metric = '"
-						+ entityUpdated.getMetric() + "' where entity_id = "
-						+ entityUpdated.getId());
+						+ entityUpdated.getMetric().getValue()
+						+ "' where entity_id = " + entityUpdated.getId());
 			}
 
 			// different timeperiod
-			if (!((entityCurrent.getTimeperiod() != null
-					&& entityUpdated.getTimeperiod() != null && entityCurrent
-					.getTimeperiod().equals(entityUpdated.getTimeperiod())) || (entityUpdated
-					.getTimeperiod() == null && entityUpdated.getTimeperiod() == null))) {
+			if (!((entityCurrent.getTimeperiod().getValue() != null
+					&& entityUpdated.getTimeperiod().getValue() != null && entityCurrent
+					.getTimeperiod().getValue()
+					.equals(entityUpdated.getTimeperiod().getValue())) || (entityUpdated
+					.getTimeperiod().getValue() == null && entityUpdated
+					.getTimeperiod().getValue() == null))) {
 				updates.add("update entities set time_period = '"
-						+ entityUpdated.getTimeperiod()
+						+ entityUpdated.getTimeperiod().getValue()
 						+ "' where entity_id = " + entityUpdated.getId());
 			}
 
@@ -479,13 +509,15 @@ public class DBHandler {
 			}
 
 			// different strength
-			if (!((entityCurrent.getStrength() != null
-					&& entityUpdated.getStrength() != null && entityCurrent
-					.getStrength().equals(entityUpdated.getStrength())) || (entityUpdated
-					.getStrength() == null && entityUpdated.getStrength() == null))) {
+			if (!((entityCurrent.getStrength().getValue() != null
+					&& entityUpdated.getStrength().getValue() != null && entityCurrent
+					.getStrength().getValue()
+					.equals(entityUpdated.getStrength().getValue())) || (entityUpdated
+					.getStrength().getValue() == null && entityUpdated
+					.getStrength().getValue() == null))) {
 				updates.add("update entities set note = '"
-						+ entityUpdated.getStrength() + "' where entity_id = "
-						+ entityUpdated.getId());
+						+ entityUpdated.getStrength().getValue()
+						+ "' where entity_id = " + entityUpdated.getId());
 			}
 
 			// different entity-entity relations
@@ -584,7 +616,7 @@ public class DBHandler {
 	public List<Entity> retrieveAllEntities() {
 		List<Entity> entities = new ArrayList<Entity>();
 		Entity entity;
-		
+
 		try {
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
@@ -596,10 +628,10 @@ public class DBHandler {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				entity = new Entity();				
+				entity = new Entity();
 				entity.setId(rs.getInt("entity_id"));
 				entity.setStatement(rs.getString("statement"));
-				
+
 				entities.add(entity);
 			}
 			rs.close();
@@ -613,7 +645,7 @@ public class DBHandler {
 		}
 		return entities;
 	}
-	
+
 	// Add Template
 	public boolean addRegion(String region) {
 		int result = 0;
@@ -724,7 +756,7 @@ public class DBHandler {
 	}
 
 	// Disable template
-	public boolean disableRegion(int regionId) {
+	public boolean disableRegion(String regionValue) {
 		int result = 0;
 		try {
 			// create connection
@@ -734,8 +766,8 @@ public class DBHandler {
 			Statement statement = connection.createStatement();
 
 			result = statement
-					.executeUpdate("update regions set is_disabled = 1 where region_id = "
-							+ regionId);
+					.executeUpdate("update regions set is_disabled = 1 where value = '"
+							+ regionValue + "'");
 
 			statement.close();
 			connection.close();
@@ -751,7 +783,7 @@ public class DBHandler {
 		}
 	}
 
-	public boolean disableMetric(int metricId) {
+	public boolean disableMetric(String metricValue) {
 		int result = 0;
 		try {
 			// create connection
@@ -761,8 +793,8 @@ public class DBHandler {
 			Statement statement = connection.createStatement();
 
 			result = statement
-					.executeUpdate("update metrics set is_disabled = 1 where metric_id = "
-							+ metricId);
+					.executeUpdate("update metrics set is_disabled = 1 where value = '"
+							+ metricValue + "'");
 
 			statement.close();
 			connection.close();
@@ -778,7 +810,7 @@ public class DBHandler {
 		}
 	}
 
-	public boolean disableTimeperiod(int timeperiodId) {
+	public boolean disableTimeperiod(String timeperiodValue) {
 		int result = 0;
 		try {
 			// create connection
@@ -788,8 +820,8 @@ public class DBHandler {
 			Statement statement = connection.createStatement();
 
 			result = statement
-					.executeUpdate("update time_periods set is_disabled = 1 where time_period_id = "
-							+ timeperiodId);
+					.executeUpdate("update time_periods set is_disabled = 1 where value = '"
+							+ timeperiodValue + "'");
 
 			statement.close();
 			connection.close();
@@ -805,7 +837,7 @@ public class DBHandler {
 		}
 	}
 
-	public boolean disableStrength(int strengthId) {
+	public boolean disableStrength(String strengthValue) {
 		int result = 0;
 		try {
 			// create connection
@@ -815,8 +847,8 @@ public class DBHandler {
 			Statement statement = connection.createStatement();
 
 			result = statement
-					.executeUpdate("update strengths set is_disabled = 1 where strength_id = "
-							+ strengthId);
+					.executeUpdate("update strengths set is_disabled = 1 where value = '"
+							+ strengthValue + "'");
 
 			statement.close();
 			connection.close();
