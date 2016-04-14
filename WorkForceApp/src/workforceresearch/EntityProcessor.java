@@ -29,7 +29,7 @@ public class EntityProcessor {
 			s.setValue(strength);
 			s.setDisabled(false);
 			
-			Entity entity=new Entity(name,reg,metr,tPeriod,null,related_entities,isBelief,person,s,note);
+			Entity entity=new Entity(name,reg,metr,tPeriod,file_paths,related_entities,isBelief,person,s,note);
 			dbhand.addEntity(entity);
 			return true;		
 	}
