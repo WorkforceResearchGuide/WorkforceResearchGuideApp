@@ -23,7 +23,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -33,7 +32,6 @@ public class AddEntityController implements Initializable
 {
     private String name, country, metric, timeperiod, person, strength, note;
     private List<String> filePaths;
-    private List<String> regionValues,metricValues,timeValues,strengthValues;
     private HashMap<Integer,String> relatedEntities;
     private boolean isBelief;
     
@@ -45,9 +43,6 @@ public class AddEntityController implements Initializable
     
     @FXML
     private RadioButton beliefRadioButton;
-    
-    @FXML
-    private ChoiceBox regionChoiceBox, metricChoiceBox, timeChoiceBox, strengthChoiceBox;
     
     private AppHandler appHandler;
     
@@ -65,7 +60,6 @@ public class AddEntityController implements Initializable
         //FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
         //chooser.getExtensionFilters().add(extFilter);
         File file = chooser.showOpenDialog(new Stage());
-        filePaths.add(file.getPath());
     }
     
     @FXML
@@ -163,30 +157,6 @@ public class AddEntityController implements Initializable
         filePaths = new ArrayList<String>();
         relatedEntities = new HashMap<Integer,String>();
         isBelief = false;
-        
-        /*
-        regionValues = new ArrayList<String>();
-        metricValues = new ArrayList<String>();
-        timeValues = new ArrayList<String>();
-        strengthValues = new ArrayList<String>();
-        
-        for(Region r : appHandler.retrieveAllRegions())
-        {
-        	regionValues.add(r.getValue());
-        }
-        for(Metric m: appHandler.retrieveAllMetrics())
-        {
-        	metricValues.add(m.getValue());
-        }
-        for(Timeperiod t: appHandler.retrieveAllTimeperiods())
-        {
-        	timeValues.add(t.getValue());
-        }
-        for(Strength s: appHandler.retrieveAllStrengths())
-        {
-        	strengthValues.add(s.getValue());
-        }
-        */
     }
     
     public void setAppHandler(AppHandler ah)

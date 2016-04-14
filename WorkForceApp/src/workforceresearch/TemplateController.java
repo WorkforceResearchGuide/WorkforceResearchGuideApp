@@ -5,9 +5,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -25,11 +21,7 @@ public class TemplateController implements Initializable
     @FXML
     private Button addRegionButton, deleteRegionButton, addMetricButton, deleteMetricButton, addTimeButton, deleteTimeButton, addStrengthButton, deleteStrengthButton, confirmButton;
     
-    @FXML
-    private ListView regionListView, metricListView, timeListView, strengthListView;
-    
     private AppHandler appHandler;
-    private ObservableList<String> regions,metrics,timeperiods,strengths;
     
     @FXML
     private void handleAddRegionButton(ActionEvent event)
@@ -60,7 +52,6 @@ public class TemplateController implements Initializable
             stage.initOwner(addRegionButton.getScene().getWindow());
             control.setAppHandler(appHandler);
             stage.showAndWait();
-            updateTemplateLists();
         }
     }
     
@@ -93,7 +84,6 @@ public class TemplateController implements Initializable
             stage.initOwner(deleteRegionButton.getScene().getWindow());
             control.setAppHandler(appHandler);
             stage.showAndWait();
-            updateTemplateLists();
         }
     }
     
@@ -126,7 +116,6 @@ public class TemplateController implements Initializable
             stage.initOwner(addMetricButton.getScene().getWindow());
             control.setAppHandler(appHandler);
             stage.showAndWait();
-            updateTemplateLists();
         }
     }
     
@@ -159,7 +148,6 @@ public class TemplateController implements Initializable
             stage.initOwner(deleteMetricButton.getScene().getWindow());
             control.setAppHandler(appHandler);
             stage.showAndWait();
-            updateTemplateLists();
         }
     }
     
@@ -192,7 +180,6 @@ public class TemplateController implements Initializable
             stage.initOwner(addTimeButton.getScene().getWindow());
             control.setAppHandler(appHandler);
             stage.showAndWait();
-            updateTemplateLists();
         }
     }
     
@@ -225,7 +212,6 @@ public class TemplateController implements Initializable
             stage.initOwner(deleteTimeButton.getScene().getWindow());
             control.setAppHandler(appHandler);
             stage.showAndWait();
-            updateTemplateLists();
         }
     }
     
@@ -258,7 +244,6 @@ public class TemplateController implements Initializable
             stage.initOwner(addStrengthButton.getScene().getWindow());
             control.setAppHandler(appHandler);
             stage.showAndWait();
-            updateTemplateLists();
         }
     }
     
@@ -291,7 +276,6 @@ public class TemplateController implements Initializable
             stage.initOwner(deleteStrengthButton.getScene().getWindow());
             control.setAppHandler(appHandler);
             stage.showAndWait();
-            updateTemplateLists();
         }
     }
     
@@ -305,8 +289,6 @@ public class TemplateController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    	appHandler = new AppHandler();
-    	updateTemplateLists();
     }
     
     public void setAppHandler(AppHandler ah)
@@ -314,38 +296,4 @@ public class TemplateController implements Initializable
         appHandler = ah;
     }
     
-    //Populates the listviews, called on initialization and whenever an add/delete of an item occurs
-    private void updateTemplateLists()
-    {
-    	regions = FXCollections.observableArrayList();
-    	metrics = FXCollections.observableArrayList();
-    	timeperiods = FXCollections.observableArrayList();
-    	strengths = FXCollections.observableArrayList();
-    	
-    	for(Region r: appHandler.retrieveAllRegions())
-    	{
-    		regions.add(r.getValue());
-    	}
-    	
-    	for(Metric m: appHandler.retrieveAllMetrics())
-    	{
-    		metrics.add(m.getValue());
-    	}
-    	
-    	for(Timeperiod t: appHandler.retrieveAllTimeperiods())
-    	{
-    		timeperiods.add(t.getValue());
-    	}
-    	
-    	for(Strength s: appHandler.retrieveAllStrengths())
-    	{
-    		strengths.add(s.getValue());
-    	}
-    	
-    	regionListView.setItems(regions);
-    	metricListView.setItems(metrics);
-    	timeListView.setItems(timeperiods);
-    	strengthListView.setItems(strengths);
-    	
-    }
 }

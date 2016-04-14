@@ -21,7 +21,7 @@ import javafx.stage.Stage;
  *
  * @author Mark
  */
-public class AddTemplateRegionController implements Initializable {
+public class AddTemplateCountryController implements Initializable {
     @FXML
     private Label messageLabel;
     @FXML
@@ -36,8 +36,6 @@ public class AddTemplateRegionController implements Initializable {
     private Button cancelButton;
     @FXML
     private HBox okParent;
-    
-    private AppHandler appHandler;
 
     /**
      * Initializes the controller class.
@@ -57,11 +55,6 @@ public class AddTemplateRegionController implements Initializable {
     private void handleCancelButton(ActionEvent event) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
-    }
-    
-    public void setAppHandler(AppHandler ah)
-    {
-        appHandler = ah;
     }
     
 }

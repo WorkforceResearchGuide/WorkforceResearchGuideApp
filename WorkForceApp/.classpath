@@ -2,14 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-<<<<<<< HEAD
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/Mark/Documents/Schoolwork/AdvSEProj/WorkforceResearchGuideApp/jar/sqlite-jdbc-3.8.11.2.jar"/>
-=======
-	<classpathentry kind="lib" path="C:/Users/Fenil/Documents/GitHub/WorkforceResearchGuideApp/jar/sqlite-jdbc-3.8.11.2.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
->>>>>>> dc2437ce950ce7d50b51ab15e33f4ab9d96c31d2
 	<classpathentry kind="output" path="bin"/>
 </classpath>
