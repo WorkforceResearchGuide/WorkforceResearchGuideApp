@@ -36,10 +36,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class AddEntityController implements Initializable {
-	private String name, country, metric, timeperiod, person, strength, note;
-	private List<String> filePaths;
-	private HashMap<Integer, String> relatedEntities;
-	private boolean isBelief;
 
 	@FXML
 	private Button addRelationButton, addFileRelationButton, removeRelationButton, saveNewFBButton, cancelAddNewButton;
@@ -61,7 +57,8 @@ public class AddEntityController implements Initializable {
 
 	private AppHandler appHandler;
 	private ObservableList<String> relationList;
-	private List<String> filePathsList = new ArrayList<String>();
+	private List<String> filePathsList;
+	private boolean isBelief;
 
 	@FXML
 	private void handleBeliefRadioButton(ActionEvent event) {
@@ -72,9 +69,6 @@ public class AddEntityController implements Initializable {
 	private void handleAddFileRelationButton(ActionEvent event) {
 		FileChooser chooser = new FileChooser();
 		chooser.setTitle("Open File");
-		// FileChooser.ExtensionFilter extFilter = new
-		// FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
-		// chooser.getExtensionFilters().add(extFilter);
 		File file = chooser.showOpenDialog(new Stage());
 		String fullPath = file.getAbsolutePath();
 		relationList.add(fullPath);
@@ -153,18 +147,8 @@ public class AddEntityController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// throw new UnsupportedOperationException("Not supported yet."); //To
-		// change body of generated methods, choose Tools | Templates.
-		name = "";
-		country = "";
-		metric = "";
-		timeperiod = "";
-		person = "";
-		strength = "";
-		note = "";
-		filePaths = new ArrayList<String>();
-		relatedEntities = new HashMap<Integer, String>();
 		isBelief = false;
+		filePathsList = new ArrayList<String>();
 		relationList = FXCollections.observableArrayList();
 		appHandler = new AppHandler();
 		ObservableList<String> regionList = FXCollections.observableArrayList();
