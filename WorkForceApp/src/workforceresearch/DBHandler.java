@@ -100,12 +100,12 @@ public class DBHandler {
 				.append("insert into entities(statement, note, region, metric, time_period, is_belief, person, strength)")
 				.append("values('" + entity.getStatement() + "', ")
 				.append("'" + entity.getNote() + "', ")
-				.append("'" + entity.getRegion() + "', ")
-				.append("'" + entity.getMetric() + "', ")
-				.append("'" + entity.getTimeperiod() + "', ")
+				.append("'" + entity.getRegion().getValue() + "', ")
+				.append("'" + entity.getMetric().getValue() + "', ")
+				.append("'" + entity.getTimeperiod().getValue() + "', ")
 				.append("'" + entity.isBelief() + "', ")
 				.append("'" + entity.getPerson() + "', ")
-				.append("'" + entity.getStrength() + "')");
+				.append("'" + entity.getStrength().getValue() + "')");
 		result = statement.executeUpdate(insertEntityQuery.toString());
 		int entityid = statement.getGeneratedKeys().getInt(1);
 

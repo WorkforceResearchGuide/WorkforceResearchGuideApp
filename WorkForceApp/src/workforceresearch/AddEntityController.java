@@ -16,6 +16,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +60,7 @@ public class AddEntityController implements Initializable {
 	private TextArea descriptionTextArea;
 
 	private AppHandler appHandler;
+	private ObservableList<String> relationList;
 
 	@FXML
 	private void handleBeliefRadioButton(ActionEvent event) {
@@ -73,7 +76,8 @@ public class AddEntityController implements Initializable {
 		// chooser.getExtensionFilters().add(extFilter);
 		File file = chooser.showOpenDialog(new Stage());
 		String fullPath = file.getAbsolutePath();
-		
+		relationList.add(fullPath);
+		associationsListView.setItems(relationList);
 	}
 
 	@FXML
@@ -104,6 +108,8 @@ public class AddEntityController implements Initializable {
 			control.setAppHandler(appHandler);
 			stage.showAndWait();
 		}
+		
+//		associationsListView.get
 	}
 
 	@FXML
@@ -136,9 +142,8 @@ public class AddEntityController implements Initializable {
 	@FXML
 	private void handleSaveNewFBButton(ActionEvent event) {
 		// TODO: Handle adding fact/belief
-		String a = "!";
 		List<String> abc = new ArrayList<String>();
-		abc.add(a);
+//		abc.add(a);
 		HashMap<Integer, String> t = new HashMap<Integer, String>();
 		t.put(1, "a");
 		String region = checkNull(regionChoiceBox);
@@ -174,6 +179,31 @@ public class AddEntityController implements Initializable {
 		filePaths = new ArrayList<String>();
 		relatedEntities = new HashMap<Integer, String>();
 		isBelief = false;
+		relationList = FXCollections.observableArrayList();
+		appHandler = new AppHandler();
+		ObservableList<String> regionList = FXCollections.observableArrayList();
+		for(Region r : appHandler.retrieveAllRegions()){
+			regionList.add(r.getValue());
+		}
+		regionChoiceBox.setItems(regionList);
+		
+		ObservableList<String> metricList = FXCollections.observableArrayList();
+		for(Metric m : appHandler.retrieveAllMetrics()){
+			metricList.add(m.getValue());
+		}
+		metricChoiceBox.setItems(metricList);
+		
+		ObservableList<String> timeList = FXCollections.observableArrayList();
+		for(Timeperiod t : appHandler.retrieveAllTimeperiods()){
+			timeList.add(t.getValue());
+		}
+		timeChoiceBox.setItems(timeList);
+		
+		ObservableList<String> strengthList = FXCollections.observableArrayList();
+		for(Strength s : appHandler.retrieveAllStrengths()){
+			strengthList.add(s.getValue());
+		}
+		strengthChoiceBox.setItems(strengthList);
 	}
 
 	public void setAppHandler(AppHandler ah) {
