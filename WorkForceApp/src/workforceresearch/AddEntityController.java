@@ -61,6 +61,7 @@ public class AddEntityController implements Initializable {
 
 	private AppHandler appHandler;
 	private ObservableList<String> relationList;
+	private List<String> filePathsList = new ArrayList<String>();
 
 	@FXML
 	private void handleBeliefRadioButton(ActionEvent event) {
@@ -77,39 +78,26 @@ public class AddEntityController implements Initializable {
 		File file = chooser.showOpenDialog(new Stage());
 		String fullPath = file.getAbsolutePath();
 		relationList.add(fullPath);
+		filePathsList.add(fullPath);
 		associationsListView.setItems(relationList);
+		System.out.println(fullPath);
 	}
 
 	@FXML
 	private void handleRemoveRelationButton(ActionEvent event) {
-		// gets the selected item
-		associationsListView.getSelectionModel().getSelectedItem();
-		
-		Stage stage;
-		Parent root = null;
-		boolean fxmlFound = false;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteAssociationVerify.fxml"));
-		DeleteAssociationVerifyController control = null;
 
-		stage = new Stage();
-		try {
-			root = loader.load();
-			control = loader.<DeleteAssociationVerifyController> getController();
-			fxmlFound = true;
-		} catch (IOException ex) {
-			Logger.getLogger(MainScreenController.class.getName()).log(Level.SEVERE, null, ex);
+		String item = associationsListView.getSelectionModel().getSelectedItem().toString();
+		for(int i = 0; i < filePathsList.size(); i++){
+			if(item.equals(filePathsList.get(i))){
+				filePathsList.remove(i);
+			}
 		}
-
-		if (fxmlFound) {
-			stage.setScene(new Scene(root));
-			stage.setTitle("WARNING");
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.initOwner(removeRelationButton.getScene().getWindow());
-			control.setAppHandler(appHandler);
-			stage.showAndWait();
+		for(int i = 0; i < relationList.size(); i++){
+			if(item.equals(relationList.get(i))){
+				relationList.remove(i);
+			}
 		}
-		
-//		associationsListView.get
+		associationsListView.getItems().remove(item);
 	}
 
 	@FXML
@@ -141,16 +129,14 @@ public class AddEntityController implements Initializable {
 
 	@FXML
 	private void handleSaveNewFBButton(ActionEvent event) {
-		// TODO: Handle adding fact/belief
-		List<String> abc = new ArrayList<String>();
-//		abc.add(a);
+		// CHange HashMap
 		HashMap<Integer, String> t = new HashMap<Integer, String>();
 		t.put(1, "a");
 		String region = checkNull(regionChoiceBox);
 		String metric = checkNull(metricChoiceBox);
 		String time = checkNull(timeChoiceBox);
 		String strength = checkNull(strengthChoiceBox);
-		appHandler.addEntity(nameField.getText(), region, metric, time, abc, t, isBelief,
+		appHandler.addEntity(nameField.getText(), region, metric, time, filePathsList, t, isBelief,
 				personField.getText(), strength, descriptionTextArea.getText());
 		for( Entity e : appHandler.retrieveAllEntities()){
 			System.out.println(e.getStatement());
