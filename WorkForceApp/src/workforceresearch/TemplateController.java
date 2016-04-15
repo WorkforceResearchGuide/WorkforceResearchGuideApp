@@ -66,7 +66,6 @@ public class TemplateController implements Initializable {
 	@FXML
 	private void handleDeleteRegionButton(ActionEvent event) {
 		String selectedRegion = (String) regionListView.getSelectionModel().getSelectedItem();
-		System.out.println(selectedRegion);
 		if (selectedRegion != null) {
 			appHandler.disableRegion(selectedRegion);
 		}
@@ -109,7 +108,6 @@ public class TemplateController implements Initializable {
 	private void handleDeleteMetricButton(ActionEvent event) {
 		String selectedMetric = (String) metricListView.getSelectionModel()
 				.getSelectedItem();
-		System.out.println(selectedMetric);
 		if (selectedMetric != null) {
 			appHandler.disableMetric(selectedMetric);
 		}
@@ -152,7 +150,6 @@ public class TemplateController implements Initializable {
 	private void handleDeleteTimeButton(ActionEvent event) {
 		String selectedTimeperiod = (String) timeListView.getSelectionModel()
 				.getSelectedItem();
-		System.out.println(selectedTimeperiod);
 		if (selectedTimeperiod != null) {
 			appHandler.disableTimeperiod(selectedTimeperiod);
 		}
@@ -195,7 +192,6 @@ public class TemplateController implements Initializable {
 	private void handleDeleteStrengthButton(ActionEvent event) {
 		String selectedStrength = (String) strengthListView.getSelectionModel()
 				.getSelectedItem();
-		System.out.println(selectedStrength);
 		if (selectedStrength != null) {
 			appHandler.disableStrength(selectedStrength);
 		}

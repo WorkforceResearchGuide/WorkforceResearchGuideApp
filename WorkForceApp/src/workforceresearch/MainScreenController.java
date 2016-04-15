@@ -139,8 +139,6 @@ public class MainScreenController implements Initializable {
             stage.initOwner(addButton.getScene().getWindow());
             addControl.setAppHandler(appHandler);
             stage.showAndWait();
-            
-            //System.out.println("BUTS");
         }
         
     }
@@ -195,7 +193,10 @@ public class MainScreenController implements Initializable {
         chooser.getExtensionFilters().add(extFilter);
         
         File file = chooser.showOpenDialog(new Stage());
-        
+       
+        String selectedFile = file.getAbsolutePath();
+        boolean result = appHandler.addEntityBatch(selectedFile);       
+        String showResult = result ? "Successful" : "Failed";
         
         stage = new Stage();
         try 
@@ -212,7 +213,7 @@ public class MainScreenController implements Initializable {
         if(fxmlFound)
         {
             stage.setScene(new Scene(root));
-            stage.setTitle("Batch Upload Results");
+            stage.setTitle("Batch Upload Results - " + showResult);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(batchUploadButton.getScene().getWindow());
             batchControl.setAppHandler(appHandler);
