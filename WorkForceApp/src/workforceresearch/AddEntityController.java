@@ -144,6 +144,7 @@ public class AddEntityController implements Initializable {
 				personField.getText(), strength, descriptionTextArea.getText());
 		Stage stage = (Stage) saveNewFBButton.getScene().getWindow();
 		stage.close();
+		System.out.println(isBelief);
 	}
 
 	@FXML
@@ -154,7 +155,7 @@ public class AddEntityController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		isBelief = false;
+//		isBelief = false;
 		filePathsList = new ArrayList<String>();
 		relationsMap = new HashMap<Integer, String>();
 		relationList = FXCollections.observableArrayList();

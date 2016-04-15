@@ -157,6 +157,7 @@ public class MainScreenController implements Initializable {
         {
             root = loader.load();
             editControl = loader.<EditEntityController>getController();
+            editControl.setEntity(tempEntity);
             fxmlFound = true; 
         } 
         catch (IOException ex) 
@@ -330,6 +331,7 @@ public class MainScreenController implements Initializable {
     	    		metricField.setText(tempEntity.getMetric().getValue());
     	    		timePeriodField.setText(tempEntity.getTimeperiod().getValue());
     	    		personField.setText(tempEntity.getPerson());
+    	    		System.out.println(tempEntity.isBelief());
     	    		if(tempEntity.isBelief())
     	    			strengthField.setText(tempEntity.getStrength().getValue());
     	    		

@@ -165,7 +165,12 @@ public class EntityProcessor {
 		Strength s = new Strength();
 		s.setValue(strength);
 		s.setDisabled(false);
-		
+		if(file_paths == null){
+			file_paths = new ArrayList<String>();
+		}
+		if(related_entities == null){
+			related_entities = new HashMap<Integer, String>();
+		}
 		Entity entity=new Entity(entityid,name,reg,metr,tPeriod,file_paths,related_entities,isBelief,person,s,note);
 		return dbhand.updateEntity(entity);
 	}

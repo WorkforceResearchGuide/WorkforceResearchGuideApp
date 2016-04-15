@@ -351,8 +351,7 @@ public class DBHandler {
 				s.setValue(rs.getString("strength"));
 				entity.setStrength(s);
 
-				entity.setBelief(rs.getBoolean("is_belief"));
-				entity.setPerson(rs.getString("person"));
+				entity.setBelief(Boolean.parseBoolean(rs.getString("is_belief")));
 				entity.setPerson(rs.getString("person"));
 				entity.setNote(rs.getString("note"));
 			}
@@ -551,7 +550,6 @@ public class DBHandler {
 			// different entity-file relations
 			List<String> updatedFileRelations = entityUpdated.getFilePaths();
 			List<String> currentFileRelations = entityCurrent.getFilePaths();
-
 			String[] updatedFileRelationsArr = updatedFileRelations
 					.toArray(new String[0]);
 			String[] currentFileRelationsArr = currentFileRelations
