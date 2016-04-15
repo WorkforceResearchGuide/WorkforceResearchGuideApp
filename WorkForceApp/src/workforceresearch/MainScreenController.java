@@ -208,7 +208,7 @@ public class MainScreenController implements Initializable {
         File defaultDirectory = new File("c:/");
         chooser.setInitialDirectory(defaultDirectory);
         File selectedDirectory = chooser.showDialog(new Stage());
-        
+
         stage = new Stage();
         try 
         {
