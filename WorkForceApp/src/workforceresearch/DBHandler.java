@@ -391,9 +391,7 @@ public class DBHandler {
 
 	@SuppressWarnings("finally")
 	public boolean deleteEntity(int entityId) {
-		boolean resultEntity = false;
-		boolean resultFileRelation = false;
-		boolean resultEntityRelation = false;
+		boolean result = true;
 		try {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
@@ -406,28 +404,29 @@ public class DBHandler {
 			String deleteFileRelation = "delete from file_relations where entity_id = ?";
 			PreparedStatement ps = connection.prepareStatement(deleteEntity);
 			ps.setInt(1, entityId);
-			resultEntity = ps.execute();
+			ps.execute();
 
 			ps = connection.prepareStatement(deleteEntityRelation);
 			ps.setInt(1, entityId);
-			resultEntityRelation = ps.execute();
+			ps.execute();
 
 			ps = connection.prepareStatement(deleteFileRelation);
 			ps.setInt(1, entityId);
-			resultFileRelation = ps.execute();
+			ps.execute();
 
 			// end of transaction
-			if (resultEntity && resultEntityRelation && resultFileRelation)
-				connection.commit();
+			connection.commit();
 
 			ps.close();
 			connection.close();
 		} catch (ClassNotFoundException e) {
+			result = false;
 			e.printStackTrace();
 		} catch (SQLException e) {
+			result = false;
 			e.printStackTrace();
 		} finally {
-			return (resultEntity && resultEntityRelation && resultFileRelation);
+			return result;
 		}
 	}
 
