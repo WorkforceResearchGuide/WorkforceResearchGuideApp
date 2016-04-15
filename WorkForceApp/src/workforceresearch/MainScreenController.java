@@ -217,6 +217,9 @@ public class MainScreenController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(batchUploadButton.getScene().getWindow());
             batchControl.setAppHandler(appHandler);
+            if(result)
+            	batchControl.setMessageSuccess();
+            else batchControl.setMessageFailure();
             stage.showAndWait();
         }
     }
