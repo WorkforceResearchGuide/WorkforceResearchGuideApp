@@ -16,16 +16,15 @@
          </content>
       </ScrollPane>
       <Label layoutX="44.0" layoutY="14.0" text="Select one or more Fact/Beliefs to Associate" />
-      <TextField fx:id="searchField" layoutX="102.0" layoutY="38.0" prefHeight="25.0" prefWidth="158.0" />
-      <Label layoutX="60.0" layoutY="42.0" text="Search" />
+      <TextField fx:id="searchField" layoutX="34.0" layoutY="102.0" prefHeight="25.0" prefWidth="166.0" />
       <Button fx:id="cancelButton" layoutX="204.0" layoutY="372.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="25.0" prefWidth="66.0" text="Cancel" />
       <Button fx:id="confirmButton" layoutX="60.0" layoutY="373.0" mnemonicParsing="false" onAction="#handleConfirmButton" prefHeight="25.0" prefWidth="66.0" text="Confirm" />
-      <Button fx:id="searchButton" layoutX="130.0" layoutY="373.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="25.0" prefWidth="66.0" text="Search" />
-      <ChoiceBox fx:id="regionDropdown" layoutX="14.0" layoutY="95.0" prefHeight="25.0" prefWidth="81.0" />
-      <ChoiceBox fx:id="metricDropdown" layoutX="119.0" layoutY="95.0" prefHeight="25.0" prefWidth="81.0" />
-      <ChoiceBox fx:id="timeDropdown" layoutX="221.0" layoutY="95.0" prefHeight="25.0" prefWidth="81.0" />
-      <Label layoutX="36.0" layoutY="78.0" text="Region" />
-      <Label layoutX="143.0" layoutY="78.0" text="Metric" />
-      <Label layoutX="230.0" layoutY="78.0" text="Time Period" />
+      <Button fx:id="searchButton" layoutX="214.0" layoutY="102.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="25.0" prefWidth="66.0" text="Search" />
+      <ChoiceBox fx:id="regionDropdown" layoutX="21.0" layoutY="64.0" prefHeight="25.0" prefWidth="81.0" />
+      <ChoiceBox fx:id="metricDropdown" layoutX="113.0" layoutY="64.0" prefHeight="25.0" prefWidth="81.0" />
+      <ChoiceBox fx:id="timeDropdown" layoutX="205.0" layoutY="64.0" prefHeight="25.0" prefWidth="81.0" />
+      <Label layoutX="41.0" layoutY="47.0" text="Region" />
+      <Label layoutX="137.0" layoutY="47.0" text="Metric" />
+      <Label layoutX="214.0" layoutY="47.0" text="Time Period" />
    </children>
 </Pane>
