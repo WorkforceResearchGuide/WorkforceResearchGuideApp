@@ -43,8 +43,9 @@ public class MainScreenController implements Initializable {
 	private AppHandler appHandler;
     private boolean entitySelected; //Should return true if the user has selected a fact/belief from the list, false otherwise
     private String currentRegion,currentMetric,currentTime;
-    private ObservableList<String> entityStrings,regionStrings,metricStrings,timeperiodStrings,strengthStrings;
+    private ObservableList<String> entityStrings,regionStrings,metricStrings,timeperiodStrings,strengthStrings, associationStrings;
     private ObservableList<Entity> currentEntities;
+    private Entity tempEntity;
     
     @FXML
     private Label label;
@@ -74,13 +75,16 @@ public class MainScreenController implements Initializable {
 	    timePeriodField.setEditable(true);
 	    personField.setEditable(true);
 	    strengthField.setEditable(true);
+	    
 	    nameField.clear();
-    	
-	    regionField.clear();
+    	regionField.clear();
 	   	metricField.clear();
 	   	timePeriodField.clear();
 	   	personField.clear();
-	   	strengthField.clear();	    	
+	   	strengthField.clear();
+	   	associationStrings = FXCollections.observableArrayList();
+	   	associationsView.setItems(associationStrings);
+	   	tempEntity = null;
     	
 	    nameField.setEditable(false);
 	   	regionField.setEditable(false);
@@ -296,6 +300,8 @@ public class MainScreenController implements Initializable {
     	currentMetric = "";
     	currentTime = "";
     	
+    	tempEntity = null;
+    	
     	resetChoiceBoxes();
     	
     	factbeliefView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Entity>() {
@@ -305,6 +311,8 @@ public class MainScreenController implements Initializable {
     	    {
     	    	if(newValue!=null)
     	    	{
+    	    		associationStrings = FXCollections.observableArrayList();
+    	    		
     	    		nameField.setEditable(true);
     	    		regionField.setEditable(true);
     	    		metricField.setEditable(true);
@@ -312,7 +320,7 @@ public class MainScreenController implements Initializable {
     	    		personField.setEditable(true);
     	    		strengthField.setEditable(true);
     	    	
-    	    		Entity tempEntity = appHandler.searchEntity(newValue.getId());
+    	    		tempEntity = appHandler.searchEntity(newValue.getId());
     	    		
     	    		nameField.setText(tempEntity.getStatement());
     	    		//if(newValue.getRegion())
@@ -322,6 +330,13 @@ public class MainScreenController implements Initializable {
     	    		personField.setText(tempEntity.getPerson());
     	    		if(tempEntity.isBelief())
     	    			strengthField.setText(tempEntity.getStrength().getValue());
+    	    		
+    	    		for(int e: tempEntity.getRelatedEntities().keySet())
+    	    			associationStrings.add(tempEntity.getRelatedEntities().get(e));
+    	    		for(String a: tempEntity.getFilePaths())
+    	    			associationStrings.add(a);
+    	    		
+    	    		associationsView.setItems(associationStrings);
     	    	
     	    		nameField.setEditable(false);
     	    		regionField.setEditable(false);
@@ -383,6 +398,9 @@ public class MainScreenController implements Initializable {
     	regionStrings = FXCollections.observableArrayList();
     	metricStrings = FXCollections.observableArrayList();
     	timeperiodStrings = FXCollections.observableArrayList();
+    	regionStrings.add("");
+    	metricStrings.add("");
+    	timeperiodStrings.add("");
     	
     	for(Region r: appHandler.retrieveAllRegions())
     	{
