@@ -27,6 +27,11 @@ public class DBHandler {
 			// start of transaction
 			connection.setAutoCommit(false);
 			Statement statement = connection.createStatement();
+			if (entity == null || entity.getRegion() == null
+					|| entity.getMetric() == null
+					|| entity.getTimeperiod() == null
+					|| entity.getStrength() == null)
+				return false;
 
 			result = addEntityHelper(entity, statement);
 
@@ -52,7 +57,7 @@ public class DBHandler {
 
 	@SuppressWarnings("finally")
 	public boolean addEntityBatch(List<Entity> entityList) {
-		int result = 0;
+		boolean result = true;
 		try {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
@@ -64,25 +69,23 @@ public class DBHandler {
 
 			// insert entities one by one as a transaction
 			for (Entity entity : entityList) {
-				result = addEntityHelper(entity, statement);
+				result = addEntity(entity);
+				if (!result) {
+					return result;
+				}
 				// end of transaction
 				connection.commit();
 			}
-
 			statement.close();
 			connection.close();
 		} catch (ClassNotFoundException e) {
-			result = 0;
+			result = false;
 			e.printStackTrace();
 		} catch (SQLException e) {
-			result = 0;
+			result = false;
 			e.printStackTrace();
 		} finally {
-			// 1 update made to insert entity into entities table.
-			if (result == 1) {
-				return true;
-			}
-			return false;
+			return result;
 		}
 	}
 
