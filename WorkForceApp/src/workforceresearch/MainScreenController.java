@@ -103,6 +103,8 @@ public class MainScreenController implements Initializable {
         }
         	
         factbeliefView.setItems(currentEntities);
+        factbeliefView.getSelectionModel().clearSelection();
+        
     	 
     }
     
