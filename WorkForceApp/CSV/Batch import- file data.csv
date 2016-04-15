@@ -1,0 +1,3 @@
+Statement,Geography,Metric,Timeperiod,isBelief,Person,Strength,Note
+this is st1,USA,NewM,NewTp,FALSE,newP,high,newNtore
+this is st1,USA,NewM,NewTp,FALSE,newP,high,"this note has , comma in it"

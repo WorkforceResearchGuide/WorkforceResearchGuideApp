@@ -45,7 +45,7 @@ public class BatchUploadResultsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        messageTextArea.setText("Words");
+    	
     }    
 
     @FXML
@@ -65,6 +65,16 @@ public class BatchUploadResultsController implements Initializable {
     public void setAppHandler(AppHandler ah)
     {
         appHandler = ah;
+    }
+    
+    public void setMessageSuccess()
+    {
+    	messageTextArea.setText("Success!");
+    }
+    
+    public void setMessageFailure()
+    {
+    	messageTextArea.setText("An Error Occurred");
     }
     
 }

@@ -1,5 +1,6 @@
 package workforceresearch;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,8 +8,8 @@ public class Entity {
 	private int id;
 	private String statement;
 	// file_paths is where entities associate to files.
-	private List<String> filePaths;
-	private HashMap<Integer, String> relatedEntities;
+	private List<String> filePaths = new ArrayList<String>();
+	private HashMap<Integer, String> relatedEntities = new HashMap<Integer, String>();
 	private boolean isBelief;
 	private String person;
 	private Strength strength;
