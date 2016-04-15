@@ -104,3 +104,12 @@ CREATE TABLE IF NOT EXISTS `strengths` (
   `value` varchar(100) UNIQUE,
   `is_disabled` boolean
 );
+-- --------------------------------------------------------
+
+--
+-- Inserting default values for templates
+--
+insert into metrics(value, is_disabled) values('Added by folder scan', 'false');
+insert into regions(value, is_disabled) values('Added by folder scan', 'false');
+insert into time_periods(value, is_disabled) values('Added by folder scan', 'false');
+insert into strengths(value, is_disabled) values('Added by folder scan', 'false');

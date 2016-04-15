@@ -115,17 +115,25 @@ public class EntityProcessor {
 			}
 			
 			List<Entity> entityList=new ArrayList<Entity>();
-			for(int i=0;i<files.length;i++){
-				String name=(String)Array.get(files[i].getName().split("\\."), 0);
+			for(File f : files){
+				String name = f.getName();
 				List<String> filePaths = new ArrayList<String>();
-				filePaths.add(files[i].toString());
+				filePaths.add(f.getAbsolutePath());
+				HashMap<Integer, String> entityRelationsMap = new HashMap<Integer, String>();
+				String folderScan = "Added by folder scan";
+				Region region = new Region();
+				region.setValue(folderScan);
+				Metric metric = new Metric();
+				metric.setValue(folderScan);
+				Timeperiod tp = new Timeperiod();
+				tp.setValue(folderScan);
+				Strength strength = new Strength();
+				strength.setValue(folderScan);
 				
-				//Set default isBelief =false
-				Entity entity=new Entity(name, null, null, null,filePaths, null, false, null, null, null);
+				Entity entity=new Entity(name, region, metric, tp, filePaths, entityRelationsMap, false, null, strength, null);
 				entityList.add(entity);
 			}
-			dbhand.addEntityBatch(entityList);
-		return true;
+			return dbhand.addEntityFolderScan(entityList);
 	}
 	
 	public List<Entity> searchEntity(String searchQuery, String region,String metric,String timeperiod){
