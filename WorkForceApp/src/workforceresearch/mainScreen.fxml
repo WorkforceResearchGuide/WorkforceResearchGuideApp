@@ -52,7 +52,7 @@
                   <ChoiceBox fx:id="regionChoiceBox" layoutX="14.0" layoutY="22.0" prefHeight="25.0" prefWidth="88.0" />
                   <Label layoutX="39.0" layoutY="5.0" text="Region" />
                   <ChoiceBox fx:id="metricChoiceBox" layoutX="110.0" layoutY="22.0" prefHeight="25.0" prefWidth="88.0" />
-                  <ChoiceBox fx:id="TimeChoiceBox" layoutX="205.0" layoutY="22.0" prefHeight="25.0" prefWidth="88.0" />
+                  <ChoiceBox fx:id="timeChoiceBox" layoutX="205.0" layoutY="22.0" prefHeight="25.0" prefWidth="88.0" />
                   <Label layoutX="137.0" layoutY="5.0" text="Metric" />
                   <Label layoutX="217.0" layoutY="5.0" text="Time Period" />
          </children></AnchorPane>

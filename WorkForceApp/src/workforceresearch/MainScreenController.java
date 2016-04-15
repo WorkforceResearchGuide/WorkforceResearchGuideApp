@@ -8,9 +8,15 @@ package workforceresearch;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +27,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -32,7 +40,11 @@ import javafx.stage.Stage;
  */
 public class MainScreenController implements Initializable {
     
+	private AppHandler appHandler;
     private boolean entitySelected; //Should return true if the user has selected a fact/belief from the list, false otherwise
+    private String currentRegion,currentMetric,currentTime;
+    private ObservableList<String> entityStrings,regionStrings,metricStrings,timeperiodStrings,strengthStrings;
+    private ObservableList<Entity> currentEntities;
     
     @FXML
     private Label label;
@@ -43,13 +55,53 @@ public class MainScreenController implements Initializable {
     @FXML
     private ChoiceBox regionChoiceBox,metricChoiceBox,timeChoiceBox;
    
+    @FXML
+    private ListView<Entity> factbeliefView;
     
     @FXML
-    private void handleSearchButton(ActionEvent event) {
-     
+    private ListView associationsView;
+    
+    @FXML
+    private TextField searchField, nameField, regionField, metricField, timePeriodField, personField, strengthField;
+    
+    
+    @FXML
+    private void handleSearchButton(ActionEvent event) 
+    {
+    	nameField.setEditable(true);
+	    regionField.setEditable(true);
+	    metricField.setEditable(true);
+	    timePeriodField.setEditable(true);
+	    personField.setEditable(true);
+	    strengthField.setEditable(true);
+	    nameField.clear();
+    	
+	    regionField.clear();
+	   	metricField.clear();
+	   	timePeriodField.clear();
+	   	personField.clear();
+	   	strengthField.clear();	    	
+    	
+	    nameField.setEditable(false);
+	   	regionField.setEditable(false);
+	   	metricField.setEditable(false);
+	   	timePeriodField.setEditable(false);
+	   	personField.setEditable(false);
+	    strengthField.setEditable(false);
+    		
+    	//entityStrings = FXCollections.observableArrayList();
+    	currentEntities = FXCollections.observableArrayList();
+    		
+        for(Entity e: appHandler.searchEntity(searchField.getText(),currentRegion,currentMetric,currentTime))
+        {
+        	//entityStrings.add(e.getStatement());
+        	currentEntities.add(e);
+        }
+        	
+        factbeliefView.setItems(currentEntities);
+    	 
     }
     
-    AppHandler appHandler;
     
     @FXML
     private void handleAddButton(ActionEvent event)
@@ -191,6 +243,7 @@ public class MainScreenController implements Initializable {
             stage.initOwner(templateButton.getScene().getWindow());
             templateControl.setAppHandler(appHandler);
             stage.showAndWait();
+            resetChoiceBoxes();
         }
     }
     
@@ -237,11 +290,118 @@ public class MainScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    	appHandler = new AppHandler();
+    	
+    	currentRegion = "";
+    	currentMetric = "";
+    	currentTime = "";
+    	
+    	resetChoiceBoxes();
+    	
+    	factbeliefView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Entity>() {
+
+    	    @Override
+    	    public void changed(ObservableValue<? extends Entity> observable, Entity oldValue, Entity newValue) 
+    	    {
+    	    	if(newValue!=null)
+    	    	{
+    	    		nameField.setEditable(true);
+    	    		regionField.setEditable(true);
+    	    		metricField.setEditable(true);
+    	    		timePeriodField.setEditable(true);
+    	    		personField.setEditable(true);
+    	    		strengthField.setEditable(true);
+    	    	
+    	    		Entity tempEntity = appHandler.searchEntity(newValue.getId());
+    	    		
+    	    		nameField.setText(tempEntity.getStatement());
+    	    		//if(newValue.getRegion())
+    	    		regionField.setText(tempEntity.getRegion().getValue());
+    	    		metricField.setText(tempEntity.getMetric().getValue());
+    	    		timePeriodField.setText(tempEntity.getTimeperiod().getValue());
+    	    		personField.setText(tempEntity.getPerson());
+    	    		if(tempEntity.isBelief())
+    	    			strengthField.setText(tempEntity.getStrength().getValue());
+    	    	
+    	    		nameField.setEditable(false);
+    	    		regionField.setEditable(false);
+    	    		metricField.setEditable(false);
+    	    		timePeriodField.setEditable(false);
+    	    		personField.setEditable(false);
+    	    		strengthField.setEditable(false);
+    	    
+    	    	}
+    	    }
+    	});
+    	
+    	regionChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
+    		
+    		@Override
+    		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+    		{
+    			currentRegion = newValue;
+    		}
+    	});
+    	
+    	metricChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
+    		
+    		@Override
+    		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+    		{
+    			currentMetric = newValue;
+    		}
+    	});
+    	
+    	timeChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
+    		
+    		@Override
+    		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+    		{
+    			currentTime = newValue;
+    		}
+    	});
+    	
+    	
+    	
+    	//TODO: Do we want to populate the list with items upon initialization?
+    	/*entities = FXCollections.observableArrayList();
+    	
+    	for(Entity e: appHandler.retrieveAllEntities())
+    	{
+    		entities.add(e.getStatement());
+    	}*/
+    	
     }    
     
     public void setAppHandler(AppHandler ah)
     {
         appHandler = ah;
+    }
+    
+    private void resetChoiceBoxes()
+    {
+    	regionStrings = FXCollections.observableArrayList();
+    	metricStrings = FXCollections.observableArrayList();
+    	timeperiodStrings = FXCollections.observableArrayList();
+    	
+    	for(Region r: appHandler.retrieveAllRegions())
+    	{
+    		regionStrings.add(r.getValue());
+    	}
+    	
+    	for(Metric m: appHandler.retrieveAllMetrics())
+    	{
+    		metricStrings.add(m.getValue());
+    	}
+    	
+    	for(Timeperiod t: appHandler.retrieveAllTimeperiods())
+    	{
+    		timeperiodStrings.add(t.getValue());
+    	}
+    	
+    	regionChoiceBox.setItems(regionStrings);
+    	metricChoiceBox.setItems(metricStrings);
+    	timeChoiceBox.setItems(timeperiodStrings);
     }
     
 }
