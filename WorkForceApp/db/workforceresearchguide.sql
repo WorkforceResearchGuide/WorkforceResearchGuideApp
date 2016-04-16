@@ -27,6 +27,9 @@ CREATE TABLE IF NOT EXISTS `entities` (
   `strength` varchar(100)
 );
 
+CREATE INDEX region_index ON entities (region);
+CREATE INDEX metric_index ON entities (metric);
+CREATE INDEX time_period_index ON entities (time_period);
 -- --------------------------------------------------------
 
 --
