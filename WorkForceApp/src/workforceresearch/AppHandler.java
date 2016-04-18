@@ -7,124 +7,139 @@ public class AppHandler {
 
 	private EntityProcessor eprocessor = new EntityProcessor();
 	private TemplateProcessor tprocessor = new TemplateProcessor();
-	
-	public boolean addEntity(String name, String country, String metric, String timeperiod,List<String> filePaths, HashMap<Integer, String> relatedEntities, boolean isBelief, String person, String strength, String note) {
-		
-		return eprocessor.addEntity(name, country, metric, timeperiod, filePaths, relatedEntities, isBelief, person, strength, note);
+
+	public boolean addEntity(String name, String country, String metric,
+			String timeperiod, List<String> filePaths,
+			HashMap<Integer, String> relatedEntities, boolean isBelief,
+			String person, String strength, String note) {
+
+		return eprocessor.addEntity(name, country, metric, timeperiod,
+				filePaths, relatedEntities, isBelief, person, strength, note);
 	}
-	
+
 	public boolean addEntityBatch(String filePath) {
-		
+
 		return eprocessor.addEntityBatch(filePath);
 	}
-	
+
 	public boolean addEntityFolderScan(String folderPath) {
-		
+
 		return eprocessor.addEntityFolderScan(folderPath);
 	}
-	
-	public List<Entity> searchEntity(String searchQuery, String region, String metric, String timeperiod) {
-		
+
+	public List<Entity> searchEntity(String searchQuery, String region,
+			String metric, String timeperiod) {
+		if ((searchQuery == null || searchQuery.isEmpty())
+				&& (region == null || region.isEmpty())
+				&& (metric == null || metric.isEmpty())
+				&& (timeperiod == null || timeperiod.isEmpty())) {
+			return eprocessor.retrieveAllEntities();
+		}
 		return eprocessor.searchEntity(searchQuery, region, metric, timeperiod);
 	}
 
 	public Entity searchEntity(int entityId) {
-		
+
 		return eprocessor.searchEntity(entityId);
 	}
 
 	public boolean deleteEntity(int entityId) {
-		
+
 		return eprocessor.deleteEntity(entityId);
 	}
 
-	public Entity updateEntity(int entityId, String name, String country, String metric, String timeperiod,List<String> filePaths, HashMap<Integer, String> relatedEntities, boolean isBelief, String person, String strength, String note) {
-		
-		return eprocessor.updateEntity(entityId, name, country, metric, timeperiod, filePaths, relatedEntities, isBelief, person, strength, note);
+	public Entity updateEntity(int entityId, String name, String country,
+			String metric, String timeperiod, List<String> filePaths,
+			HashMap<Integer, String> relatedEntities, boolean isBelief,
+			String person, String strength, String note) {
+
+		return eprocessor.updateEntity(entityId, name, country, metric,
+				timeperiod, filePaths, relatedEntities, isBelief, person,
+				strength, note);
 	}
-	
-	public List<Entity> retrieveAllEntities(){
-		
+
+	public List<Entity> retrieveAllEntities() {
+
 		return eprocessor.retrieveAllEntities();
 	}
-	
-	public boolean addRegion(String region){
-		
+
+	public boolean addRegion(String region) {
+
 		return tprocessor.addRegion(region);
 	}
-	
-	public boolean disableRegion(String regionValue){
-		
+
+	public boolean disableRegion(String regionValue) {
+
 		return tprocessor.disableRegion(regionValue);
 	}
-	
-	public boolean addMetric(String metric){
-		
+
+	public boolean addMetric(String metric) {
+
 		return tprocessor.addMetric(metric);
 	}
-	
-	public boolean disableMetric(String metricValue){
-		
+
+	public boolean disableMetric(String metricValue) {
+
 		return tprocessor.disableMetric(metricValue);
 	}
-	
-	public boolean addTimeperiod(String timeperiod){
-		
+
+	public boolean addTimeperiod(String timeperiod) {
+
 		return tprocessor.addTimeperiod(timeperiod);
 	}
-	
-	public boolean disableTimeperiod(String timeperiodValue){
-		
+
+	public boolean disableTimeperiod(String timeperiodValue) {
+
 		return tprocessor.disableTimeperiod(timeperiodValue);
 	}
-	
-	public boolean addStrength(String strength){
-		
+
+	public boolean addStrength(String strength) {
+
 		return tprocessor.addStrength(strength);
 	}
-	
-	public boolean disableStrength(String strengthValue){
-		
+
+	public boolean disableStrength(String strengthValue) {
+
 		return tprocessor.disableStrength(strengthValue);
 	}
-	
-	public List<Region> retrieveAllRegions(){
-		
+
+	public List<Region> retrieveAllRegions() {
+
 		return tprocessor.retrieveAllRegions();
 	}
-	
-	public List<Metric> retrieveAllMetrics(){
-		
+
+	public List<Metric> retrieveAllMetrics() {
+
 		return tprocessor.retrieveAllMetrics();
 	}
-	
-	public List<Timeperiod> retrieveAllTimeperiods(){
-		
+
+	public List<Timeperiod> retrieveAllTimeperiods() {
+
 		return tprocessor.retrieveAllTimeperiods();
 	}
-	
-	public List<Strength> retrieveAllStrengths(){
-		
+
+	public List<Strength> retrieveAllStrengths() {
+
 		return tprocessor.retrieveAllStrengths();
 	}
-	
-	public List<Region> retrieveEnabledRegions(){
-		
+
+	public List<Region> retrieveEnabledRegions() {
+
 		return tprocessor.retrieveEnabledRegions();
 	}
-	
-	public List<Metric> retrieveEnabledMetrics(){
-		
+
+	public List<Metric> retrieveEnabledMetrics() {
+
 		return tprocessor.retrieveEnabledMetrics();
 	}
-	
-	public List<Timeperiod> retrieveEnabledTimeperiods(){
-		
+
+	public List<Timeperiod> retrieveEnabledTimeperiods() {
+
 		return tprocessor.retrieveEnabledTimeperiods();
 	}
-	
-	public List<Strength> retrieveEnabledStrengths(){
-		
+
+	public List<Strength> retrieveEnabledStrengths() {
+
 		return tprocessor.retrieveEnabledStrengths();
 	}
 }

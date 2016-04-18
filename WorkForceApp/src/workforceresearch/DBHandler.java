@@ -456,6 +456,7 @@ public class DBHandler {
 				updates.add("update entities set region = '"
 						+ entityUpdated.getRegion().getValue()
 						+ "' where entity_id = " + entityUpdated.getId());
+				
 			}
 
 			// different metric
@@ -504,7 +505,7 @@ public class DBHandler {
 					&& entityUpdated.getPerson() != null && entityCurrent
 					.getPerson().equals(entityUpdated.getPerson())) || (entityUpdated
 					.getPerson() == null && entityUpdated.getPerson() == null))) {
-				updates.add("update entities set note = '"
+				updates.add("update entities set person = '"
 						+ entityUpdated.getPerson() + "' where entity_id = "
 						+ entityUpdated.getId());
 			}
@@ -516,7 +517,7 @@ public class DBHandler {
 					.equals(entityUpdated.getStrength().getValue())) || (entityUpdated
 					.getStrength().getValue() == null && entityUpdated
 					.getStrength().getValue() == null))) {
-				updates.add("update entities set note = '"
+				updates.add("update entities set strength = '"
 						+ entityUpdated.getStrength().getValue()
 						+ "' where entity_id = " + entityUpdated.getId());
 			}
