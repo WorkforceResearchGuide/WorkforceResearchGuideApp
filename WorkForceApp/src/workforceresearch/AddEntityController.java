@@ -41,7 +41,7 @@ public class AddEntityController implements Initializable {
 	private Button addRelationButton, addFileRelationButton, removeRelationButton, saveNewFBButton, cancelAddNewButton;
 
 	@FXML
-	private ListView associationsListView;
+	private ListView<String> associationsListView;
 
 	@FXML
 	private RadioButton beliefRadioButton;
@@ -50,7 +50,7 @@ public class AddEntityController implements Initializable {
 	private TextField nameField, personField;
 
 	@FXML
-	private ChoiceBox regionChoiceBox, metricChoiceBox, strengthChoiceBox, timeChoiceBox;
+	private ChoiceBox<String> regionChoiceBox, metricChoiceBox, strengthChoiceBox, timeChoiceBox;
 
 	@FXML
 	private TextArea descriptionTextArea;
@@ -162,25 +162,29 @@ public class AddEntityController implements Initializable {
 		appHandler = new AppHandler();
 		ObservableList<String> regionList = FXCollections.observableArrayList();
 		for(Region r : appHandler.retrieveAllRegions()){
-			regionList.add(r.getValue());
+			if(!r.isDisabled())
+				regionList.add(r.getValue());
 		}
 		regionChoiceBox.setItems(regionList);
 		
 		ObservableList<String> metricList = FXCollections.observableArrayList();
 		for(Metric m : appHandler.retrieveAllMetrics()){
-			metricList.add(m.getValue());
+			if(!m.isDisabled())
+				metricList.add(m.getValue());
 		}
 		metricChoiceBox.setItems(metricList);
 		
 		ObservableList<String> timeList = FXCollections.observableArrayList();
 		for(Timeperiod t : appHandler.retrieveAllTimeperiods()){
-			timeList.add(t.getValue());
+			if(!t.isDisabled())
+				timeList.add(t.getValue());
 		}
 		timeChoiceBox.setItems(timeList);
 		
 		ObservableList<String> strengthList = FXCollections.observableArrayList();
 		for(Strength s : appHandler.retrieveAllStrengths()){
-			strengthList.add(s.getValue());
+			if(!s.isDisabled())
+				strengthList.add(s.getValue());
 		}
 		strengthChoiceBox.setItems(strengthList);
 	}
@@ -189,7 +193,7 @@ public class AddEntityController implements Initializable {
 		appHandler = ah;
 	}
 
-	public String checkNull(ChoiceBox c){
+	public String checkNull(ChoiceBox<String> c){
 		if(c.getValue() != null){
 			return c.getValue().toString();
 		}

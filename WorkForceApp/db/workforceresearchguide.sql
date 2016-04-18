@@ -27,9 +27,9 @@ CREATE TABLE IF NOT EXISTS `entities` (
   `strength` varchar(100)
 );
 
-CREATE INDEX region_index ON entities (region);
-CREATE INDEX metric_index ON entities (metric);
-CREATE INDEX time_period_index ON entities (time_period);
+CREATE INDEX index_region ON entities (region);
+CREATE INDEX index_metric ON entities (metric);
+CREATE INDEX index_time_period ON entities (time_period);
 -- --------------------------------------------------------
 
 --
@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `entity_relations` (
   `related_entity_id` int(11)
 );
 
+CREATE INDEX index_on_entity_id_entity_relations ON entity_relations (entity_id);
 -- --------------------------------------------------------
 
 --
@@ -56,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `file_relations` (
   `file_path` varchar(250)
 );
 
+CREATE INDEX index_on_entity_id_file_relations ON file_relations (entity_id);
 -- --------------------------------------------------------
 
 --
