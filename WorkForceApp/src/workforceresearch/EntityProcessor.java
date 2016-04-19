@@ -18,6 +18,7 @@ public class EntityProcessor {
 			"Strength", "Note" };
 
 	DBHandler dbhand = new DBHandler();
+	TemplateProcessor tp = new TemplateProcessor();
 
 	public boolean addEntity(String name, String region, String metric,
 			String timeperiod, List<String> file_paths,
@@ -36,10 +37,10 @@ public class EntityProcessor {
 		Strength s = new Strength();
 		s.setValue(strength);
 		s.setDisabled(false);
-		if(file_paths == null){
+		if (file_paths == null) {
 			file_paths = new ArrayList<String>();
 		}
-		if(related_entities == null){
+		if (related_entities == null) {
 			related_entities = new HashMap<Integer, String>();
 		}
 
@@ -111,6 +112,12 @@ public class EntityProcessor {
 				entity.setRelatedEntities(new HashMap<Integer, String>());
 
 				entityList.add(entity);
+
+				// adding possible new templates from csv to allowed templates
+				tp.addMetric(metric.getValue());
+				tp.addRegion(region.getValue());
+				tp.addTimeperiod(timeperiod.getValue());
+				tp.addStrength(strength.getValue());
 			}
 
 			result = dbhand.addEntityBatch(entityList);

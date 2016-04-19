@@ -2,9 +2,9 @@ package workforceresearch;
 
 
 public class Region {
-	int regionId;
-	String value;
-	boolean isDisabled;
+	private int regionId;
+	private String value;
+	private boolean isDisabled;
 	
 	public Region() {
 	

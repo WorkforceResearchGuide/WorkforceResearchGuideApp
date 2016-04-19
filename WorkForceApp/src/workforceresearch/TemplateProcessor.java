@@ -6,126 +6,108 @@ import java.util.List;
 public class TemplateProcessor {
 
 	private DBHandler db = new DBHandler();
-	private Region r = new Region();
-	private Metric m = new Metric();
-	private Timeperiod tp = new Timeperiod();
-	private Strength s = new Strength();
-	
-	public boolean addRegion(String region){
-		
-		r.setValue(region);
-		r.setDisabled(false);
-		return db.addRegion(region);
+
+	public boolean addRegion(String region) {
+		boolean result;
+		result = db.addRegion(region);
+		result = result || db.enableRegion(region);
+		return result;
 	}
-	
-	public boolean addMetric(String metric){
-		
-		m.setValue(metric);
-		m.setDisabled(false);
-		return db.addMetric(metric);
+
+	public boolean addMetric(String metric) {
+		boolean result;
+		result = db.addMetric(metric);
+		result = result || db.enableMetric(metric);
+		return result;
 	}
-	
-	public boolean addTimeperiod(String timeperiod){
-		
-		tp.setValue(timeperiod);
-		tp.setDisabled(false);
-		return db.addTimeperiod(timeperiod);
+
+	public boolean addTimeperiod(String timeperiod) {
+		boolean result;
+		result = db.addTimeperiod(timeperiod);
+		result = result || db.enableTimeperiod(timeperiod);
+		return result;
 	}
-	
-	public boolean addStrength(String strength){
-		
-		s.setValue(strength);
-		s.setDisabled(false);
-		return db.addStrength(strength);
+
+	public boolean addStrength(String strength) {
+		boolean result;
+		result = db.addStrength(strength);
+		result = result || db.enableStrength(strength);
+		return result;
 	}
-	
-	public boolean disableRegion(String regionValue){
-		
+
+	public boolean disableRegion(String regionValue) {
 		return db.disableRegion(regionValue);
 	}
-	
-	public boolean disableMetric(String metricValue){
-		
+
+	public boolean disableMetric(String metricValue) {
 		return db.disableMetric(metricValue);
 	}
-	
-	public boolean disableTimeperiod(String timeperiodValue){
-		
+
+	public boolean disableTimeperiod(String timeperiodValue) {
 		return db.disableTimeperiod(timeperiodValue);
 	}
-	
-	public boolean disableStrength(String strengthValue){
-		
+
+	public boolean disableStrength(String strengthValue) {
 		return db.disableStrength(strengthValue);
 	}
-	
-	public List<Region> retrieveAllRegions(){
-		
+
+	public List<Region> retrieveAllRegions() {
 		return db.retrieveAllRegions();
 	}
-	
-	public List<Metric> retrieveAllMetrics(){
-		
+
+	public List<Metric> retrieveAllMetrics() {
 		return db.retrieveAllMetrics();
 	}
-	
-	public List<Timeperiod> retrieveAllTimeperiods(){
-		
+
+	public List<Timeperiod> retrieveAllTimeperiods() {
 		return db.retrieveAllTimeperiods();
 	}
-	
-	public List<Strength> retrieveAllStrengths(){
-		
+
+	public List<Strength> retrieveAllStrengths() {
 		return db.retrieveAllStrengths();
 	}
-	
-	public List<Region> retrieveEnabledRegions(){
-		
-		List<Region> regionList = new ArrayList<Region>(retrieveAllRegions());
+
+	public List<Region> retrieveEnabledRegions() {
+		List<Region> regionList = retrieveAllRegions();
 		List<Region> enabledRegionList = new ArrayList<Region>();
-		for(Region r : regionList){
-			if(!r.isDisabled()){
+		for (Region r : regionList) {
+			if (!r.isDisabled()) {
 				enabledRegionList.add(r);
 			}
 		}
 		return enabledRegionList;
 	}
 
-	public List<Metric> retrieveEnabledMetrics(){
-		
-		List<Metric> metricList = new ArrayList<Metric>(retrieveAllMetrics());
+	public List<Metric> retrieveEnabledMetrics() {
+		List<Metric> metricList = retrieveAllMetrics();
 		List<Metric> enabledMetricList = new ArrayList<Metric>();
-		for(Metric m : metricList){
-			if(!m.isDisabled){
+		for (Metric m : metricList) {
+			if (!m.isDisabled()) {
 				enabledMetricList.add(m);
 			}
 		}
 		return enabledMetricList;
 	}
 
-	public List<Timeperiod> retrieveEnabledTimeperiods(){
-		
-		List<Timeperiod> timperiodList = new ArrayList<Timeperiod>(retrieveAllTimeperiods());
+	public List<Timeperiod> retrieveEnabledTimeperiods() {
+		List<Timeperiod> timperiodList = retrieveAllTimeperiods();
 		List<Timeperiod> enabledTimeperiodList = new ArrayList<Timeperiod>();
-		for(Timeperiod t : timperiodList){
-			if(!t.isDisabled){
+		for (Timeperiod t : timperiodList) {
+			if (!t.isDisabled()) {
 				enabledTimeperiodList.add(t);
 			}
 		}
 		return enabledTimeperiodList;
 	}
 
-	public List<Strength> retrieveEnabledStrengths(){
-		
-		List<Strength> strengthList = new ArrayList<Strength>(retrieveAllStrengths());
+	public List<Strength> retrieveEnabledStrengths() {
+		List<Strength> strengthList = retrieveAllStrengths();
 		List<Strength> enabledStrengthList = new ArrayList<Strength>();
-		for(Strength s : strengthList){
-			if(!s.isDisabled){
+		for (Strength s : strengthList) {
+			if (!s.isDisabled()) {
 				enabledStrengthList.add(s);
 			}
 		}
 		return enabledStrengthList;
 	}
-
-	
 }

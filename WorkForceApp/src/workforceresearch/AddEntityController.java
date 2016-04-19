@@ -38,7 +38,8 @@ import javafx.stage.Stage;
 public class AddEntityController implements Initializable {
 
 	@FXML
-	private Button addRelationButton, addFileRelationButton, removeRelationButton, saveNewFBButton, cancelAddNewButton;
+	private Button addRelationButton, addFileRelationButton,
+			removeRelationButton, saveNewFBButton, cancelAddNewButton;
 
 	@FXML
 	private ListView<String> associationsListView;
@@ -50,7 +51,8 @@ public class AddEntityController implements Initializable {
 	private TextField nameField, personField;
 
 	@FXML
-	private ChoiceBox<String> regionChoiceBox, metricChoiceBox, strengthChoiceBox, timeChoiceBox;
+	private ChoiceBox<String> regionChoiceBox, metricChoiceBox,
+			strengthChoiceBox, timeChoiceBox;
 
 	@FXML
 	private TextArea descriptionTextArea;
@@ -80,23 +82,25 @@ public class AddEntityController implements Initializable {
 	@FXML
 	private void handleRemoveRelationButton(ActionEvent event) {
 
-		String item = associationsListView.getSelectionModel().getSelectedItem().toString();
-		for(int i = 0; i < filePathsList.size(); i++){
-			if(item.equals(filePathsList.get(i))){
+		String item = associationsListView.getSelectionModel()
+				.getSelectedItem().toString();
+		for (int i = 0; i < filePathsList.size(); i++) {
+			if (item.equals(filePathsList.get(i))) {
 				filePathsList.remove(i);
 			}
 		}
-		for(int i = 0; i < relationList.size(); i++){
-			if(item.equals(relationList.get(i))){
+		for (int i = 0; i < relationList.size(); i++) {
+			if (item.equals(relationList.get(i))) {
 				relationList.remove(i);
 			}
 		}
-	    for(Iterator<Map.Entry<Integer, String>> it = relationsMap.entrySet().iterator(); it.hasNext(); ) {
-	        Map.Entry<Integer, String> entry = it.next();
-	        if(entry.getValue().equals(item)) {
-	          it.remove();
-	        }
-	    }
+		for (Iterator<Map.Entry<Integer, String>> it = relationsMap.entrySet()
+				.iterator(); it.hasNext();) {
+			Map.Entry<Integer, String> entry = it.next();
+			if (entry.getValue().equals(item)) {
+				it.remove();
+			}
+		}
 		associationsListView.getItems().remove(item);
 	}
 
@@ -105,16 +109,19 @@ public class AddEntityController implements Initializable {
 		Stage stage;
 		Parent root = null;
 		boolean fxmlFound = false;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("associateEntity.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(
+				"associateEntity.fxml"));
 		AssociateEntityController associateControl = null;
 
 		stage = new Stage();
 		try {
 			root = loader.load();
-			associateControl = loader.<AssociateEntityController> getController();
+			associateControl = loader
+					.<AssociateEntityController> getController();
 			fxmlFound = true;
 		} catch (IOException ex) {
-			Logger.getLogger(MainScreenController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(MainScreenController.class.getName()).log(
+					Level.SEVERE, null, ex);
 		}
 
 		if (fxmlFound) {
@@ -126,7 +133,7 @@ public class AddEntityController implements Initializable {
 			stage.showAndWait();
 			List<Entity> tempRelationList = new ArrayList<Entity>();
 			tempRelationList = associateControl.getEntityList();
-			for(Entity e : tempRelationList){
+			for (Entity e : tempRelationList) {
 				relationList.add(e.getStatement());
 				relationsMap.put(e.getId(), e.getStatement());
 			}
@@ -140,11 +147,11 @@ public class AddEntityController implements Initializable {
 		String metric = checkNull(metricChoiceBox);
 		String time = checkNull(timeChoiceBox);
 		String strength = checkNull(strengthChoiceBox);
-		appHandler.addEntity(nameField.getText(), region, metric, time, filePathsList, relationsMap, isBelief,
-				personField.getText(), strength, descriptionTextArea.getText());
+		appHandler.addEntity(nameField.getText(), region, metric, time,
+				filePathsList, relationsMap, isBelief, personField.getText(),
+				strength, descriptionTextArea.getText());
 		Stage stage = (Stage) saveNewFBButton.getScene().getWindow();
 		stage.close();
-		System.out.println(isBelief);
 	}
 
 	@FXML
@@ -155,36 +162,32 @@ public class AddEntityController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-//		isBelief = false;
 		filePathsList = new ArrayList<String>();
 		relationsMap = new HashMap<Integer, String>();
 		relationList = FXCollections.observableArrayList();
 		appHandler = new AppHandler();
 		ObservableList<String> regionList = FXCollections.observableArrayList();
-		for(Region r : appHandler.retrieveAllRegions()){
-			if(!r.isDisabled())
-				regionList.add(r.getValue());
+		for (Region r : appHandler.retrieveEnabledRegions()) {
+			regionList.add(r.getValue());
 		}
 		regionChoiceBox.setItems(regionList);
-		
+
 		ObservableList<String> metricList = FXCollections.observableArrayList();
-		for(Metric m : appHandler.retrieveAllMetrics()){
-			if(!m.isDisabled())
-				metricList.add(m.getValue());
+		for (Metric m : appHandler.retrieveEnabledMetrics()) {
+			metricList.add(m.getValue());
 		}
 		metricChoiceBox.setItems(metricList);
-		
+
 		ObservableList<String> timeList = FXCollections.observableArrayList();
-		for(Timeperiod t : appHandler.retrieveAllTimeperiods()){
-			if(!t.isDisabled())
-				timeList.add(t.getValue());
+		for (Timeperiod t : appHandler.retrieveEnabledTimeperiods()) {
+			timeList.add(t.getValue());
 		}
 		timeChoiceBox.setItems(timeList);
-		
-		ObservableList<String> strengthList = FXCollections.observableArrayList();
-		for(Strength s : appHandler.retrieveAllStrengths()){
-			if(!s.isDisabled())
-				strengthList.add(s.getValue());
+
+		ObservableList<String> strengthList = FXCollections
+				.observableArrayList();
+		for (Strength s : appHandler.retrieveEnabledStrengths()) {
+			strengthList.add(s.getValue());
 		}
 		strengthChoiceBox.setItems(strengthList);
 	}
@@ -193,10 +196,10 @@ public class AddEntityController implements Initializable {
 		appHandler = ah;
 	}
 
-	public String checkNull(ChoiceBox<String> c){
-		if(c.getValue() != null){
+	public String checkNull(ChoiceBox<String> c) {
+		if (c.getValue() != null) {
 			return c.getValue().toString();
 		}
-			return null;
+		return null;
 	}
 }

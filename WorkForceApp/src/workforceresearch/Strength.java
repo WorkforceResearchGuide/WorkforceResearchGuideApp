@@ -2,9 +2,9 @@ package workforceresearch;
 
 
 public class Strength {
-	int strengthId;
-	String value;
-	boolean isDisabled;
+	private int strengthId;
+	private String value;
+	private boolean isDisabled;
 	
 	public Strength() {
 	

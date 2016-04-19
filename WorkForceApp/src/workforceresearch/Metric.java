@@ -2,9 +2,9 @@ package workforceresearch;
 
 
 public class Metric {
-	int metricId;
-	String value;
-	boolean isDisabled;
+	private int metricId;
+	private String value;
+	private boolean isDisabled;
 
 	public Metric() {
 	

@@ -2,9 +2,9 @@ package workforceresearch;
 
 
 public class Timeperiod {
-	int timeperiodId;
-	String value;
-	boolean isDisabled;
+	private int timeperiodId;
+	private String value;
+	private boolean isDisabled;
 	
 	public Timeperiod() {
 	

@@ -456,7 +456,6 @@ public class DBHandler {
 				updates.add("update entities set region = '"
 						+ entityUpdated.getRegion().getValue()
 						+ "' where entity_id = " + entityUpdated.getId());
-				
 			}
 
 			// different metric
@@ -849,6 +848,115 @@ public class DBHandler {
 
 			result = statement
 					.executeUpdate("update strengths set is_disabled = 1 where value = '"
+							+ strengthValue + "'");
+
+			statement.close();
+			connection.close();
+			if (result == 1)
+				return true;
+			return false;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	// Enable template
+	public boolean enableRegion(String regionValue) {
+		int result = 0;
+		try {
+			// create connection
+			Class.forName("org.sqlite.JDBC");
+			Connection connection = DriverManager
+					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+			Statement statement = connection.createStatement();
+
+			result = statement
+					.executeUpdate("update regions set is_disabled = 0 where value = '"
+							+ regionValue + "'");
+
+			statement.close();
+			connection.close();
+			if (result == 1)
+				return true;
+			return false;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean enableMetric(String metricValue) {
+		int result = 0;
+		try {
+			// create connection
+			Class.forName("org.sqlite.JDBC");
+			Connection connection = DriverManager
+					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+			Statement statement = connection.createStatement();
+
+			result = statement
+					.executeUpdate("update metrics set is_disabled = 0 where value = '"
+							+ metricValue + "'");
+
+			statement.close();
+			connection.close();
+			if (result == 1)
+				return true;
+			return false;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean enableTimeperiod(String timeperiodValue) {
+		int result = 0;
+		try {
+			// create connection
+			Class.forName("org.sqlite.JDBC");
+			Connection connection = DriverManager
+					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+			Statement statement = connection.createStatement();
+
+			result = statement
+					.executeUpdate("update time_periods set is_disabled = 0 where value = '"
+							+ timeperiodValue + "'");
+
+			statement.close();
+			connection.close();
+			if (result == 1)
+				return true;
+			return false;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean enableStrength(String strengthValue) {
+		int result = 0;
+		try {
+			// create connection
+			Class.forName("org.sqlite.JDBC");
+			Connection connection = DriverManager
+					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+			Statement statement = connection.createStatement();
+
+			result = statement
+					.executeUpdate("update strengths set is_disabled = 0 where value = '"
 							+ strengthValue + "'");
 
 			statement.close();
