@@ -143,14 +143,14 @@ public class AddEntityController implements Initializable {
 
 	@FXML
 	private void handleSaveNewFBButton(ActionEvent event) {
-		String statement = nameField.getText();
+		String statement = nameField.getText().trim();
 		String region = checkNull(regionChoiceBox);
 		String metric = checkNull(metricChoiceBox);
 		String time = checkNull(timeChoiceBox);
 		String strength = checkNull(strengthChoiceBox);
 		
 		//Check the required fields: statement, region, metric and time 
-		if(!(statement.equals(null) || region.equals(null) || metric.equals(null) || time.equals(null)))
+		if(!(statement == null || statement.isEmpty() || region == null || metric == null || time == null))
 		{				
 			appHandler.addEntity(statement, region, metric, time,
 							filePathsList, relationsMap, isBelief, personField.getText(),
