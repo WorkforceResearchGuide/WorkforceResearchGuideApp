@@ -30,6 +30,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 public class EditEntityController implements Initializable {
 	@FXML
@@ -172,6 +173,8 @@ public class EditEntityController implements Initializable {
 			stage.showAndWait();
 		}
 		appHandler.deleteEntity(entity.getId());
+		Stage currentStage = (Stage) deleteEntityButton.getScene().getWindow();
+		currentStage.close();
 
 	}
 

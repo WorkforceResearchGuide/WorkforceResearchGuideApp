@@ -41,7 +41,7 @@ import javafx.stage.Stage;
 public class MainScreenController implements Initializable {
     
 	private AppHandler appHandler;
-    private boolean entitySelected; //Should return true if the user has selected a fact/belief from the list, false otherwise
+    private boolean entitySelected = false; //Should return true if the user has selected a fact/belief from the list, false otherwise
     private String currentRegion,currentMetric,currentTime;
     private ObservableList<String> entityStrings,regionStrings,metricStrings,timeperiodStrings,strengthStrings, associationStrings;
     private ObservableList<Entity> currentEntities;
@@ -104,7 +104,7 @@ public class MainScreenController implements Initializable {
         	
         factbeliefView.setItems(currentEntities);
         factbeliefView.getSelectionModel().clearSelection();
-        
+        entitySelected = false;
     	 
     }
     
@@ -146,35 +146,75 @@ public class MainScreenController implements Initializable {
     @FXML
     private void handleEditButton(ActionEvent event)
     {
-        Stage stage;
-        Parent root = null;
-        boolean fxmlFound = false;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("editEntity.fxml")); 
-        EditEntityController editControl = null;
+    	if(entitySelected)
+    	{
+    		Stage stage;
+        	Parent root = null;
+        	boolean fxmlFound = false;
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("editEntity.fxml")); 
+        	EditEntityController editControl = null;
         
-        stage = new Stage();
-        try 
-        {
-            root = loader.load();
-            editControl = loader.<EditEntityController>getController();
-            editControl.setEntity(tempEntity);
-            fxmlFound = true; 
-        } 
-        catch (IOException ex) 
-        {
-            Logger.getLogger(MainScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        	stage = new Stage();
+        	try 
+        	{
+            	root = loader.load();
+            	editControl = loader.<EditEntityController>getController();
+            	editControl.setEntity(tempEntity);
+            	fxmlFound = true; 
+        	} 
+        	catch (IOException ex) 
+        	{
+        		Logger.getLogger(MainScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        	}
         
-        if(fxmlFound)
-        {
-            stage.setScene(new Scene(root));
-            stage.setTitle("Edit Fact/Belief");
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initOwner(addButton.getScene().getWindow());
-            editControl.setAppHandler(appHandler);
-            stage.showAndWait();
+        	if(fxmlFound)
+        	{
+            	stage.setScene(new Scene(root));
+            	stage.setTitle("Edit Fact/Belief");
+            	stage.initModality(Modality.APPLICATION_MODAL);
+            	stage.initOwner(addButton.getScene().getWindow());
+            	editControl.setAppHandler(appHandler);
+            	stage.showAndWait();
             
-        }
+        	}
+        	
+        	nameField.setEditable(true);
+    	    regionField.setEditable(true);
+    	    metricField.setEditable(true);
+    	    timePeriodField.setEditable(true);
+    	    personField.setEditable(true);
+    	    strengthField.setEditable(true);
+    	    
+    	    nameField.clear();
+        	regionField.clear();
+    	   	metricField.clear();
+    	   	timePeriodField.clear();
+    	   	personField.clear();
+    	   	strengthField.clear();
+    	   	associationStrings = FXCollections.observableArrayList();
+    	   	associationsView.setItems(associationStrings);
+    	   	tempEntity = null;
+        	
+    	    nameField.setEditable(false);
+    	   	regionField.setEditable(false);
+    	   	metricField.setEditable(false);
+    	   	timePeriodField.setEditable(false);
+    	   	personField.setEditable(false);
+    	    strengthField.setEditable(false);
+        		
+        	//entityStrings = FXCollections.observableArrayList();
+        	currentEntities = FXCollections.observableArrayList();
+        		
+            for(Entity e: appHandler.searchEntity(searchField.getText(),currentRegion,currentMetric,currentTime))
+            {
+            	//entityStrings.add(e.getStatement());
+            	currentEntities.add(e);
+            }
+            	
+            factbeliefView.setItems(currentEntities);
+            factbeliefView.getSelectionModel().clearSelection();
+            entitySelected = false;
+    	}
         
     }
     
@@ -355,6 +395,7 @@ public class MainScreenController implements Initializable {
     	    		personField.setEditable(false);
     	    		strengthField.setEditable(false);
     	    
+    	    		entitySelected = true;
     	    	}
     	    }
     	});

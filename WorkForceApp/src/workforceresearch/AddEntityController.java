@@ -143,15 +143,21 @@ public class AddEntityController implements Initializable {
 
 	@FXML
 	private void handleSaveNewFBButton(ActionEvent event) {
+		String statement = nameField.getText();
 		String region = checkNull(regionChoiceBox);
 		String metric = checkNull(metricChoiceBox);
 		String time = checkNull(timeChoiceBox);
 		String strength = checkNull(strengthChoiceBox);
-		appHandler.addEntity(nameField.getText(), region, metric, time,
-				filePathsList, relationsMap, isBelief, personField.getText(),
-				strength, descriptionTextArea.getText());
-		Stage stage = (Stage) saveNewFBButton.getScene().getWindow();
-		stage.close();
+		
+		//Check the required fields: statement, region, metric and time 
+		if(!(statement.equals(null) || region.equals(null) || metric.equals(null) || time.equals(null)))
+		{				
+			appHandler.addEntity(statement, region, metric, time,
+							filePathsList, relationsMap, isBelief, personField.getText(),
+								strength, descriptionTextArea.getText());
+			Stage stage = (Stage) saveNewFBButton.getScene().getWindow();
+			stage.close();			
+		}
 	}
 
 	@FXML
@@ -202,4 +208,5 @@ public class AddEntityController implements Initializable {
 		}
 		return null;
 	}
+	
 }
