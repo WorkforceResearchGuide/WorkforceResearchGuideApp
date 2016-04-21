@@ -46,7 +46,7 @@
          <children>
             <ScrollPane layoutY="50.0" prefHeight="504.0" prefWidth="307.0">
                <content>
-                  <ListView fx:id="factbeliefView" prefHeight="584.0" prefWidth="290.0" />
+                  <ListView fx:id="factbeliefView" prefHeight="502.0" prefWidth="305.0" />
                </content>
             </ScrollPane>
                   <ChoiceBox fx:id="regionChoiceBox" layoutX="14.0" layoutY="22.0" prefHeight="25.0" prefWidth="88.0" />

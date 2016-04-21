@@ -135,14 +135,17 @@ public class EditEntityController implements Initializable {
 	@FXML
 	private void handleSaveNewFBButton(ActionEvent event) {
 		// TODO: edit the fact/belief
-		Stage stage = (Stage) saveEditsButton.getScene().getWindow();
-		stage.close();
-		String region = checkNull(regionChoiceBox);
-		String metric = checkNull(metricChoiceBox);
-		String time = checkNull(timeChoiceBox);
-		String strength = checkNull(strengthChoiceBox);
-		appHandler.updateEntity(entity.getId(), nameField.getText(), region, metric, time, filePathsList, relationsMap,
-				isBelief, personField.getText(), strength, descriptionTextArea.getText());
+		if(!nameField.getText().isEmpty())
+		{
+			Stage stage = (Stage) saveEditsButton.getScene().getWindow();	
+			stage.close();
+			String region = checkNull(regionChoiceBox);
+			String metric = checkNull(metricChoiceBox);
+			String time = checkNull(timeChoiceBox);
+			String strength = checkNull(strengthChoiceBox);
+			appHandler.updateEntity(entity.getId(), nameField.getText(), region, metric, time, filePathsList, relationsMap,
+					isBelief, personField.getText(), strength, descriptionTextArea.getText());
+		}
 	}
 
 	@FXML
