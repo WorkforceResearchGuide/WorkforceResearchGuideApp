@@ -116,7 +116,7 @@ public class MainScreenController implements Initializable {
         Stage stage;
         Parent root = null;
         boolean fxmlFound = false;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("addEntity.fxml")); 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/workforceresearch/addEntity.fxml")); 
         AddEntityController addControl = null;
         
         stage = new Stage();
@@ -151,7 +151,7 @@ public class MainScreenController implements Initializable {
     		Stage stage;
         	Parent root = null;
         	boolean fxmlFound = false;
-        	FXMLLoader loader = new FXMLLoader(getClass().getResource("editEntity.fxml")); 
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("/workforceresearch/editEntity.fxml")); 
         	EditEntityController editControl = null;
         
         	stage = new Stage();
@@ -225,7 +225,7 @@ public class MainScreenController implements Initializable {
         Parent root = null;
         boolean fxmlFound = false;
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("batchUploadResults.fxml")); 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/workforceresearch/batchUploadResults.fxml")); 
         BatchUploadResultsController batchControl = null;
         
         FileChooser chooser = new FileChooser();
@@ -271,7 +271,7 @@ public class MainScreenController implements Initializable {
         Stage stage;
         Parent root = null;
         boolean fxmlFound = false;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("templateView.fxml")); 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/workforceresearch/templateView.fxml")); 
         TemplateController templateControl = null;
         
         stage = new Stage();
@@ -304,7 +304,7 @@ public class MainScreenController implements Initializable {
         Stage stage;
         Parent root = null;
         boolean fxmlFound = false;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("folderScanResults.fxml")); 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/workforceresearch/folderScanResults.fxml")); 
         FolderScanResultsController scanControl = null;
         
         DirectoryChooser chooser = new DirectoryChooser();

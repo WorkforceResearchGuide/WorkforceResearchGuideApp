@@ -110,7 +110,7 @@ public class AddEntityController implements Initializable {
 		Parent root = null;
 		boolean fxmlFound = false;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(
-				"associateEntity.fxml"));
+				"/workfoceresearch/associateEntity.fxml"));
 		AssociateEntityController associateControl = null;
 
 		stage = new Stage();

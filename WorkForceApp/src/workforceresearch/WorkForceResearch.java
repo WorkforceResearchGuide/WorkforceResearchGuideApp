@@ -22,7 +22,7 @@ public class WorkForceResearch extends Application {
         
         AppHandler appHandler = new AppHandler();
         
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainScreen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/workforceresearch/mainScreen.fxml"));
         
         Parent root = fxmlLoader.load();
         MainScreenController controller = fxmlLoader.<MainScreenController>getController();

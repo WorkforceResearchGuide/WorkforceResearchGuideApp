@@ -23,7 +23,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			// start of transaction
 			connection.setAutoCommit(false);
 			Statement statement = connection.createStatement();
@@ -62,7 +62,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 
 			connection.setAutoCommit(false);
 			Statement statement = connection.createStatement();
@@ -156,7 +156,7 @@ public class DBHandler {
 				// create connection
 				Class.forName("org.sqlite.JDBC");
 				Connection connection = DriverManager
-						.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+						.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 
 				PreparedStatement ps = connection.prepareStatement(query);
 
@@ -323,7 +323,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 
 			PreparedStatement ps = connection
 					.prepareStatement("select * from entities where entity_id = ?");
@@ -396,7 +396,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			// start of transaction
 			connection.setAutoCommit(false);
 			String deleteEntity = "delete from entities where entity_id = ?";
@@ -584,7 +584,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			// start of transaction
 			connection.setAutoCommit(false);
 			PreparedStatement ps = null;
@@ -620,7 +620,7 @@ public class DBHandler {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 
 			PreparedStatement ps = connection
 					.prepareStatement("select entity_id, statement from entities");
@@ -653,7 +653,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			result = statement
@@ -680,7 +680,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			result = statement
@@ -707,7 +707,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			result = statement
@@ -734,7 +734,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			result = statement
@@ -762,7 +762,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			result = statement
@@ -789,7 +789,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			result = statement
@@ -816,7 +816,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			result = statement
@@ -843,7 +843,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			result = statement
@@ -871,7 +871,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			result = statement
@@ -898,7 +898,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			result = statement
@@ -925,7 +925,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			result = statement
@@ -952,7 +952,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			result = statement
@@ -981,7 +981,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			ResultSet rs = statement.executeQuery("select * from regions");
@@ -1010,7 +1010,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			ResultSet rs = statement.executeQuery("select * from metrics");
@@ -1039,7 +1039,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			ResultSet rs = statement.executeQuery("select * from time_periods");
@@ -1069,7 +1069,7 @@ public class DBHandler {
 			// create connection
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager
-					.getConnection("jdbc:sqlite:db/workforceresearchguide.db");
+					.getConnection("jdbc:sqlite:C:\\workforceresearchguide.db");
 			Statement statement = connection.createStatement();
 
 			ResultSet rs = statement.executeQuery("select * from strengths");

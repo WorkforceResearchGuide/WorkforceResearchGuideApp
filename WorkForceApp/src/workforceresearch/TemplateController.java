@@ -38,7 +38,7 @@ public class TemplateController implements Initializable {
 		Parent root = null;
 		boolean fxmlFound = false;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(
-				"addTemplateRegion.fxml"));
+				"/workforceresearch/addTemplateRegion.fxml"));
 		AddTemplateRegionController control = null;
 
 		stage = new Stage();
@@ -79,7 +79,7 @@ public class TemplateController implements Initializable {
 		Parent root = null;
 		boolean fxmlFound = false;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(
-				"addTemplateMetric.fxml"));
+				"/workforceresearch/addTemplateMetric.fxml"));
 		AddTemplateMetricController control = null;
 
 		stage = new Stage();
@@ -121,7 +121,7 @@ public class TemplateController implements Initializable {
 		Parent root = null;
 		boolean fxmlFound = false;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(
-				"addTemplateTime.fxml"));
+				"/workforceresearch/addTemplateTime.fxml"));
 		AddTemplateTimeController control = null;
 
 		stage = new Stage();
@@ -163,7 +163,7 @@ public class TemplateController implements Initializable {
 		Parent root = null;
 		boolean fxmlFound = false;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(
-				"addTemplateStrength.fxml"));
+				"/workforceresearch/addTemplateStrength.fxml"));
 		AddTemplateStrengthController control = null;
 
 		stage = new Stage();

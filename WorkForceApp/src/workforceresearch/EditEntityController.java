@@ -103,7 +103,7 @@ public class EditEntityController implements Initializable {
 		Stage stage;
 		Parent root = null;
 		boolean fxmlFound = false;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("associateEntity.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/workforceresearch/associateEntity.fxml"));
 		AssociateEntityController associateControl = null;
 
 		stage = new Stage();
