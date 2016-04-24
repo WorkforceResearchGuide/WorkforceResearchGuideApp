@@ -190,25 +190,25 @@ public class EditEntityController implements Initializable {
 		filePathsList = new ArrayList<String>();
 		relationList = FXCollections.observableArrayList();
 		ObservableList<String> regionList = FXCollections.observableArrayList();
-		for (Region r : appHandler.retrieveAllRegions()) {
+		for (Region r : appHandler.retrieveEnabledRegions()) {
 			regionList.add(r.getValue());
 		}
 		regionChoiceBox.setItems(regionList);
 
 		ObservableList<String> metricList = FXCollections.observableArrayList();
-		for (Metric m : appHandler.retrieveAllMetrics()) {
+		for (Metric m : appHandler.retrieveEnabledMetrics()) {
 			metricList.add(m.getValue());
 		}
 		metricChoiceBox.setItems(metricList);
 
 		ObservableList<String> timeList = FXCollections.observableArrayList();
-		for (Timeperiod t : appHandler.retrieveAllTimeperiods()) {
+		for (Timeperiod t : appHandler.retrieveEnabledTimeperiods()) {
 			timeList.add(t.getValue());
 		}
 		timeChoiceBox.setItems(timeList);
 
 		ObservableList<String> strengthList = FXCollections.observableArrayList();
-		for (Strength s : appHandler.retrieveAllStrengths()) {
+		for (Strength s : appHandler.retrieveEnabledStrengths()) {
 			strengthList.add(s.getValue());
 		}
 		strengthChoiceBox.setItems(strengthList);
