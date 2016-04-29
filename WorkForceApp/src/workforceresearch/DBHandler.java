@@ -495,7 +495,7 @@ public class DBHandler {
 			// different isBelief
 			if (entityCurrent.isBelief() != entityUpdated.isBelief()) {
 				updates.add("update entities set is_belief = '"
-						+ (entityUpdated.isBelief() ? 1 : 0)
+						+ (entityUpdated.isBelief())
 						+ "' where entity_id = " + entityUpdated.getId());
 			}
 
