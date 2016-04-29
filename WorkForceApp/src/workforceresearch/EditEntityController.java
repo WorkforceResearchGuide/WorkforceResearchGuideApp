@@ -69,10 +69,14 @@ public class EditEntityController implements Initializable {
 		FileChooser chooser = new FileChooser();
 		chooser.setTitle("Open File");
 		File file = chooser.showOpenDialog(new Stage());
-		String fullPath = file.getAbsolutePath();
-		relationList.add(fullPath);
-		filePathsList.add(fullPath);
-		associationsListView.setItems(relationList);
+		if(file != null)
+		{
+			String fullPath = file.getAbsolutePath();
+			relationList.add(fullPath);
+			filePathsList.add(fullPath);
+			associationsListView.setItems(relationList);
+	
+		}
 	}
 
 	@FXML

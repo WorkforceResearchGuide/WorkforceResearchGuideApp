@@ -42,10 +42,10 @@ public class DBHandler {
 			connection.close();
 		} catch (ClassNotFoundException e) {
 			result = 0;
-			e.printStackTrace();
+			// e.printStackTrace();
 		} catch (SQLException e) {
 			result = 0;
-			e.printStackTrace();
+			// e.printStackTrace();
 		} finally {
 			// 1 update made to insert entity into entities table.
 			if (result == 1) {
@@ -80,10 +80,10 @@ public class DBHandler {
 			connection.close();
 		} catch (ClassNotFoundException e) {
 			result = false;
-			e.printStackTrace();
+			// e.printStackTrace();
 		} catch (SQLException e) {
 			result = false;
-			e.printStackTrace();
+			// e.printStackTrace();
 		} finally {
 			return result;
 		}
@@ -172,9 +172,9 @@ public class DBHandler {
 				ps.close();
 				connection.close();
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				// e.printStackTrace();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 
@@ -382,9 +382,9 @@ public class DBHandler {
 			connection.close();
 
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		return entity;
 	}
@@ -421,10 +421,10 @@ public class DBHandler {
 			connection.close();
 		} catch (ClassNotFoundException e) {
 			result = false;
-			e.printStackTrace();
+			// e.printStackTrace();
 		} catch (SQLException e) {
 			result = false;
-			e.printStackTrace();
+			// e.printStackTrace();
 		} finally {
 			return result;
 		}
@@ -602,13 +602,13 @@ public class DBHandler {
 
 			return entityUpdated;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return entityCurrent;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return entityCurrent;
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return entityCurrent;
 		}
 	}
@@ -639,9 +639,9 @@ public class DBHandler {
 			connection.close();
 
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		return entities;
 	}
@@ -666,10 +666,10 @@ public class DBHandler {
 				return true;
 			return false;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 	}
@@ -693,10 +693,10 @@ public class DBHandler {
 				return true;
 			return false;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 	}
@@ -720,10 +720,10 @@ public class DBHandler {
 				return true;
 			return false;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 	}
@@ -747,10 +747,10 @@ public class DBHandler {
 				return true;
 			return false;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 	}
@@ -775,10 +775,10 @@ public class DBHandler {
 				return true;
 			return false;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 	}
@@ -802,10 +802,10 @@ public class DBHandler {
 				return true;
 			return false;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 	}
@@ -829,10 +829,10 @@ public class DBHandler {
 				return true;
 			return false;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 	}
@@ -856,10 +856,10 @@ public class DBHandler {
 				return true;
 			return false;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 	}
@@ -884,10 +884,10 @@ public class DBHandler {
 				return true;
 			return false;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 	}
@@ -911,10 +911,10 @@ public class DBHandler {
 				return true;
 			return false;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 	}
@@ -938,10 +938,10 @@ public class DBHandler {
 				return true;
 			return false;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 	}
@@ -965,10 +965,10 @@ public class DBHandler {
 				return true;
 			return false;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 	}
@@ -995,10 +995,10 @@ public class DBHandler {
 			connection.close();
 			return regions;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return null;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return null;
 		}
 	}
@@ -1024,10 +1024,10 @@ public class DBHandler {
 			connection.close();
 			return metrics;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return null;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return null;
 		}
 	}
@@ -1054,10 +1054,10 @@ public class DBHandler {
 			connection.close();
 			return timeperiods;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return null;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return null;
 		}
 	}
@@ -1084,10 +1084,10 @@ public class DBHandler {
 			connection.close();
 			return strengths;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return null;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return null;
 		}
 	}

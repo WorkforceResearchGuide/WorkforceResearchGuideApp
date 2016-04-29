@@ -73,10 +73,13 @@ public class AddEntityController implements Initializable {
 		FileChooser chooser = new FileChooser();
 		chooser.setTitle("Open File");
 		File file = chooser.showOpenDialog(new Stage());
-		String fullPath = file.getAbsolutePath();
-		relationList.add(fullPath);
-		filePathsList.add(fullPath);
-		associationsListView.setItems(relationList);
+		if(file != null)
+		{
+			String fullPath = file.getAbsolutePath();
+			relationList.add(fullPath);
+			filePathsList.add(fullPath);
+			associationsListView.setItems(relationList);
+		}
 	}
 
 	@FXML
@@ -109,19 +112,16 @@ public class AddEntityController implements Initializable {
 		Stage stage;
 		Parent root = null;
 		boolean fxmlFound = false;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(
-				"/workfoceresearch/associateEntity.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/workforceresearch/associateEntity.fxml"));
 		AssociateEntityController associateControl = null;
 
 		stage = new Stage();
 		try {
 			root = loader.load();
-			associateControl = loader
-					.<AssociateEntityController> getController();
+			associateControl = loader.<AssociateEntityController> getController();
 			fxmlFound = true;
 		} catch (IOException ex) {
-			Logger.getLogger(MainScreenController.class.getName()).log(
-					Level.SEVERE, null, ex);
+			Logger.getLogger(MainScreenController.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
 		if (fxmlFound) {
